@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import { FileIcon as FilePdf, Download } from "lucide-react"
-import Navbar from "./Navbar"
+import Navbar from "./NavBar"
 import AllLinks from "./Links"
 
 // Sample revisions data
