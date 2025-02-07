@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
-import { GraduationCap, Book, Trophy, Check, Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin, Zap, Users, BookOpen, BarChart, StarsIcon } from 'lucide-react'
+import { GraduationCap, Book, Trophy, Check, Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin, Zap, Users, BookOpen, BarChart, StarsIcon, Rocket, Target, Award } from 'lucide-react'
 import Navbar from "./NavBar"
 
 export default function LandingPage() {
@@ -50,6 +50,77 @@ export default function LandingPage() {
       ],
     },
   ]
+  const features = [
+    {
+      icon: <Rocket />,
+      title: isArabic ? "تعلم سريع" : "Fast Learning",
+      description: isArabic
+        ? "منهج مكثف ومصمم بعناية لتسريع عملية التعلم وتحقيق نتائج ملموسة في وقت أقصر"
+        : "Intensive and carefully designed curriculum to accelerate the learning process and achieve tangible results in less time",
+    },
+    {
+      icon: <Users />,
+      title: isArabic ? "تعلم تفاعلي" : "Interactive Learning",
+      description: isArabic
+        ? "دروس تفاعلية وتمارين عملية لتعزيز الفهم وتحسين الاحتفاظ بالمعلومات"
+        : "Interactive lessons and practical exercises to enhance understanding and improve information retention",
+    },
+    {
+      icon: <BookOpen />,
+      title: isArabic ? "محتوى شامل" : "Comprehensive Content",
+      description: isArabic
+        ? "تغطية شاملة لجميع المواد الدراسية مع التركيز على المفاهيم الأساسية والتطبيقات العملية"
+        : "Comprehensive coverage of all subjects with a focus on core concepts and practical applications",
+    },
+    {
+      icon: <BarChart />,
+      title: isArabic ? "تتبع التقدم" : "Progress Tracking",
+      description: isArabic
+        ? "أدوات متقدمة لتتبع تقدم الطالب وتحليل الأداء لتحديد مجالات التحسين"
+        : "Advanced tools to track student progress and analyze performance to identify areas for improvement",
+    },
+    {
+      icon: <Target />,
+      title: isArabic ? "أهداف مخصصة" : "Personalized Goals",
+      description: isArabic
+        ? "تحديد أهداف تعليمية مخصصة لكل طالب بناءً على احتياجاته وقدراته الفردية"
+        : "Set personalized learning goals for each student based on their individual needs and abilities",
+    },
+    {
+      icon: <Award />,
+      title: isArabic ? "شهادات معتمدة" : "Certified Achievements",
+      description: isArabic
+        ? "الحصول على شهادات معتمدة عند إكمال الدورات والبرامج التعليمية"
+        : "Earn certified credentials upon completion of courses and educational programs",
+    },
+  ]
+
+  const featureRefs = useRef([])
+
+  useEffect(() => {
+    const observers = []
+
+    featureRefs.current.forEach((ref, index) => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            ref.classList.add("animate")
+            observer.unobserve(ref)
+          }
+        },
+        { threshold: 0.5 },
+      )
+
+      if (ref) {
+        observer.observe(ref)
+        observers.push(observer)
+      }
+    })
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect())
+    }
+  }, [])
 
   return (
     <div className={isDarkTheme ? "dark-theme" : "light-theme"}>
@@ -151,39 +222,33 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Special Offers Section */}
-        <section className="special-offers">
+        {/* Features Section */}
+        <section className="features-section">
           <div className="section-header">
-            <h2>{isArabic ? "باقاتنا المميزة" : "Special Offers"}</h2>
+            <h2>{isArabic ? "مميزات منصتنا" : "Our Platform Features"}</h2>
             <p>
               {isArabic
-                ? "اختر الباقة المناسبة لك وابدأ رحلة التعلم"
-                : "Choose the perfect package for you and start your learning journey"}
+                ? "اكتشف الميزات الفريدة التي تجعل منصتنا الخيار الأمثل لتعليمك"
+                : "Discover the unique features that make our platform the best choice for your education"}
             </p>
           </div>
-
-          <div className="offers-grid">
-            {offers.map((offer, index) => (
-              <div key={index} className="offer-card">
-                <div className="offer-icon">{offer.icon}</div>
-                <h3 className="offer-title">{offer.title}</h3>
-                <div className="offer-price">
-                  {offer.price} EGP
-                  <span>{offer.period}</span>
+          <div className="features-container">
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                ref={(el) => (featureRefs.current[index] = el)}
+                className={`feature-item ${index % 2 === 0 ? "feature-left" : "feature-right"}`}
+              >
+                <div className="feature-icon-wrapper">{feature.icon}</div>
+                <div className="feature-content">
+                  <h3>{feature.title}</h3>
+                  <p>{feature.description}</p>
                 </div>
-                <ul className="offer-features">
-                  {offer.features.map((feature, idx) => (
-                    <li key={idx}>
-                      <Check size={20} />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <button className="auth-button">{isArabic ? "اشترك الآن" : "Subscribe Now"}</button>
               </div>
             ))}
           </div>
         </section>
+
 
         {/* Footer */}
         <footer className="footer">
