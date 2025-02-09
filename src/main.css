@@ -1462,6 +1462,221 @@ input:checked + .slider:before {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
+/* Notifications Styles */
+.welcome-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #9c6bdf, #7c4dff);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.welcome-banner:hover {
+  transform: translateY(-5px);
+}
+
+.welcome-content {
+  flex: 1;
+}
+
+.notifications-container {
+  position: relative;
+}
+
+.notifications-icon {
+  position: relative;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.notifications-icon:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.notifications-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #ef4444;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notifications-popover {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  max-width: 90vw;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  display: none;
+  z-index: 1000;
+}
+
+.notifications-container:hover .notifications-popover {
+  display: block;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.notifications-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--heading-color);
+}
+
+.notifications-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.notification-item:hover {
+  background-color: var(--hover-color);
+}
+
+.notification-item.new {
+  background-color: var(--notification-new-bg);
+}
+
+.notification-time {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  min-width: 45px;
+}
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-type {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.notification-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.notification-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background: var(--primary-color);
+  color: white;
+  font-size: 0.75rem;
+  border-radius: 12px;
+  margin-left: auto;
+}
+
+/* Scrollbar Styles for Notifications List */
+.notifications-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.notifications-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.notifications-list::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5);
+  border-radius: 20px;
+  border: transparent;
+}
+
+.dark-theme .notifications-list::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .welcome-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .notifications-container {
+    margin-top: 1rem;
+  }
+
+  .notifications-popover {
+    left: auto;
+    right: 0;
+    transform: none;
+    width: 280px;
+    max-width: 100vw;
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 12px 12px 0 0;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+  .notifications-container {
+    position: static;
+  }
+}
+
+/* Ensure the notifications icon is always visible */
+.notifications-icon {
+  position: relative;
+  z-index: 1001;
+}
+
+/* Adjust the welcome banner for better mobile layout */
+@media (max-width: 768px) {
+  .welcome-banner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1.5rem;
+  }
+
+  .welcome-content {
+    max-width: 70%;
+  }
+
+  .notifications-container {
+    align-self: flex-start;
+  }
+}
+
+/* Ensure the popover doesn't collapse */
+.notifications-list {
+  min-height: 50px;
+}
+
 /* Registration Page Styles */
 .register-container {
   min-height: 100vh;

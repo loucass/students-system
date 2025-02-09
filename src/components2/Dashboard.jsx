@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react"
-import { Menu, X } from "lucide-react"
+import { Bell, Menu, X } from "lucide-react"
 import Navbar from "./NavBar"
 import AllLinks from "./Links"
 
@@ -24,6 +24,20 @@ const notifications = [
     time: "13:00",
     type: "تحدي جديد",
     title: "تحدي جديد",
+    isNew: false,
+  },
+  {
+    id: 4,
+    time: "14:00",
+    type: "واجب منزلي",
+    title: "تم إضافة واجب جديد",
+    isNew: true,
+  },
+  {
+    id: 5,
+    time: "15:00",
+    type: "تذكير",
+    title: "موعد المحاضرة القادمة",
     isNew: false,
   },
 ]
@@ -90,23 +104,6 @@ export default function Dashboard() {
             <p>{isArabic ? "الصف الثاني" : "Second Grade"}</p>
           </div>
 
-          {/* Notifications Section */}
-          <div className="notifications-section">
-            <h4 className="notifications-title">{isArabic ? "تحديثات" : "Updates"}</h4>
-            <div className="notifications-list">
-              {notifications.map((notification) => (
-                <div key={notification.id} className={`notification-item ${notification.isNew ? "new" : ""}`}>
-                  <div className="notification-time">{notification.time}</div>
-                  <div className="notification-content">
-                    <div className="notification-type">{notification.type}</div>
-                    <div className="notification-title">{notification.title}</div>
-                  </div>
-                  {notification.isNew && <span className="notification-badge">{isArabic ? "جديد" : "New"}</span>}
-                </div>
-              ))}
-            </div>
-          </div>
-
           <div className="sidebar-links">
             <AllLinks isArabic={isArabic} />
           </div>
@@ -115,10 +112,33 @@ export default function Dashboard() {
         {/* Main Content */}
         <main className="main-content">
           <div className="welcome-banner">
+          <div className="welcome-content">
             <h1>{isArabic ? "اهلاً يوسف" : "Welcome Yousef"}</h1>
             <p>
               {isArabic ? "كن على اطلاع دائم لكل جديد في منصتنا" : "Stay updated with everything new on our platform"}
             </p>
+            </div>
+            <div className="notifications-container">
+              <div className="notifications-icon">
+                <Bell size={24} />
+                <span className="notifications-count">{notifications.filter((n) => n.isNew).length}</span>
+              </div>
+              <div className="notifications-popover">
+                <h4 className="notifications-title">{isArabic ? "التنبيهات" : "Notifications"}</h4>
+                <div className="notifications-list">
+                  {notifications.map((notification) => (
+                    <div key={notification.id} className={`notification-item ${notification.isNew ? "new" : ""}`}>
+                      <div className="notification-time">{notification.time}</div>
+                      <div className="notification-content">
+                        <div className="notification-type">{notification.type}</div>
+                        <div className="notification-title">{notification.title}</div>
+                      </div>
+                      {notification.isNew && <span className="notification-badge">{isArabic ? "جديد" : "New"}</span>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="stats-container">
