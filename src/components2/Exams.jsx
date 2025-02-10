@@ -176,8 +176,8 @@ export default function Exams() {
                     </div>
                   </div>
                   <div className="exam-actions">
-                    <button className="btn-start">{isArabic ? "بدء الامتحان" : "Start Exam"}</button>
-                    <a to={exam.reviewUrl} className="review-link">
+                  <Link to="/examPage" className="btn-start">{isArabic ? "بدء الامتحان" : "Start Exam"}</Link>
+                  <a to={exam.reviewUrl} className="review-link">
                       <ChevronLeft className="icon" />
                       {isArabic ? "مراجعة الدرس" : "Review Lesson"}
                     </a>

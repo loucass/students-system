@@ -14,6 +14,7 @@ import ForgotPassword from './components2/ForgetPassword'
 import OtpVerification from './components2/OTP'
 import ResetPassword from './components2/ResetPassword'
 import LandingPage from './components2/Home'
+import ExamPage from './components2/ExamPage'
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
       <Route path="/curriculum" element={<Curriculum />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/exams" element={<Exams />} />
+      <Route path="/examPage" element={<ExamPage />} />
       <Route path="/challenges" element={<Challenges />} />
       <Route path="/Revisions" element={<Revisions />} />
       <Route path="/register" element={<Register />} />
