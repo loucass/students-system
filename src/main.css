@@ -2462,6 +2462,7 @@ input:checked + .slider:before {
   border-radius: 50%;
   opacity: 0.1;
   animation: pulse 4s infinite;
+  -webkit-animation: pulse 4s infinite;
 }
 
 .hero-shape-2 {
@@ -2996,7 +2997,8 @@ input:checked + .slider:before {
   font-weight: 700;
   line-height: 1;
   text-shadow: 0 0 10px rgba(124, 77, 255, 0.5);
-  animation: pulse 2s infinite alternate;
+  animation: pulse2 2s infinite alternate;
+  -webkit-animation: pulse2 2s infinite alternate;
 }
 
 .zero {
@@ -3015,7 +3017,8 @@ input:checked + .slider:before {
 
 .astronaut {
   position: absolute;
-  animation: float 6s ease-in-out infinite;
+  animation: float2 6s ease-in-out infinite;
+  -webkit-animation: float2 6s ease-in-out infinite;
 }
 
 .astronaut-img {
@@ -3169,7 +3172,7 @@ input:checked + .slider:before {
 }
 
 /* Animations */
-@keyframes pulse {
+@keyframes pulse2 {
   0% {
     transform: scale(1);
     opacity: 1;
@@ -3193,7 +3196,7 @@ input:checked + .slider:before {
   }
 }
 
-@keyframes float {
+@keyframes float2 {
   0% {
     transform: translateY(0) rotate(0deg);
   }
