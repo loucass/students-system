@@ -156,7 +156,7 @@ export default function Curriculum() {
             {curriculumData.chapters.map((chapter) => (
               <div key={chapter.id} className="chapter-card">
                 <button
-                  className={`chapter-header ${expandedChapters.includes(chapter.id) ? "expanded" : ""}`}
+                  className={`chapter-header ${isDarkTheme ? "text-light" : ""} ${expandedChapters.includes(chapter.id) ? "expanded" : ""}`}
                   onClick={() => toggleChapter(chapter.id)}
                 >
                   <span>{isArabic ? chapter.title : chapter.titleEn}</span>

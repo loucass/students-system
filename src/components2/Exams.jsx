@@ -14,6 +14,7 @@ const examData = {
       time: 30,
       questions: 60,
       reviewUrl: "#",
+      examLink: "/First Chapter Exam",
     },
     {
       id: 2,
@@ -22,6 +23,7 @@ const examData = {
       time: 30,
       questions: 60,
       reviewUrl: "#",
+      examLink: "/Second Chapter Exam",
     },
     {
       id: 3,
@@ -30,6 +32,7 @@ const examData = {
       time: "-",
       questions: "-",
       reviewUrl: "#",
+      examLink: "/Interactive Exam",
     },
   ],
   upcomingExams: [
@@ -176,11 +179,11 @@ export default function Exams() {
                     </div>
                   </div>
                   <div className="exam-actions">
-                  <Link to="/examPage" className="btn-start">{isArabic ? "بدء الامتحان" : "Start Exam"}</Link>
-                  <a to={exam.reviewUrl} className="review-link">
+                  <Link to={`/examPage${exam.examLink}`} className="btn-start text-decoration-none">{isArabic ? "بدء الامتحان" : "Start Exam"}</Link>
+                  <Link to={exam.reviewUrl ? exam.reviewUrl : "#"} className="review-link">
                       <ChevronLeft className="icon" />
                       {isArabic ? "مراجعة الدرس" : "Review Lesson"}
-                    </a>
+                    </Link>
                   </div>
                 </div>
               ))}

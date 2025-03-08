@@ -24,7 +24,7 @@ export default function Home() {
       <Route path="/curriculum" element={<Curriculum />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/exams" element={<Exams />} />
-      <Route path="/examPage" element={<ExamPage />} />
+      <Route path="/examPage/:examID" element={<ExamPage />} />
       <Route path="/challenges" element={<Challenges />} />
       <Route path="/Revisions" element={<Revisions />} />
       <Route path="/register" element={<Register />} />

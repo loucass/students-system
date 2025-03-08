@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { Clock, ArrowLeft, Check, X } from 'lucide-react'
 
 // Mock exam data
 const examData = {
   titleAr: "امتحان الفصل الاول : الدرس الثاني",
   titleEn: "First Chapter Exam: Second Lesson",
-  duration: 30, // minutes
+  duration: 3, // minutes
   totalQuestions: 3,
   questions: [
     {
@@ -52,6 +52,7 @@ const examData = {
 }
 
 export default function examPage() {
+  const {examID} = useParams()
   const [isDarkTheme, setIsDarkTheme] = useState(() => {
     return localStorage.getItem("theme") === "dark"
   })
@@ -168,7 +169,7 @@ export default function examPage() {
           </Link>
           <div className="exam-controls">
             <button className="btn btn-outline-primary" onClick={() => setIsDarkTheme(!isDarkTheme)}>
-              {isDarkTheme ? "☀️ Light" : "🌙 Dark"}
+              {isDarkTheme ? "Light" : "Dark"}
             </button>
             <button className="btn btn-outline-primary" onClick={() => setIsArabic(!isArabic)}>
               {isArabic ? "English" : "عربي"}
@@ -183,7 +184,8 @@ export default function examPage() {
         </div>
 
         <div className="exam-title">
-          <h1>{isArabic ? examData.titleAr : examData.titleEn}</h1>
+          <h1>{examID}</h1>
+          {/* <h1>{isArabic ? examData.titleAr : examData.titleEn}</h1> */}
           <p className="exam-info">
             {isArabic ? "عدد الأسئلة:" : "Questions:"} {examData.questions.length} •{" "}
             {isArabic ? "مدة الامتحان:" : "Duration:"} {examData.duration} {isArabic ? "دقيقة" : "minutes"}
