@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import Navbar from "./NavBar"
+import Navbar from "../NavBar"
 
 export default function Login() {
     let navigate = useNavigate()
@@ -13,8 +13,8 @@ export default function Login() {
   })
 
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    StudentCode: "",
+    nationalId: "",
   })
 
   const handleInputChange = (e) => {
@@ -28,7 +28,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log("Form submitted:", formData)
-    navigate("/dashboard")
+    navigate("/parent/dashboard")
   }
 
   return (
@@ -48,47 +48,33 @@ export default function Login() {
 
             <form onSubmit={handleSubmit} className="auth-form">
               <div className="form-group">
-                <label>{isArabic ? "البريد الالكتروني / كود الطالب" : "Email / Student Code"}</label>
+                <label>{isArabic ? "كود الطالب" : "Student Code"}</label>
                 <input
                   type="text"
-                  name="email"
-                  value={formData.email}
+                  name="StudentCode"
+                  value={formData.StudentCode}
                   onChange={handleInputChange}
-                  placeholder={isArabic ? "البريد الالكتروني / كود الطالب" : "Email / Student Code"}
+                  placeholder={isArabic ? "كود الطالب" : "Student Code"}
                   required
                 />
               </div>
 
               <div className="form-group">
-                <label>{isArabic ? "كلمة السر" : "Password"}</label>
+                <label>{isArabic ? "الرقم القومي" : "nationalId"}</label>
                 <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
+                  type="text"
+                  name="nationalId"
+                  value={formData.nationalId}
                   onChange={handleInputChange}
-                  placeholder={isArabic ? "كلمة السر" : "Password"}
+                  placeholder={isArabic ? "كلمة السر" : "nationalId"}
                   required
                 />
               </div>
-
-              <Link to="/forgot-password" className="forgot-password-link">
-                {isArabic ? "هل نسيت كلمة السر؟" : "Forgot password?"}
-              </Link>
 
               <button type="submit" className="auth-button">
                 {isArabic ? "تسجيل الدخول" : "Login"}
               </button>
             </form>
-
-            <p className="auth-link">
-              {isArabic ? "لا يوجد لديك حساب؟" : "Don't have an account?"}{" "}
-              <Link to="/register">{isArabic ? "انشئ حسابك الآن!" : "Create your account!"}</Link>
-            </p>
-
-            <p className="auth-link">
-              {isArabic ? "تسجيل الدخول ك ولي امر" : "log in as parent"}{" "}
-              <Link to="/parent/login">{isArabic ? "سجل الدخول ك ولي امر" : "log in as parent"}</Link>
-            </p>
           </div>
 
           <div className="auth-image-section">

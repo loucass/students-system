@@ -1,0 +1,527 @@
+.student-profile-page {
+  /* Student Profile Specific Styles */
+  .student-profile-content {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: fadeIn 0.5s ease-out;
+    width: 100%;
+  }
+
+  /* Profile Header */
+  .profile-header {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-color);
+  }
+
+  .profile-details h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--heading-color);
+  }
+
+  .profile-details p {
+    margin: 0.5rem 0 0;
+    color: var(--text-muted);
+  }
+
+  .contact-info {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .info-item {
+    min-width: 200px;
+  }
+
+  .info-item label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .info-item p {
+    margin: 0;
+    color: var(--heading-color);
+    font-weight: 500;
+  }
+
+  /* Notes Section */
+  .notes-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .notes-container {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .notes-container h3 {
+    margin: 0 0 1rem;
+    color: var(--heading-color);
+    font-size: 1.2rem;
+  }
+
+  .notes-container textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    resize: vertical;
+  }
+
+  .notes-container textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.2);
+  }
+
+  /* Progress Cards */
+  .progress-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .progress-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Main Content Layout for Wide Screens */
+  .main-content-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .main-content-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .main-content-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Attendance Section */
+  .attendance-section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+  }
+
+  .attendance-section h3 {
+    margin: 0 0 1.5rem;
+    color: var(--heading-color);
+  }
+
+  .attendance-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .attendance-table th,
+  .attendance-table td {
+    padding: 1rem;
+    text-align: start;
+  }
+
+  .attendance-table th {
+    background: var(--table-header-bg);
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  .attendance-table td {
+    border-top: 1px solid var(--border-color);
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .status-badge.present {
+    background: #dcfce7;
+    color: #15803d;
+  }
+
+  .status-badge.absent {
+    background: #fee2e2;
+    color: #dc2626;
+  }
+
+  /* Performance Section */
+  .performance-section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .performance-section h3 {
+    margin: 0 0 1.5rem;
+    color: var(--heading-color);
+  }
+
+  .graph-container {
+    height: 250px;
+    padding: 1rem;
+    position: relative;
+    margin-top: 2rem;
+  }
+
+  .graph-line {
+    height: 2px;
+    background: var(--primary-color);
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    clip-path: polygon(var(--points));
+  }
+
+  .graph-labels {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+  }
+
+  .graph-labels span {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+  }
+
+  /* Documents Section */
+  .documents-section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .documents-section h3 {
+    margin: 0 0 1.5rem;
+    color: var(--heading-color);
+  }
+
+  .documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .document-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: var(--hover-color);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    text-align: center;
+  }
+
+  .document-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .doc-icon {
+    color: #ef4444;
+    width: 40px;
+    height: 40px;
+  }
+
+  .doc-info {
+    width: 100%;
+  }
+
+  .doc-info h4 {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--heading-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .doc-info p {
+    margin: 0.25rem 0 0;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .download-btn {
+    background: var(--primary-color);
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .download-btn:hover {
+    background: var(--primary-hover);
+  }
+
+  .download-btn span {
+    font-size: 0.75rem;
+  }
+
+  /* Support Section */
+  .support-section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .support-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, #7c4dff, #2196f3);
+  }
+
+  .support-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: rgba(124, 77, 255, 0.1);
+    border-radius: 50%;
+    color: var(--primary-color);
+    flex-shrink: 0;
+  }
+
+  .support-content {
+    flex: 1;
+  }
+
+  .support-content h3 {
+    margin: 0 0 0.5rem;
+    color: var(--heading-color);
+    font-size: 1.2rem;
+  }
+
+  .support-content p {
+    margin: 0 0 1rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .support-contacts {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .support-contact {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+
+  .support-contact svg {
+    flex-shrink: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .student-profile-page .documents-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 992px) {
+  .student-profile-page .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .student-profile-page .contact-info {
+    width: 100%;
+  }
+
+  .student-profile-page .notes-section {
+    grid-template-columns: 1fr;
+  }
+
+  .student-profile-page .progress-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .student-profile-page .main-content-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .student-profile-page .documents-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  .student-profile-page .support-contacts {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .student-profile-page .student-profile-content {
+    padding: 1rem;
+  }
+
+  .student-profile-page .profile-info {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .student-profile-page .contact-info {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .student-profile-page .info-item {
+    min-width: 100%;
+  }
+
+  .student-profile-page .progress-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .student-profile-page .documents-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .student-profile-page .document-card {
+    flex-direction: row;
+    text-align: left;
+    align-items: center;
+  }
+
+  .student-profile-page .doc-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .student-profile-page .download-btn {
+    width: auto;
+    min-width: 100px;
+  }
+
+  .student-profile-page .support-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .student-profile-page .support-contacts {
+    justify-content: center;
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] .student-profile-page .attendance-table th,
+[dir="rtl"] .student-profile-page .attendance-table td {
+  text-align: right;
+}
+
+[dir="rtl"] .student-profile-page .document-card {
+  flex-direction: column;
+}
+
+[dir="rtl"] .student-profile-page .support-section::before {
+  background: linear-gradient(to left, #7c4dff, #2196f3);
+}
+
+@media (max-width: 768px) {
+  [dir="rtl"] .student-profile-page .document-card {
+    flex-direction: row-reverse;
+  }
+
+  [dir="rtl"] .student-profile-page .support-section {
+    flex-direction: column;
+  }
+}
+
+/* Fix for dashboard container in student profile */
+.student-profile-page .dashboard-container {
+  display: block;
+  padding: 0;
+}

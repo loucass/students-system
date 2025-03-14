@@ -1,12 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "./main.css"
+import { Route, Routes } from "react-router-dom"
 import Dashboard from "./components2/Dashboard"
 import Curriculum from "./components2/curriculum"
 import Settings from "./components2/Settings"
 import Exams from "./components2/Exams"
 import Challenges from "./components2/Challenges"
 import Revisions from "./components2/Revisions"
-import { Route, Routes } from "react-router-dom"
 import NotFound from "./components2/NotFound"
 import Register from './components2/Register'
 import Login from './components2/Login'
@@ -15,6 +15,8 @@ import OtpVerification from './components2/OTP'
 import ResetPassword from './components2/ResetPassword'
 import LandingPage from './components2/Home'
 import ExamPage from './components2/ExamPage'
+import ParentHome from './components2/parent/ParentHome'
+import ParentLogin from './components2/parent/ParentLogin'
 
 export default function Home() {
   return (
@@ -32,6 +34,9 @@ export default function Home() {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/otp-verification" element={<OtpVerification />} />
       <Route path="/reset-password" element={<ResetPassword />} />
+      {/* parent routes */}
+      <Route path="/parent/dashboard" element={<ParentHome />} />
+      <Route path="/parent/login" element={<ParentLogin />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )

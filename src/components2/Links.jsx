@@ -9,6 +9,11 @@ export default function AllLinks({isArabic}) {
     <Link to="/chat">{isArabic ? "المحادثات" : "Chat"}</Link>
     <Link to="/Revisions">{isArabic ? "المراجعات" : "Revisions"}</Link>
     <Link to="/challenges">{isArabic ? "التحديات" : "challenges"}</Link>
+
+    <h2 className="text-danger">mocking</h2>
+    <Link to="/parent/dashboard">{isArabic ? "الرئيسيه لولي الامر" : "parent dashboard"}</Link>
+    <Link to="/parent/login">{isArabic ? "تسجيل دخول ولي الامر" : "parent log in"}</Link>
+
   </>
   )
 }
