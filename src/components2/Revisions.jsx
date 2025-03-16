@@ -1,8 +1,7 @@
-import { useState, useEffect, useRef } from "react"
-import { Link } from "react-router-dom"
+import { useState, useEffect, useRef, useContext } from "react"
 import { FileIcon as FilePdf, Download } from "lucide-react"
-import Navbar from "./NavBar"
 import AllLinks from "./Links"
+import { MainContextObj } from "./shared/MainContext"
 
 // Sample revisions data
 const revisionsData = {
@@ -90,31 +89,23 @@ const revisionsData = {
 }
 
 export default function Revisions() {
-  const [isDarkTheme, setIsDarkTheme] = useState(() => {
-    return localStorage.getItem("theme") === "dark"
-  })
-
-  const [isArabic, setIsArabic] = useState(() => {
-    return localStorage.getItem("lang") === "ar"
-  })
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const data = useContext(MainContextObj)
   const sidebarRef = useRef(null)
 
   useEffect(() => {
-    localStorage.setItem("theme", isDarkTheme ? "dark" : "light")
-    document.body.className = isDarkTheme ? "dark-theme" : "light-theme"
-  }, [isDarkTheme])
+    localStorage.setItem("theme", data.isDarkTheme ? "dark" : "light")
+    document.body.className = data.isDarkTheme ? "dark-theme" : "light-theme"
+  }, [data.isDarkTheme])
 
   useEffect(() => {
-    localStorage.setItem("lang", isArabic ? "ar" : "en")
-    document.dir = isArabic ? "rtl" : "ltr"
-  }, [isArabic])
+    localStorage.setItem("lang", data.isArabic ? "ar" : "en")
+    document.dir = data.isArabic ? "rtl" : "ltr"
+  }, [data.isArabic])
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target) && isSidebarOpen) {
-        setIsSidebarOpen(false)
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target) && data.isSidebarOpen) {
+        data.setIsSidebarOpen(false)
       }
     }
 
@@ -122,41 +113,33 @@ export default function Revisions() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
     }
-  }, [isSidebarOpen])
+  }, [data.isSidebarOpen])
 
   const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen)
+    data.setIsSidebarOpen(!data.isSidebarOpen)
   }
 
   return (
-    <div className={`dashboard ${isDarkTheme ? "dark-theme" : "light-theme"}`}>
-      <Navbar
-        isDarkTheme={isDarkTheme}
-        setIsDarkTheme={setIsDarkTheme}
-        isArabic={isArabic}
-        setIsArabic={setIsArabic}
-        toggleSidebar={toggleSidebar}
-        isSidebarOpen={isSidebarOpen}
-      />
+    <div className={`dashboard ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
 
       <div className="dashboard-container">
         {/* Left Sidebar */}
-        <div ref={sidebarRef} className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+        <div ref={sidebarRef} className={`sidebar ${data.isSidebarOpen ? "open" : ""}`}>
           <div className="profile-section">
             <img src="/placeholder.svg?height=80&width=80" alt="Profile" className="profile-image" />
-            <h3>{isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
-            <p>{isArabic ? "الصف الثاني" : "Second Grade"}</p>
+            <h3>{data.isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
+            <p>{data.isArabic ? "الصف الثاني" : "Second Grade"}</p>
           </div>
 
           <div className="sidebar-links">
-          <AllLinks isArabic={isArabic} />
+          <AllLinks isArabic={data.isArabic} />
           </div>
         </div>
 
         {/* Main Content */}
         <main className="main-content">
           <div className="revisions-container">
-            <h1>{isArabic ? "المراجعات" : "Revisions"}</h1>
+            <h1>{data.isArabic ? "المراجعات" : "Revisions"}</h1>
 
             {/* Revision Materials */}
             <div className="materials-grid">
@@ -165,13 +148,13 @@ export default function Revisions() {
                   <div className="material-icon">
                     <FilePdf size={40} />
                   </div>
-                  <h3>{isArabic ? material.titleAr : material.titleEn}</h3>
+                  <h3>{data.isArabic ? material.titleAr : material.titleEn}</h3>
                   <div className="material-price">
-                    {material.price} {isArabic ? "جنيه" : "EGP"}
+                    {material.price} {data.isArabic ? "جنيه" : "EGP"}
                   </div>
                   <button className="btn-purchase">
                     <Download size={16} />
-                    <span>{isArabic ? "رابط الشراء" : "Purchase Link"}</span>
+                    <span>{data.isArabic ? "رابط الشراء" : "Purchase Link"}</span>
                   </button>
                 </div>
               ))}
@@ -179,31 +162,31 @@ export default function Revisions() {
 
             {/* Purchase Requests */}
             <div className="requests-section">
-              <h2>{isArabic ? "طلباتي" : "My Requests"}</h2>
+              <h2>{data.isArabic ? "طلباتي" : "My Requests"}</h2>
               <div className="table-responsive">
                 <table className="requests-table">
                   <thead>
                     <tr>
-                      <th>{isArabic ? "الاسم" : "Name"}</th>
-                      <th>{isArabic ? "الحالة" : "Status"}</th>
-                      <th>{isArabic ? "التاريخ" : "Date"}</th>
-                      <th>{isArabic ? "عرض" : "View"}</th>
+                      <th>{data.isArabic ? "الاسم" : "Name"}</th>
+                      <th>{data.isArabic ? "الحالة" : "Status"}</th>
+                      <th>{data.isArabic ? "التاريخ" : "Date"}</th>
+                      <th>{data.isArabic ? "عرض" : "View"}</th>
                     </tr>
                   </thead>
                   <tbody>
                     {revisionsData.requests.map((request) => (
                       <tr key={request.id}>
-                        <td>{isArabic ? request.titleAr : request.titleEn}</td>
+                        <td>{data.isArabic ? request.titleAr : request.titleEn}</td>
                         <td>
                           <span
                             className={`status-badge ${request.status === "مقبول" ? "success" : request.status === "مرفوض" ? "error" : "pending"}`}
                           >
-                            {isArabic ? request.status : request.statusEn}
+                            {data.isArabic ? request.status : request.statusEn}
                           </span>
                         </td>
                         <td>{request.date}</td>
                         <td>
-                          <button className="btn-view">{isArabic ? "عرض" : "View"}</button>
+                          <button className="btn-view">{data.isArabic ? "عرض" : "View"}</button>
                         </td>
                       </tr>
                     ))}
@@ -216,7 +199,7 @@ export default function Revisions() {
 
         {/* Right Navigation */}
         <div className="right-nav">
-        <AllLinks isArabic={isArabic} />
+        <AllLinks isArabic={data.isArabic} />
         </div>
       </div>
     </div>

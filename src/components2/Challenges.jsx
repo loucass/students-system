@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useContext } from "react"
 import { Link } from "react-router-dom"
 import { Menu, X } from "lucide-react"
-import Navbar from "./NavBar"
 import AllLinks from "./Links"
+import { MainContextObj } from "./shared/MainContext"
 
 // Sample challenges data
 const challengesData = {
@@ -63,31 +63,24 @@ const challengesData = {
 }
 
 export default function Challenges() {
-  const [isDarkTheme, setIsDarkTheme] = useState(() => {
-    return localStorage.getItem("theme") === "dark"
-  })
+  const data = useContext(MainContextObj)
 
-  const [isArabic, setIsArabic] = useState(() => {
-    return localStorage.getItem("lang") === "ar"
-  })
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const sidebarRef = useRef(null)
 
   useEffect(() => {
-    localStorage.setItem("theme", isDarkTheme ? "dark" : "light")
-    document.body.className = isDarkTheme ? "dark-theme" : "light-theme"
-  }, [isDarkTheme])
+    localStorage.setItem("theme", data.isDarkTheme ? "dark" : "light")
+    document.body.className = data.isDarkTheme ? "dark-theme" : "light-theme"
+  }, [data.isDarkTheme])
 
   useEffect(() => {
-    localStorage.setItem("lang", isArabic ? "ar" : "en")
-    document.dir = isArabic ? "rtl" : "ltr"
-  }, [isArabic])
+    localStorage.setItem("lang", data.isArabic ? "ar" : "en")
+    document.dir = data.isArabic ? "rtl" : "ltr"
+  }, [data.isArabic])
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target) && isSidebarOpen) {
-        setIsSidebarOpen(false)
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target) && data.isSidebarOpen) {
+        data.setIsSidebarOpen(false)
       }
     }
 
@@ -95,34 +88,22 @@ export default function Challenges() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
     }
-  }, [isSidebarOpen])
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen)
-  }
+  }, [data.isSidebarOpen])
 
   return (
-    <div className={`dashboard ${isDarkTheme ? "dark-theme" : "light-theme"}`}>
-      <Navbar
-        isDarkTheme={isDarkTheme}
-        setIsDarkTheme={setIsDarkTheme}
-        isArabic={isArabic}
-        setIsArabic={setIsArabic}
-        toggleSidebar={toggleSidebar}
-        isSidebarOpen={isSidebarOpen}
-      />
+    <div className={`dashboard ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
 
       <div className="dashboard-container">
         {/* Left Sidebar */}
-        <div ref={sidebarRef} className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+        <div ref={sidebarRef} className={`sidebar ${data.isSidebarOpen ? "open" : ""}`}>
           <div className="profile-section">
             <img src="/placeholder.svg?height=80&width=80" alt="Profile" className="profile-image" />
-            <h3>{isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
-            <p>{isArabic ? "الصف الثاني" : "Second Grade"}</p>
+            <h3>{data.isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
+            <p>{data.isArabic ? "الصف الثاني" : "Second Grade"}</p>
           </div>
 
           <div className="sidebar-links">
-          <AllLinks isArabic={isArabic} />
+          <AllLinks isArabic={data.isArabic} />
           </div>
         </div>
 
@@ -131,14 +112,14 @@ export default function Challenges() {
           <div className="challenges-container">
             {/* Completed Challenges Progress */}
             <div className="completed-challenges">
-              <h2>{isArabic ? "تحديات مكتملة" : "Completed Challenges"}</h2>
+              <h2>{data.isArabic ? "تحديات مكتملة" : "Completed Challenges"}</h2>
               <div className="progress-container">
                 <div
                   className="progress-bar"
                   style={{ width: `${(challengesData.completed / challengesData.total) * 100}%` }}
                 />
                 <span className="progress-text">
-                  {challengesData.completed} {isArabic ? "من" : "of"} {challengesData.total}
+                  {challengesData.completed} {data.isArabic ? "من" : "of"} {challengesData.total}
                 </span>
               </div>
             </div>
@@ -146,21 +127,21 @@ export default function Challenges() {
             <div className="challenges-content">
               {/* Leaderboard */}
               <div className="leaderboard-section">
-                <h3>{isArabic ? "لوحة البطولة" : "Leaderboard"}</h3>
+                <h3>{data.isArabic ? "لوحة البطولة" : "Leaderboard"}</h3>
                 <div className="leaderboard-table">
                   <table>
                     <thead>
                       <tr>
-                        <th>{isArabic ? "الترتيب" : "Rank"}</th>
-                        <th>{isArabic ? "اسم الطالب" : "Student Name"}</th>
-                        <th>{isArabic ? "الدرجة" : "Points"}</th>
+                        <th>{data.isArabic ? "الترتيب" : "Rank"}</th>
+                        <th>{data.isArabic ? "اسم الطالب" : "Student Name"}</th>
+                        <th>{data.isArabic ? "الدرجة" : "Points"}</th>
                       </tr>
                     </thead>
                     <tbody>
                       {challengesData.leaderboard.map((student, index) => (
                         <tr key={student.id} className={index === 0 ? "current-user" : ""}>
                           <td>{index + 1}</td>
-                          <td>{isArabic ? student.nameAr : student.nameEn}</td>
+                          <td>{data.isArabic ? student.nameAr : student.nameEn}</td>
                           <td>
                             {student.points}/{student.total}
                           </td>
@@ -175,13 +156,13 @@ export default function Challenges() {
               <div className="challenges-sections">
                 {/* Today's Challenges */}
                 <section className="challenges-section">
-                  <h3>{isArabic ? "تحديات اليوم" : "Today's Challenges"}</h3>
+                  <h3>{data.isArabic ? "تحديات اليوم" : "Today's Challenges"}</h3>
                   <div className="challenges-grid">
                     {challengesData.todayChallenges.map((challenge) => (
                       <div key={challenge.id} className="challenge-card">
                         <div className="challenge-icon">{challenge.icon}</div>
                         <div className="challenge-info">
-                          <h4>{isArabic ? challenge.titleAr : challenge.titleEn}</h4>
+                          <h4>{data.isArabic ? challenge.titleAr : challenge.titleEn}</h4>
                           <div className="challenge-progress">
                             <div className="progress-bar" style={{ width: `${challenge.progress}%` }} />
                             <span className="progress-text">{challenge.progress}%</span>
@@ -194,14 +175,14 @@ export default function Challenges() {
 
                 {/* Season Challenges */}
                 <section className="challenges-section">
-                  <h3>{isArabic ? "تحديات الموسم" : "Season Challenges"}</h3>
+                  <h3>{data.isArabic ? "تحديات الموسم" : "Season Challenges"}</h3>
                   <div className="challenges-grid">
                     {challengesData.seasonChallenges.map((challenge) => (
                       <div key={challenge.id} className="challenge-card">
                         <div className="challenge-icon">{challenge.icon}</div>
                         <div className="challenge-info">
-                          <h4>{isArabic ? challenge.titleAr : challenge.titleEn}</h4>
-                          <p>{isArabic ? challenge.descAr : challenge.descEn}</p>
+                          <h4>{data.isArabic ? challenge.titleAr : challenge.titleEn}</h4>
+                          <p>{data.isArabic ? challenge.descAr : challenge.descEn}</p>
                           <div className="challenge-progress">
                             <div className="progress-bar" style={{ width: `${challenge.progress}%` }} />
                             <span className="progress-text">{challenge.progress}%</span>
@@ -218,7 +199,7 @@ export default function Challenges() {
 
         {/* Right Navigation */}
         <div className="right-nav">
-        <AllLinks isArabic={isArabic} />
+        <AllLinks isArabic={data.isArabic} />
         </div>
       </div>
     </div>

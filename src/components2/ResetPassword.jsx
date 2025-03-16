@@ -1,17 +1,11 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { Check } from "lucide-react"
-import Navbar from "./NavBar"
+import { MainContextObj } from "./shared/MainContext"
 
 export default function ResetPassword() {
-    let navigate = useNavigate()
-  const [isDarkTheme, setIsDarkTheme] = useState(() => {
-    return localStorage.getItem("theme") === "dark"
-  })
-
-  const [isArabic, setIsArabic] = useState(() => {
-    return localStorage.getItem("lang") === "ar"
-  })
+  const data = useContext(MainContextObj)
+  let navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     password: "",
@@ -49,7 +43,7 @@ export default function ResetPassword() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (formData.password.value !== formData.confirmPassword.value) {
-      alert(isArabic ? "كلمات المرور غير متطابقة" : "Passwords do not match")
+      alert(data.isArabic ? "كلمات المرور غير متطابقة" : "Passwords do not match")
       return
     }
     console.log("Password reset:", formData)
@@ -57,26 +51,18 @@ export default function ResetPassword() {
   }
 
   const requirements = [
-    { text: isArabic ? "ثمانية أحرف على الأقل" : "At least 8 characters", met: formData.password.length >= 8 },
-    { text: isArabic ? "حرف كبير واحد" : "One uppercase letter", met: /[A-Z]/.test(formData.password) },
-    { text: isArabic ? "حرف صغير واحد" : "One lowercase letter", met: /[a-z]/.test(formData.password) },
-    { text: isArabic ? "رقم واحد" : "One number", met: /\d/.test(formData.password) },
+    { text: data.isArabic ? "ثمانية أحرف على الأقل" : "At least 8 characters", met: formData.password.length >= 8 },
+    { text: data.isArabic ? "حرف كبير واحد" : "One uppercase letter", met: /[A-Z]/.test(formData.password) },
+    { text: data.isArabic ? "حرف صغير واحد" : "One lowercase letter", met: /[a-z]/.test(formData.password) },
+    { text: data.isArabic ? "رقم واحد" : "One number", met: /\d/.test(formData.password) },
     {
-      text: isArabic ? "رمز خاص واحد" : "One special character",
+      text: data.isArabic ? "رمز خاص واحد" : "One special character",
       met: /[!@#$%^&*(),.?":{}|<>]/.test(formData.password),
     },
   ]
 
   return (
-    <div className={isDarkTheme ? "dark-theme" : "light-theme"}>
-      <Navbar
-        isDarkTheme={isDarkTheme}
-        setIsDarkTheme={setIsDarkTheme}
-        isArabic={isArabic}
-        setIsArabic={setIsArabic}
-        toggleSidebar={() => {}}
-        isSidebarOpen={false}
-      />
+    <div className={data.isDarkTheme ? "dark-theme" : "light-theme"}>
 
       <div className="auth-container">
         <div className="auth-card">
@@ -87,7 +73,7 @@ export default function ResetPassword() {
 
             <form onSubmit={handleSubmit} className="auth-form">
               <div className="form-group">
-                <label>{isArabic ? "كلمة السر الجديدة" : "New Password"}</label>
+                <label>{data.isArabic ? "كلمة السر الجديدة" : "New Password"}</label>
                 <input
                   type="password"
                   name="password"
@@ -98,10 +84,10 @@ export default function ResetPassword() {
                 />
                 {formData.password && (
                   <div className={`password-strength ${passwordStrength}`}>
-                    {isArabic ? "قوة كلمة المرور: " : "Password strength: "}
-                    {passwordStrength === "weak" && (isArabic ? "ضعيفة" : "Weak")}
-                    {passwordStrength === "medium" && (isArabic ? "متوسطة" : "Medium")}
-                    {passwordStrength === "strong" && (isArabic ? "قوية" : "Strong")}
+                    {data.isArabic ? "قوة كلمة المرور: " : "Password strength: "}
+                    {passwordStrength === "weak" && (data.isArabic ? "ضعيفة" : "Weak")}
+                    {passwordStrength === "medium" && (data.isArabic ? "متوسطة" : "Medium")}
+                    {passwordStrength === "strong" && (data.isArabic ? "قوية" : "Strong")}
                   </div>
                 )}
                 <div className="password-requirements">
@@ -117,7 +103,7 @@ export default function ResetPassword() {
               </div>
 
               <div className="form-group">
-                <label>{isArabic ? "تأكيد كلمة السر" : "Confirm Password"}</label>
+                <label>{data.isArabic ? "تأكيد كلمة السر" : "Confirm Password"}</label>
                 <input
                   type="password"
                   name="confirmPassword"
@@ -129,12 +115,12 @@ export default function ResetPassword() {
               </div>
 
               <button type="submit" className="auth-button">
-                {isArabic ? "حفظ" : "Save"}
+                {data.isArabic ? "حفظ" : "Save"}
               </button>
             </form>
 
             <p className="auth-link">
-              <Link to="/login">{isArabic ? "العودة إلى تسجيل الدخول" : "Back to Login"}</Link>
+              <Link to="/login">{data.isArabic ? "العودة إلى تسجيل الدخول" : "Back to Login"}</Link>
             </p>
           </div>
 

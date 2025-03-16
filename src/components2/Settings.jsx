@@ -1,17 +1,10 @@
-import { useState, useEffect, useRef } from "react"
-import { Link } from "react-router-dom"
-import { Menu, X, Eye, EyeOff } from "lucide-react"
-import Navbar from "./NavBar"
+import { useState, useEffect, useRef, useContext } from "react"
+import { Eye, EyeOff } from "lucide-react"
 import AllLinks from "./Links"
+import { MainContextObj } from "./shared/MainContext"
 
 export default function Settings() {
-  const [isDarkTheme, setIsDarkTheme] = useState(() => {
-    return localStorage.getItem("theme") === "dark"
-  })
-
-  const [isArabic, setIsArabic] = useState(() => {
-    return localStorage.getItem("lang") === "ar"
-  })
+  const data = useContext(MainContextObj)
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
@@ -28,14 +21,14 @@ export default function Settings() {
   })
 
   useEffect(() => {
-    localStorage.setItem("theme", isDarkTheme ? "dark" : "light")
-    document.body.className = isDarkTheme ? "dark-theme" : "light-theme"
-  }, [isDarkTheme])
+    localStorage.setItem("theme", data.isDarkTheme ? "dark" : "light")
+    document.body.className = data.isDarkTheme ? "dark-theme" : "light-theme"
+  }, [data.isDarkTheme])
 
   useEffect(() => {
-    localStorage.setItem("lang", isArabic ? "ar" : "en")
-    document.dir = isArabic ? "rtl" : "ltr"
-  }, [isArabic])
+    localStorage.setItem("lang", data.isArabic ? "ar" : "en")
+    document.dir = data.isArabic ? "rtl" : "ltr"
+  }, [data.isArabic])
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -69,27 +62,19 @@ export default function Settings() {
   }
 
   return (
-    <div className={`dashboard ${isDarkTheme ? "dark-theme" : "light-theme"}`}>
-      <Navbar
-        isDarkTheme={isDarkTheme}
-        setIsDarkTheme={setIsDarkTheme}
-        isArabic={isArabic}
-        setIsArabic={setIsArabic}
-        toggleSidebar={toggleSidebar}
-        isSidebarOpen={isSidebarOpen}
-      />
+    <div className={`dashboard ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
 
       <div className="dashboard-container">
         {/* Left Sidebar */}
         <div ref={sidebarRef} className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
           <div className="profile-section">
             <img src="/placeholder.svg?height=80&width=80" alt="Profile" className="profile-image" />
-            <h3>{isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
-            <p>{isArabic ? "الصف الثاني" : "Second Grade"}</p>
+            <h3>{data.isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
+            <p>{data.isArabic ? "الصف الثاني" : "Second Grade"}</p>
           </div>
 
           <div className="sidebar-links">
-          <AllLinks isArabic={isArabic} />
+          <AllLinks isArabic={data.isArabic} />
           </div>
         </div>
 
@@ -97,11 +82,11 @@ export default function Settings() {
         <main className="main-content">
           <div className="settings-container">
             <div className="settings-header">
-              <h1>{isArabic ? "الإعدادات" : "Settings"}</h1>
+              <h1>{data.isArabic ? "الإعدادات" : "Settings"}</h1>
               <div className="theme-toggle">
-                <span>{isArabic ? "الوضع الليلي" : "Dark Mode"}</span>
+                <span>{data.isArabic ? "الوضع الليلي" : "Dark Mode"}</span>
                 <label className="switch">
-                  <input type="checkbox" checked={isDarkTheme} onChange={() => setIsDarkTheme(!isDarkTheme)} />
+                  <input type="checkbox" checked={data.isDarkTheme} onChange={() => data.setIsDarkTheme(!data.isDarkTheme)} />
                   <span className="slider round"></span>
                 </label>
               </div>
@@ -110,30 +95,30 @@ export default function Settings() {
             <div className="user-profile">
               <img src="/placeholder.svg?height=80&width=80" alt="Profile" className="profile-image" />
               <div className="user-info">
-                <h2>{isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h2>
-                <p>{isArabic ? "الصف الثاني" : "Second Grade"}</p>
+                <h2>{data.isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h2>
+                <p>{data.isArabic ? "الصف الثاني" : "Second Grade"}</p>
               </div>
             </div>
 
             <form onSubmit={handleSubmit} className="settings-form">
               <div className="form-row">
                 <div className="form-group">
-                  <label>{isArabic ? "الاسم الأول" : "First Name"}</label>
+                  <label>{data.isArabic ? "الاسم الأول" : "First Name"}</label>
                   <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} />
                 </div>
                 <div className="form-group">
-                  <label>{isArabic ? "الاسم الثاني" : "Last Name"}</label>
+                  <label>{data.isArabic ? "الاسم الثاني" : "Last Name"}</label>
                   <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} />
                 </div>
               </div>
 
               <div className="form-group">
-                <label>{isArabic ? "الرقم القومي" : "National ID"}</label>
+                <label>{data.isArabic ? "الرقم القومي" : "National ID"}</label>
                 <input type="text" name="nationalId" value={formData.nationalId} onChange={handleInputChange} />
               </div>
 
               <div className="form-group password-group">
-                <label>{isArabic ? "كلمة المرور" : "Password"}</label>
+                <label>{data.isArabic ? "كلمة المرور" : "Password"}</label>
                 <div className="password-input">
                   <input
                     type={showPassword ? "text" : "password"}
@@ -148,7 +133,7 @@ export default function Settings() {
               </div>
 
               <div className="form-group password-group">
-                <label>{isArabic ? "تأكيد كلمة المرور" : "Confirm Password"}</label>
+                <label>{data.isArabic ? "تأكيد كلمة المرور" : "Confirm Password"}</label>
                 <div className="password-input">
                   <input
                     type={showPassword ? "text" : "password"}
@@ -164,11 +149,11 @@ export default function Settings() {
 
               <div className="form-row">
                 <div className="form-group">
-                  <label>{isArabic ? "رقم الهاتف" : "Phone Number"}</label>
+                  <label>{data.isArabic ? "رقم الهاتف" : "Phone Number"}</label>
                   <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} />
                 </div>
                 <div className="form-group">
-                  <label>{isArabic ? "رقم هاتف آخر" : "Alternate Phone"}</label>
+                  <label>{data.isArabic ? "رقم هاتف آخر" : "Alternate Phone"}</label>
                   <input
                     type="tel"
                     name="alternatePhone"
@@ -179,7 +164,7 @@ export default function Settings() {
               </div>
 
               <button type="submit" className="save-button">
-                {isArabic ? "حفظ التغييرات" : "Save Changes"}
+                {data.isArabic ? "حفظ التغييرات" : "Save Changes"}
               </button>
             </form>
           </div>
@@ -187,7 +172,7 @@ export default function Settings() {
 
         {/* Right Navigation */}
         <div className="right-nav">
-        <AllLinks isArabic={isArabic} />
+        <AllLinks isArabic={data.isArabic} />
         </div>
       </div>
     </div>

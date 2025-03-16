@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { Link, useParams } from "react-router-dom"
 import { Clock, ArrowLeft, Check, X } from 'lucide-react'
+import { MainContextObj } from "./shared/MainContext"
 
 // Mock exam data
 const examData = {
@@ -11,40 +12,37 @@ const examData = {
   questions: [
     {
       id: 1,
-      textAr: "ما هي عاصمة مصر؟",
-      textEn: "What is the capital of Egypt?",
+      text: "What is the capital of Egypt?",
       points: 1,
       options: [
-        { id: "a", textAr: "الإسكندرية", textEn: "Alexandria" },
-        { id: "b", textAr: "القاهرة", textEn: "Cairo" },
-        { id: "c", textAr: "الأقصر", textEn: "Luxor" },
-        { id: "d", textAr: "أسوان", textEn: "Aswan" },
+        { id: "a", text: "Alexandria" },
+        { id: "b", text: "Cairo" },
+        { id: "c", text: "Luxor" },
+        { id: "d", text: "Aswan" },
       ],
       correctAnswer: "b"
     },
     {
       id: 2,
-      textAr: "كم عدد أضلاع المثلث؟",
-      textEn: "How many sides does a triangle have?",
+      text: "How many sides does a triangle have?",
       points: 1,
       options: [
-        { id: "a", textAr: "٣", textEn: "3" },
-        { id: "b", textAr: "٤", textEn: "4" },
-        { id: "c", textAr: "٥", textEn: "5" },
-        { id: "d", textAr: "٦", textEn: "6" },
+        { id: "a", text: "3" },
+        { id: "b", text: "4" },
+        { id: "c", text: "5" },
+        { id: "d", text: "6" },
       ],
       correctAnswer: "a"
     },
     {
       id: 3,
-      textAr: "ما هو أكبر كوكب في النظام الشمسي؟",
-      textEn: "What is the largest planet in the solar system?",
+      text: "What is the largest planet in the solar system?",
       points: 1,
       options: [
-        { id: "a", textAr: "الأرض", textEn: "Earth" },
-        { id: "b", textAr: "المريخ", textEn: "Mars" },
-        { id: "c", textAr: "المشتري", textEn: "Jupiter" },
-        { id: "d", textAr: "زحل", textEn: "Saturn" },
+        { id: "a", text: "Earth" },
+        { id: "b", text: "Mars" },
+        { id: "c", text: "Jupiter" },
+        { id: "d", text: "Saturn" },
       ],
       correctAnswer: "c"
     },
@@ -52,14 +50,9 @@ const examData = {
 }
 
 export default function examPage() {
-  const {examID} = useParams()
-  const [isDarkTheme, setIsDarkTheme] = useState(() => {
-    return localStorage.getItem("theme") === "dark"
-  })
+  const data = useContext(MainContextObj)
 
-  const [isArabic, setIsArabic] = useState(() => {
-    return localStorage.getItem("lang") === "ar"
-  })
+  const {examID} = useParams()
 
   const [answers, setAnswers] = useState({})
   const [timeLeft, setTimeLeft] = useState(examData.duration * 60) // Convert to seconds
@@ -68,14 +61,14 @@ export default function examPage() {
   const [score, setScore] = useState(null)
 
   useEffect(() => {
-    localStorage.setItem("theme", isDarkTheme ? "dark" : "light")
-    document.body.className = isDarkTheme ? "dark-theme" : "light-theme"
-  }, [isDarkTheme])
+    localStorage.setItem("theme", data.isDarkTheme ? "dark" : "light")
+    document.body.className = data.isDarkTheme ? "dark-theme" : "light-theme"
+  }, [data.isDarkTheme])
 
   useEffect(() => {
-    localStorage.setItem("lang", isArabic ? "ar" : "en")
-    document.dir = isArabic ? "rtl" : "ltr"
-  }, [isArabic])
+    localStorage.setItem("lang", data.isArabic ? "ar" : "en")
+    document.dir = data.isArabic ? "rtl" : "ltr"
+  }, [data.isArabic])
 
   // Handle countdown
   useEffect(() => {
@@ -148,7 +141,7 @@ export default function examPage() {
   }
 
   return (
-    <div className={`exam-page ${isDarkTheme ? "dark-theme" : "light-theme"}`}>
+    <div className={`exam-page ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
       {/* Progress bar */}
       <div className="exam-progress-bar">
         <div
@@ -165,16 +158,8 @@ export default function examPage() {
         <div className="exam-header">
           <Link to="/exams" className="back-button">
             <ArrowLeft />
-            <span>{isArabic ? "عودة" : "Back"}</span>
+            <span>{data.isArabic ? "عودة" : "Back"}</span>
           </Link>
-          <div className="exam-controls">
-            <button className="btn btn-outline-primary" onClick={() => setIsDarkTheme(!isDarkTheme)}>
-              {isDarkTheme ? "Light" : "Dark"}
-            </button>
-            <button className="btn btn-outline-primary" onClick={() => setIsArabic(!isArabic)}>
-              {isArabic ? "English" : "عربي"}
-            </button>
-          </div>
           <div className="exam-timer">
             <Clock className="timer-icon" />
             <span className={timeLeft < 300 ? "text-danger" : ""}>
@@ -185,10 +170,10 @@ export default function examPage() {
 
         <div className="exam-title">
           <h1>{examID}</h1>
-          {/* <h1>{isArabic ? examData.titleAr : examData.titleEn}</h1> */}
+          {/* <h1>{data.isArabic ? examData.titleAr : examData.titleEn}</h1> */}
           <p className="exam-info">
-            {isArabic ? "عدد الأسئلة:" : "Questions:"} {examData.questions.length} •{" "}
-            {isArabic ? "مدة الامتحان:" : "Duration:"} {examData.duration} {isArabic ? "دقيقة" : "minutes"}
+            {data.isArabic ? "عدد الأسئلة:" : "Questions:"} {examData.questions.length} •{" "}
+            {data.isArabic ? "مدة الامتحان:" : "Duration:"} {examData.duration} {data.isArabic ? "دقيقة" : "minutes"}
           </p>
         </div>
 
@@ -197,10 +182,10 @@ export default function examPage() {
             <div key={question.id} className={`question-card ${examSubmitted ? (answers[question.id] === question.correctAnswer ? 'correct' : 'incorrect') : ''}`}>
               <div className="question-header">
                 <h3>
-                  {question.id}. {isArabic ? question.textAr : question.textEn}
+                  {question.id}. {question.text}
                 </h3>
                 <span className="question-points">
-                  {question.points} {isArabic ? "درجة" : "point"}
+                  {question.points} {data.isArabic ? "درجة" : "point"}
                 </span>
               </div>
               <div className="question-options">
@@ -215,7 +200,7 @@ export default function examPage() {
                       disabled={examSubmitted}
                     />
                     <span className="option-text">
-                      {isArabic ? option.textAr : option.textEn}
+                      {option.text}
                     </span>
                     {examSubmitted && option.id === question.correctAnswer && <Check className="icon-correct" />}
                     {examSubmitted && answers[question.id] === option.id && option.id !== question.correctAnswer && <X className="icon-incorrect" />}
@@ -234,15 +219,15 @@ export default function examPage() {
               disabled={isSubmitting}
             >
               {isSubmitting ? (
-                isArabic ? "جاري التسليم..." : "Submitting..."
+                data.isArabic ? "جاري التسليم..." : "Submitting..."
               ) : (
-                isArabic ? "تسليم" : "Submit"
+                data.isArabic ? "تسليم" : "Submit"
               )}
             </button>
           ) : (
             <div className="exam-results">
-              <h2>{isArabic ? "نتيجة الاختبار" : "Exam Results"}</h2>
-              <p>{isArabic ? `درجتك: ${score.toFixed(2)}%` : `Your score: ${score.toFixed(2)}%`}</p>
+              <h2>{data.isArabic ? "نتيجة الاختبار" : "Exam Results"}</h2>
+              <p>{data.isArabic ? `درجتك: ${score.toFixed(2)}%` : `Your score: ${score.toFixed(2)}%`}</p>
             </div>
           )}
         </div>

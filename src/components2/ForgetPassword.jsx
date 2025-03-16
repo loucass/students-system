@@ -1,16 +1,11 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import Navbar from "./NavBar"
+import { MainContextObj } from "./shared/MainContext"
 
 export default function ForgotPassword() {
-  let navigate = useNavigate()
-  const [isDarkTheme, setIsDarkTheme] = useState(() => {
-    return localStorage.getItem("theme") === "dark"
-  })
+  const data = useContext(MainContextObj)
 
-  const [isArabic, setIsArabic] = useState(() => {
-    return localStorage.getItem("lang") === "ar"
-  })
+  let navigate = useNavigate()
 
   const [phoneNumber, setPhoneNumber] = useState("")
 
@@ -21,15 +16,7 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div className={isDarkTheme ? "dark-theme" : "light-theme"}>
-      <Navbar
-        isDarkTheme={isDarkTheme}
-        setIsDarkTheme={setIsDarkTheme}
-        isArabic={isArabic}
-        setIsArabic={setIsArabic}
-        toggleSidebar={() => {}}
-        isSidebarOpen={false}
-      />
+    <div className={data.isDarkTheme ? "dark-theme" : "light-theme"}>
 
       <div className="auth-container">
         <div className="auth-card">
@@ -37,23 +24,23 @@ export default function ForgotPassword() {
 
             <form onSubmit={handleSubmit} className="auth-form">
               <div className="form-group">
-                <label>{isArabic ? "ادخل رقم هاتفك" : "Enter your phone number"}</label>
+                <label>{data.isArabic ? "ادخل رقم هاتفك" : "Enter your phone number"}</label>
                 <input
                   type="tel"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
-                  placeholder={isArabic ? "ادخل رقم الهاتف الخاص بك" : "Enter your phone number"}
+                  placeholder={data.isArabic ? "ادخل رقم الهاتف الخاص بك" : "Enter your phone number"}
                   required
                 />
               </div>
 
               <button type="submit" className="auth-button">
-                {isArabic ? "ارسال الكود" : "Send Code"}
+                {data.isArabic ? "ارسال الكود" : "Send Code"}
               </button>
             </form>
 
             <p className="auth-link">
-              <Link to="/login">{isArabic ? "العودة إلى تسجيل الدخول" : "Back to Login"}</Link>
+              <Link to="/login">{data.isArabic ? "العودة إلى تسجيل الدخول" : "Back to Login"}</Link>
             </p>
           </div>
 

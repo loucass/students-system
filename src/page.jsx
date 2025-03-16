@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "./main.css"
-import { Route, Routes } from "react-router-dom"
+import { createBrowserRouter, Route, RouterProvider, Routes } from "react-router-dom"
 import Dashboard from "./components2/Dashboard"
 import Curriculum from "./components2/curriculum"
 import Settings from "./components2/Settings"
@@ -17,28 +17,96 @@ import LandingPage from './components2/Home'
 import ExamPage from './components2/ExamPage'
 import ParentHome from './components2/parent/ParentHome'
 import ParentLogin from './components2/parent/ParentLogin'
+import MainContext from './components2/shared/MainContext'
+import Navbar from './components2/NavBar'
+import TeacherHome from './components2/teacher/TeacherHome'
+import TeacherExam from './components2/teacher/TeacherExam'
 
 export default function Home() {
+
+  const MainRoutes = createBrowserRouter(
+    [
+      {
+        path: "/",
+        element: <LandingPage />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "/curriculum",
+        element: <Curriculum />,
+      },
+      {
+        path: "/settings",
+        element: <Settings />,
+      },
+      {
+        path: "/exams",
+        element: <Exams />,
+      },
+      {
+        path: "/examPage/:examID",
+        element: <ExamPage />,
+      },
+      {
+        path: "/challenges",
+        element: <Challenges />,
+      },
+      {
+        path: "/Revisions",
+        element: <Revisions />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
+      },
+      {
+        path: "/otp-verification",
+        element: <OtpVerification />,
+      },
+      {
+        path: "/reset-password",
+        element: <ResetPassword />,
+      },
+      {
+        path: "/parent/dashboard",
+        element: <ParentHome />,
+      },
+      {
+        path: "/parent/login",
+        element: <ParentLogin />,
+      },
+      {
+        path: "/teacher/dashboard",
+        element: <TeacherHome />,
+      },
+      {
+        path: "/teacher/exams",
+        element: <TeacherExam />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ]
+    
+  )
+
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/curriculum" element={<Curriculum />} />
-      <Route path="/settings" element={<Settings />} />
-      <Route path="/exams" element={<Exams />} />
-      <Route path="/examPage/:examID" element={<ExamPage />} />
-      <Route path="/challenges" element={<Challenges />} />
-      <Route path="/Revisions" element={<Revisions />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/otp-verification" element={<OtpVerification />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
-      {/* parent routes */}
-      <Route path="/parent/dashboard" element={<ParentHome />} />
-      <Route path="/parent/login" element={<ParentLogin />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <MainContext >
+      <Navbar />
+      <RouterProvider router={MainRoutes} />
+    </MainContext>
   )
 }
 

@@ -13,6 +13,9 @@ export default function AllLinks({isArabic}) {
     <h2 className="text-danger">mocking</h2>
     <Link to="/parent/dashboard">{isArabic ? "الرئيسيه لولي الامر" : "parent dashboard"}</Link>
     <Link to="/parent/login">{isArabic ? "تسجيل دخول ولي الامر" : "parent log in"}</Link>
+    <hr />
+    <Link to="/teacher/exams">exams page for teacher</Link>
+    <Link to="/teacher/dashboard">dashboard for teacher</Link>
 
   </>
   )

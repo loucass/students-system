@@ -1,16 +1,10 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import Navbar from "./NavBar"
+import { MainContextObj } from "./shared/MainContext"
 
 export default function OtpVerification() {
+  const data = useContext(MainContextObj)
   let navigate = useNavigate()
-  const [isDarkTheme, setIsDarkTheme] = useState(() => {
-    return localStorage.getItem("theme") === "dark"
-  })
-
-  const [isArabic, setIsArabic] = useState(() => {
-    return localStorage.getItem("lang") === "ar"
-  })
 
   const [otp, setOtp] = useState(["", "", "", ""])
   const inputRefs = [useRef(), useRef(), useRef(), useRef()]
@@ -44,15 +38,7 @@ export default function OtpVerification() {
   }
 
   return (
-    <div className={isDarkTheme ? "dark-theme" : "light-theme"}>
-      <Navbar
-        isDarkTheme={isDarkTheme}
-        setIsDarkTheme={setIsDarkTheme}
-        isArabic={isArabic}
-        setIsArabic={setIsArabic}
-        toggleSidebar={() => {}}
-        isSidebarOpen={false}
-      />
+    <div className={data.isDarkTheme ? "dark-theme" : "light-theme"}>
 
       <div className="auth-container">
         <div className="auth-card">
@@ -63,7 +49,7 @@ export default function OtpVerification() {
 
             <form onSubmit={handleSubmit} className="auth-form">
               <div className="form-group">
-                <label>{isArabic ? "ادخل الكود المرسل اليك" : "Enter the verification code"}</label>
+                <label>{data.isArabic ? "ادخل الكود المرسل اليك" : "Enter the verification code"}</label>
                 <div className="otp-container">
                   {otp.map((digit, index) => (
                     <input
@@ -82,12 +68,12 @@ export default function OtpVerification() {
               </div>
 
               <button type="submit" className="auth-button">
-                {isArabic ? "استرداد" : "Verify"}
+                {data.isArabic ? "استرداد" : "Verify"}
               </button>
             </form>
 
             <p className="auth-link">
-              <Link to="/login">{isArabic ? "العودة إلى تسجيل الدخول" : "Back to Login"}</Link>
+              <Link to="/login">{data.isArabic ? "العودة إلى تسجيل الدخول" : "Back to Login"}</Link>
             </p>
           </div>
 

@@ -1,0 +1,622 @@
+/* TeacherExam Specific Styles */
+.teacher-exam-styling-loading,
+.teacher-exam-styling-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+/* Header Styles */
+.teacher-exam-styling-search-container {
+  position: relative;
+  width: 300px;
+}
+
+.teacher-exam-styling-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  width: 18px;
+  height: 18px;
+}
+
+[dir="rtl"] .teacher-exam-styling-search-icon {
+  left: auto;
+  right: 10px;
+}
+
+.teacher-exam-styling-search-input {
+  width: 100%;
+  padding: 0.6rem 2.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.teacher-exam-styling-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.2);
+}
+
+.teacher-exam-styling-notification,
+.teacher-exam-styling-assistant {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  color: var(--text-color);
+}
+
+.teacher-exam-styling-notification:hover,
+.teacher-exam-styling-assistant:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+}
+
+.teacher-exam-styling-notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ff4081;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[dir="rtl"] .teacher-exam-styling-notification-badge {
+  right: auto;
+  left: 0;
+}
+
+.teacher-exam-styling-notification-text {
+  font-size: 0.9rem;
+}
+
+/* Dashboard Container */
+.teacher-exam-styling-dashboard-container {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 56px - 60px); /* Adjust for navbar and footer */
+  position: relative;
+}
+
+/* Update the sidebar styles */
+.teacher-exam-styling-sidebar {
+  width: 250px;
+  background-color: var(--card-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 56px; /* Adjust for navbar height */
+  height: calc(100vh - 56px); /* Adjust for navbar height */
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+[dir="rtl"] .teacher-exam-styling-sidebar {
+  border-right: none;
+  border-left: 1px solid var(--border-color);
+}
+
+.teacher-exam-styling-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.teacher-exam-styling-profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+.teacher-exam-styling-profile-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  color: var(--heading-color);
+}
+
+.teacher-exam-styling-class-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(124, 77, 255, 0.1);
+  color: var(--primary-color);
+  margin: 0 1rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.teacher-exam-styling-class-selector:hover {
+  background-color: rgba(124, 77, 255, 0.2);
+}
+
+.teacher-exam-styling-nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.teacher-exam-styling-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-bottom: 0.5rem;
+}
+
+.teacher-exam-styling-nav-item:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+  color: var(--primary-color);
+}
+
+.teacher-exam-styling-nav-item.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.teacher-exam-styling-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+  color: #ff4081;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-exam-styling-logout:hover {
+  background-color: rgba(255, 64, 129, 0.1);
+}
+
+/* Main Content Styles */
+.teacher-exam-styling-main {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  width: calc(100% - 250px); /* Ensure it takes the remaining width */
+}
+
+.dark-theme .teacher-exam-styling-main {
+  background-color: #1a1a2e;
+}
+
+.teacher-exam-styling-header {
+  margin-bottom: 1.5rem;
+}
+
+.teacher-exam-styling-title {
+  font-size: 1.8rem;
+  color: var(--heading-color);
+  margin: 0;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Create Exam Form Styles */
+.teacher-exam-styling-create-exam-container {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme .teacher-exam-styling-create-exam-container {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-exam-styling-create-exam-header {
+  margin-bottom: 1.5rem;
+}
+
+.teacher-exam-styling-create-exam-title {
+  font-size: 1.3rem;
+  color: var(--heading-color);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.teacher-exam-styling-create-exam-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.teacher-exam-styling-form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.teacher-exam-styling-form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.teacher-exam-styling-form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.teacher-exam-styling-form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.2);
+}
+
+.teacher-exam-styling-add-questions-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.teacher-exam-styling-add-questions-btn:hover {
+  background-color: var(--secondary-hover);
+  color: white;
+}
+
+.teacher-exam-styling-icon-left {
+  width: 16px;
+  height: 16px;
+}
+
+[dir="rtl"] .teacher-exam-styling-icon-left {
+  transform: rotate(180deg);
+}
+
+.teacher-exam-styling-form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.teacher-exam-styling-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-exam-styling-submit-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Tables Styles */
+.teacher-exam-styling-tables-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.teacher-exam-styling-table-section {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme .teacher-exam-styling-table-section {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-exam-styling-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.teacher-exam-styling-table-title {
+  font-size: 1.2rem;
+  color: var(--heading-color);
+  margin: 0;
+}
+
+.teacher-exam-styling-sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.teacher-exam-styling-sort-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.teacher-exam-styling-sort-select {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
+
+.teacher-exam-styling-table-wrapper {
+  overflow-x: auto;
+}
+
+.teacher-exam-styling-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.teacher-exam-styling-table th,
+.teacher-exam-styling-table td {
+  padding: 1rem;
+  text-align: start;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.teacher-exam-styling-table th {
+  font-weight: 600;
+  color: var(--text-muted);
+  background-color: var(--hover-color);
+}
+
+.teacher-exam-styling-sortable {
+  cursor: pointer;
+  position: relative;
+}
+
+.teacher-exam-styling-sortable:hover {
+  background-color: rgba(124, 77, 255, 0.05);
+}
+
+.teacher-exam-styling-sort-indicator {
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+}
+
+[dir="rtl"] .teacher-exam-styling-sort-indicator {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+.teacher-exam-styling-table tr:hover td {
+  background-color: rgba(124, 77, 255, 0.05);
+}
+
+.teacher-exam-styling-exam-title {
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.teacher-exam-styling-success-rate {
+  position: relative;
+  height: 20px;
+  background-color: var(--hover-color);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.teacher-exam-styling-success-rate-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: var(--success-color);
+  border-radius: 10px;
+  z-index: 1;
+}
+
+[dir="rtl"] .teacher-exam-styling-success-rate-bar {
+  left: auto;
+  right: 0;
+}
+
+.teacher-exam-styling-success-rate span {
+  position: relative;
+  z-index: 2;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.teacher-exam-styling-report-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.teacher-exam-styling-report-link:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* Footer */
+.teacher-exam-styling-footer {
+  background-color: var(--card-bg);
+  padding: 1rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.teacher-exam-styling-footer p {
+  margin: 0.25rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .teacher-exam-styling-form-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .teacher-exam-styling-form-group {
+    width: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  .teacher-exam-styling-sidebar {
+    width: 80px;
+    padding: 1rem 0;
+  }
+
+  .teacher-exam-styling-profile-name,
+  .teacher-exam-styling-class-selector span,
+  .teacher-exam-styling-nav-item span,
+  .teacher-exam-styling-logout span {
+    display: none;
+  }
+
+  .teacher-exam-styling-class-selector {
+    justify-content: center;
+    padding: 0.75rem;
+    margin: 0 0.5rem 1.5rem;
+  }
+
+  .teacher-exam-styling-nav-item,
+  .teacher-exam-styling-logout {
+    justify-content: center;
+    padding: 0.75rem;
+  }
+
+  .teacher-exam-styling-profile-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .teacher-exam-styling-main {
+    width: calc(100% - 80px);
+  }
+}
+
+@media (max-width: 768px) {
+  .teacher-exam-styling-search-container {
+    width: 100%;
+  }
+
+  .teacher-exam-styling-dashboard-container {
+    flex-direction: column;
+  }
+
+  .teacher-exam-styling-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 1rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .teacher-exam-styling-main {
+    width: 100%;
+  }
+
+  .teacher-exam-styling-profile,
+  .teacher-exam-styling-class-selector {
+    display: none;
+  }
+
+  .teacher-exam-styling-nav {
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .teacher-exam-styling-nav-item,
+  .teacher-exam-styling-logout {
+    padding: 0.5rem;
+    margin: 0 0.25rem;
+  }
+
+  .teacher-exam-styling-nav-item span,
+  .teacher-exam-styling-logout span {
+    display: none;
+  }
+
+  .teacher-exam-styling-table-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .teacher-exam-styling-main {
+    padding: 1rem;
+  }
+
+  .teacher-exam-styling-table th,
+  .teacher-exam-styling-table td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .teacher-exam-styling-create-exam-container,
+  .teacher-exam-styling-table-section {
+    padding: 1rem;
+  }
+}

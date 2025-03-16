@@ -1,36 +1,23 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { Link } from "react-router-dom"
 import { Home } from "lucide-react"
+import { MainContextObj } from "./shared/MainContext"
 
 export default function NotFound() {
-  const [isDarkTheme, setIsDarkTheme] = useState(() => {
-    return localStorage.getItem("theme") === "dark"
-  })
-
-  const [isArabic, setIsArabic] = useState(() => {
-    return localStorage.getItem("lang") === "ar"
-  })
+  const data = useContext(MainContextObj)
 
   useEffect(() => {
-    localStorage.setItem("theme", isDarkTheme ? "dark" : "light")
-    document.body.className = isDarkTheme ? "dark-theme" : "light-theme"
-  }, [isDarkTheme])
+    localStorage.setItem("theme", data.isDarkTheme ? "dark" : "light")
+    document.body.className = data.isDarkTheme ? "dark-theme" : "light-theme"
+  }, [data.isDarkTheme])
 
   useEffect(() => {
-    localStorage.setItem("lang", isArabic ? "ar" : "en")
-    document.dir = isArabic ? "rtl" : "ltr"
-  }, [isArabic])
+    localStorage.setItem("lang", data.isArabic ? "ar" : "en")
+    document.dir = data.isArabic ? "rtl" : "ltr"
+  }, [data.isArabic])
 
   return (
-    <div className={`not-found-container ${isDarkTheme ? "dark-theme" : "light-theme"}`}>
-      <div className="theme-language-controls">
-        <button className="theme-toggle" onClick={() => setIsDarkTheme(!isDarkTheme)}>
-          {isDarkTheme ? "☀️" : "🌙"}
-        </button>
-        <button className="language-toggle" onClick={() => setIsArabic(!isArabic)}>
-          {isArabic ? "English" : "عربي"}
-        </button>
-      </div>
+    <div className={`not-found-container ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
 
       <div className="not-found-content">
         <div className="error-code">
@@ -43,10 +30,10 @@ export default function NotFound() {
           <div className="digit">4</div>
         </div>
 
-        <h1 className="error-title">{isArabic ? "عفواً، الصفحة غير موجودة" : "Oops! Page Not Found"}</h1>
+        <h1 className="error-title">{data.isArabic ? "عفواً، الصفحة غير موجودة" : "Oops! Page Not Found"}</h1>
 
         <p className="error-message">
-          {isArabic
+          {data.isArabic
             ? "الصفحة التي تبحث عنها قد تكون تم نقلها أو حذفها أو ربما لم تكن موجودة من الأساس."
             : "The page you are looking for might have been moved, deleted, or possibly never existed."}
         </p>
@@ -60,7 +47,7 @@ export default function NotFound() {
 
         <Link to="/dashboard" className="home-button">
           <Home size={20} />
-          <span>{isArabic ? "العودة إلى الصفحة الرئيسية" : "Back to Home"}</span>
+          <span>{data.isArabic ? "العودة إلى الصفحة الرئيسية" : "Back to Home"}</span>
         </Link>
       </div>
 

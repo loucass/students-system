@@ -1,35 +1,47 @@
 import { Menu, X, Sun, Moon, Languages } from "lucide-react"
+import { useContext } from "react"
+import { MainContextObj } from "./shared/MainContext"
 
-export default function Navbar({ isDarkTheme, setIsDarkTheme, isArabic, setIsArabic, toggleSidebar, isSidebarOpen }) {
+export default function Navbar() {
+  const data = useContext(MainContextObj)
   return (
-    <nav className={`navbar navbar-expand-lg ${isDarkTheme ? "navbar-dark bg-dark" : "navbar-light bg-light"}`}>
+    <nav className={`navbar navbar-expand-lg ${data.isDarkTheme ? "navbar-dark bg-dark" : "navbar-light bg-light"}`}>
       <div className="container-fluid">
         <button
           className="navbar-toggler"
           type="button"
-          onClick={toggleSidebar}
-          aria-label={isArabic ? "تبديل القائمة" : "Toggle navigation"}
+          onClick={data.toggleSidebar}
+          aria-label={data.isArabic ? "تبديل القائمة" : "Toggle navigation"}
         >
-          {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
+          {data.isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
         <div className="ms-auto d-flex gap-3">
           <button
             className="btn btn-icon"
-            onClick={() => setIsDarkTheme(!isDarkTheme)}
-            aria-label={isArabic ? "تبديل المظهر" : "Toggle theme"}
+            onClick={() => data.setIsDarkTheme(!data.isDarkTheme)}
+            aria-label={data.isArabic ? "تبديل المظهر" : "Toggle theme"}
           >
-            {isDarkTheme ? <Sun size={20} /> : <Moon size={20} />}
+            {data.isDarkTheme ? <Sun size={20} /> : <Moon size={20} />}
           </button>
           <button
             className="btn btn-icon"
-            onClick={() => setIsArabic(!isArabic)}
-            aria-label={isArabic ? "تغيير اللغة" : "Change language"}
+            onClick={() => data.setIsArabic(!data.isArabic)}
+            aria-label={data.isArabic ? "تغيير اللغة" : "Change language"}
           >
             <Languages size={20} />
           </button>
         </div>
       </div>
     </nav>
+  )
+}
+
+export function Navbar2() {
+  const data = useContext(MainContextObj)
+  console.log(data);
+  
+  return (
+    <></>
   )
 }
 

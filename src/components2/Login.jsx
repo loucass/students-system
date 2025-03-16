@@ -1,16 +1,10 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import Navbar from "./NavBar"
+import { MainContextObj } from "./shared/MainContext"
 
 export default function Login() {
-    let navigate = useNavigate()
-  const [isDarkTheme, setIsDarkTheme] = useState(() => {
-    return localStorage.getItem("theme") === "dark"
-  })
-
-  const [isArabic, setIsArabic] = useState(() => {
-    return localStorage.getItem("lang") === "ar"
-  })
+  const data = useContext(MainContextObj)
+  let navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     email: "",
@@ -32,15 +26,7 @@ export default function Login() {
   }
 
   return (
-    <div className={isDarkTheme ? "dark-theme" : "light-theme"}>
-      <Navbar
-        isDarkTheme={isDarkTheme}
-        setIsDarkTheme={setIsDarkTheme}
-        isArabic={isArabic}
-        setIsArabic={setIsArabic}
-        toggleSidebar={() => {}}
-        isSidebarOpen={false}
-      />
+    <div className={data.isDarkTheme ? "dark-theme" : "light-theme"}>
 
       <div className="auth-container">
         <div className="auth-card">
@@ -48,46 +34,46 @@ export default function Login() {
 
             <form onSubmit={handleSubmit} className="auth-form">
               <div className="form-group">
-                <label>{isArabic ? "البريد الالكتروني / كود الطالب" : "Email / Student Code"}</label>
+                <label>{data.isArabic ? "البريد الالكتروني / كود الطالب" : "Email / Student Code"}</label>
                 <input
                   type="text"
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder={isArabic ? "البريد الالكتروني / كود الطالب" : "Email / Student Code"}
+                  placeholder={data.isArabic ? "البريد الالكتروني / كود الطالب" : "Email / Student Code"}
                   required
                 />
               </div>
 
               <div className="form-group">
-                <label>{isArabic ? "كلمة السر" : "Password"}</label>
+                <label>{data.isArabic ? "كلمة السر" : "Password"}</label>
                 <input
                   type="password"
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  placeholder={isArabic ? "كلمة السر" : "Password"}
+                  placeholder={data.isArabic ? "كلمة السر" : "Password"}
                   required
                 />
               </div>
 
               <Link to="/forgot-password" className="forgot-password-link">
-                {isArabic ? "هل نسيت كلمة السر؟" : "Forgot password?"}
+                {data.isArabic ? "هل نسيت كلمة السر؟" : "Forgot password?"}
               </Link>
 
               <button type="submit" className="auth-button">
-                {isArabic ? "تسجيل الدخول" : "Login"}
+                {data.isArabic ? "تسجيل الدخول" : "Login"}
               </button>
             </form>
 
             <p className="auth-link">
-              {isArabic ? "لا يوجد لديك حساب؟" : "Don't have an account?"}{" "}
-              <Link to="/register">{isArabic ? "انشئ حسابك الآن!" : "Create your account!"}</Link>
+              {data.isArabic ? "لا يوجد لديك حساب؟" : "Don't have an account?"}{" "}
+              <Link to="/register">{data.isArabic ? "انشئ حسابك الآن!" : "Create your account!"}</Link>
             </p>
 
             <p className="auth-link">
-              {isArabic ? "تسجيل الدخول ك ولي امر" : "log in as parent"}{" "}
-              <Link to="/parent/login">{isArabic ? "سجل الدخول ك ولي امر" : "log in as parent"}</Link>
+              {data.isArabic ? "تسجيل الدخول ك ولي امر" : "log in as parent"}{" "}
+              <Link to="/parent/login">{data.isArabic ? "سجل الدخول ك ولي امر" : "log in as parent"}</Link>
             </p>
           </div>
 

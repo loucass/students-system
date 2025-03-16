@@ -1,16 +1,15 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useContext } from "react"
 import { Link } from "react-router-dom"
 import { Menu, X, Clock, FileText, ChevronLeft } from "lucide-react"
-import Navbar from "./NavBar"
 import AllLinks from "./Links"
+import { MainContextObj } from "./shared/MainContext"
 
 // Sample exam data
 const examData = {
   currentExams: [
     {
       id: 1,
-      titleAr: "اختبار على الفصل الأول",
-      titleEn: "First Chapter Exam",
+      title: "First Chapter Exam",
       time: 30,
       questions: 60,
       reviewUrl: "#",
@@ -18,8 +17,7 @@ const examData = {
     },
     {
       id: 2,
-      titleAr: "اختبار على الفصل الثاني",
-      titleEn: "Second Chapter Exam",
+      title: "Second Chapter Exam",
       time: 30,
       questions: 60,
       reviewUrl: "#",
@@ -27,8 +25,7 @@ const examData = {
     },
     {
       id: 3,
-      titleAr: "امتحان تفاعلي",
-      titleEn: "Interactive Exam",
+      title: "Interactive Exam",
       time: "-",
       questions: "-",
       reviewUrl: "#",
@@ -38,21 +35,17 @@ const examData = {
   upcomingExams: [
     {
       id: 1,
-      titleAr: "الفصل الثالث",
-      titleEn: "Third Chapter",
+      title: "Third Chapter",
       date: "2024/6/20",
-      time: "9:00 مساءً",
-      timeEn: "9:00 PM",
+      time: "9:00 PM",
       duration: 30,
       score: 100,
     },
     {
       id: 2,
-      titleAr: "الفصل الثاني",
-      titleEn: "Second Chapter",
+      title: "Second Chapter",
       date: "2024/6/25",
-      time: "8:30 مساءً",
-      timeEn: "8:30 PM",
+      time: "8:30 PM",
       duration: 30,
       score: 100,
     },
@@ -60,60 +53,47 @@ const examData = {
   examResults: [
     {
       id: 1,
-      titleAr: "الفصل الأول",
-      titleEn: "First Chapter",
+      title: "First Chapter",
       date: "2024/6/15",
-      status: "نجاح",
-      statusEn: "Pass",
+      status: "Pass",
       score: "90/100",
     },
     {
       id: 2,
-      titleAr: "الفصل الرابع",
-      titleEn: "Fourth Chapter",
+      title: "Fourth Chapter",
       date: "2024/6/17",
-      status: "نجاح",
-      statusEn: "Pass",
+      status: "Pass",
       score: "95/100",
     },
     {
       id: 3,
-      titleAr: "امتحان شامل",
-      titleEn: "Comprehensive Exam",
+      title: "Comprehensive Exam",
       date: "2024/6/17",
-      status: "رسوب",
-      statusEn: "Fail",
+      status: "Fail",
       score: "60/100",
     },
   ],
 }
 
 export default function Exams() {
-  const [isDarkTheme, setIsDarkTheme] = useState(() => {
-    return localStorage.getItem("theme") === "dark"
-  })
+  const data = useContext(MainContextObj)
 
-  const [isArabic, setIsArabic] = useState(() => {
-    return localStorage.getItem("lang") === "ar"
-  })
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const sidebarRef = useRef(null)
 
   useEffect(() => {
-    localStorage.setItem("theme", isDarkTheme ? "dark" : "light")
-    document.body.className = isDarkTheme ? "dark-theme" : "light-theme"
-  }, [isDarkTheme])
+    localStorage.setItem("theme", data.isDarkTheme ? "dark" : "light")
+    document.body.className = data.isDarkTheme ? "dark-theme" : "light-theme"
+  }, [data.isDarkTheme])
 
   useEffect(() => {
-    localStorage.setItem("lang", isArabic ? "ar" : "en")
-    document.dir = isArabic ? "rtl" : "ltr"
-  }, [isArabic])
+    localStorage.setItem("lang", data.isArabic ? "ar" : "en")
+    document.dir = data.isArabic ? "rtl" : "ltr"
+  }, [data.isArabic])
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target) && isSidebarOpen) {
-        setIsSidebarOpen(false)
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target) && data.isSidebarOpen) {
+        data.setIsSidebarOpen(false)
       }
     }
 
@@ -121,68 +101,60 @@ export default function Exams() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
     }
-  }, [isSidebarOpen])
+  }, [data.isSidebarOpen])
 
   const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen)
+    data.setIsSidebarOpen(!data.isSidebarOpen)
   }
 
   return (
-    <div className={`dashboard ${isDarkTheme ? "dark-theme" : "light-theme"}`}>
-      <Navbar
-        isDarkTheme={isDarkTheme}
-        setIsDarkTheme={setIsDarkTheme}
-        isArabic={isArabic}
-        setIsArabic={setIsArabic}
-        toggleSidebar={toggleSidebar}
-        isSidebarOpen={isSidebarOpen}
-      />
+    <div className={`dashboard ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
 
       <div className="dashboard-container">
         {/* Left Sidebar */}
-        <div ref={sidebarRef} className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+        <div ref={sidebarRef} className={`sidebar ${data.isSidebarOpen ? "open" : ""}`}>
           <div className="profile-section">
             <img src="/placeholder.svg?height=80&width=80" alt="Profile" className="profile-image" />
-            <h3>{isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
-            <p>{isArabic ? "الصف الثاني" : "Second Grade"}</p>
+            <h3>{data.isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
+            <p>{data.isArabic ? "الصف الثاني" : "Second Grade"}</p>
           </div>
 
           <div className="sidebar-links">
-          <AllLinks isArabic={isArabic} />
+          <AllLinks isArabic={data.isArabic} />
           </div>
         </div>
 
         {/* Main Content */}
         <main className="main-content">
           <div className="exams-container">
-            <h1>{isArabic ? "الاختبارات" : "Exams"}</h1>
+            <h1>{data.isArabic ? "الاختبارات" : "Exams"}</h1>
 
             {/* Current Exams */}
             <div className="current-exams">
               {examData.currentExams.map((exam) => (
                 <div key={exam.id} className="exam-card">
-                  <h3>{isArabic ? exam.titleAr : exam.titleEn}</h3>
+                  <h3>{exam.title}</h3>
                   <div className="exam-details">
                     <div className="detail-item">
                       <Clock className="icon" />
-                      <span>{isArabic ? "الوقت" : "Time"}</span>
+                      <span>{data.isArabic ? "الوقت" : "Time"}</span>
                       <strong>
-                        {exam.time} {isArabic ? "دقيقة" : "min"}
+                        {exam.time} {data.isArabic ? "دقيقة" : "min"}
                       </strong>
                     </div>
                     <div className="detail-item">
                       <FileText className="icon" />
-                      <span>{isArabic ? "الأسئلة" : "Questions"}</span>
+                      <span>{data.isArabic ? "الأسئلة" : "Questions"}</span>
                       <strong>
-                        {exam.questions} {isArabic ? "سؤال" : "questions"}
+                        {exam.questions} {data.isArabic ? "سؤال" : "questions"}
                       </strong>
                     </div>
                   </div>
                   <div className="exam-actions">
-                  <Link to={`/examPage${exam.examLink}`} className="btn-start text-decoration-none">{isArabic ? "بدء الامتحان" : "Start Exam"}</Link>
+                  <Link to={`/examPage${exam.examLink}`} className="btn-start text-decoration-none">{data.isArabic ? "بدء الامتحان" : "Start Exam"}</Link>
                   <Link to={exam.reviewUrl ? exam.reviewUrl : "#"} className="review-link">
                       <ChevronLeft className="icon" />
-                      {isArabic ? "مراجعة الدرس" : "Review Lesson"}
+                      {data.isArabic ? "مراجعة الدرس" : "Review Lesson"}
                     </Link>
                   </div>
                 </div>
@@ -191,31 +163,31 @@ export default function Exams() {
 
             {/* Upcoming Exams */}
             <div className="exams-section">
-              <h2>{isArabic ? "امتحانات قادمة" : "Upcoming Exams"}</h2>
+              <h2>{data.isArabic ? "امتحانات قادمة" : "Upcoming Exams"}</h2>
               <div className="table-responsive">
                 <table className="exams-table">
                   <thead>
                     <tr>
-                      <th>{isArabic ? "عنوان الامتحان" : "Exam Title"}</th>
-                      <th>{isArabic ? "المدة" : "Duration"}</th>
-                      <th>{isArabic ? "التاريخ" : "Date"}</th>
-                      <th>{isArabic ? "الوقت" : "Time"}</th>
-                      <th>{isArabic ? "الدرجة" : "Score"}</th>
-                      <th>{isArabic ? "تفاصيل" : "Details"}</th>
+                      <th>{data.isArabic ? "عنوان الامتحان" : "Exam Title"}</th>
+                      <th>{data.isArabic ? "المدة" : "Duration"}</th>
+                      <th>{data.isArabic ? "التاريخ" : "Date"}</th>
+                      <th>{data.isArabic ? "الوقت" : "Time"}</th>
+                      <th>{data.isArabic ? "الدرجة" : "Score"}</th>
+                      <th>{data.isArabic ? "تفاصيل" : "Details"}</th>
                     </tr>
                   </thead>
                   <tbody>
                     {examData.upcomingExams.map((exam) => (
                       <tr key={exam.id}>
-                        <td>{isArabic ? exam.titleAr : exam.titleEn}</td>
+                        <td>{exam.title}</td>
                         <td>
-                          {exam.duration} {isArabic ? "دقيقة" : "min"}
+                          {exam.duration} {data.isArabic ? "دقيقة" : "min"}
                         </td>
                         <td>{exam.date}</td>
-                        <td>{isArabic ? exam.time : exam.timeEn}</td>
+                        <td>{exam.time}</td>
                         <td>{exam.score}</td>
                         <td>
-                          <button className="btn-details">{isArabic ? "تفاصيل" : "Details"}</button>
+                          <button className="btn-details">{data.isArabic ? "تفاصيل" : "Details"}</button>
                         </td>
                       </tr>
                     ))}
@@ -226,31 +198,31 @@ export default function Exams() {
 
             {/* Exam Results */}
             <div className="exams-section">
-              <h2>{isArabic ? "نتيجة الامتحانات" : "Exam Results"}</h2>
+              <h2>{data.isArabic ? "نتيجة الامتحانات" : "Exam Results"}</h2>
               <div className="table-responsive">
                 <table className="exams-table results-table">
                   <thead>
                     <tr>
-                      <th>{isArabic ? "عنوان الامتحان" : "Exam Title"}</th>
-                      <th>{isArabic ? "التاريخ" : "Date"}</th>
-                      <th>{isArabic ? "الحالة" : "Status"}</th>
-                      <th>{isArabic ? "الدرجة" : "Score"}</th>
-                      <th>{isArabic ? "تفاصيل" : "Details"}</th>
+                      <th>{data.isArabic ? "عنوان الامتحان" : "Exam Title"}</th>
+                      <th>{data.isArabic ? "التاريخ" : "Date"}</th>
+                      <th>{data.isArabic ? "الحالة" : "Status"}</th>
+                      <th>{data.isArabic ? "الدرجة" : "Score"}</th>
+                      <th>{data.isArabic ? "تفاصيل" : "Details"}</th>
                     </tr>
                   </thead>
                   <tbody>
                     {examData.examResults.map((result) => (
                       <tr key={result.id}>
-                        <td>{isArabic ? result.titleAr : result.titleEn}</td>
+                        <td>{result.title}</td>
                         <td>{result.date}</td>
                         <td>
                           <span className={`status-badge ${result.status === "نجاح" ? "success" : "fail"}`}>
-                            {isArabic ? result.status : result.statusEn}
+                            {result.status}
                           </span>
                         </td>
                         <td>{result.score}</td>
                         <td>
-                          <button className="btn-details">{isArabic ? "تفاصيل" : "Details"}</button>
+                          <button className="btn-details">{data.isArabic ? "تفاصيل" : "Details"}</button>
                         </td>
                       </tr>
                     ))}
@@ -263,7 +235,7 @@ export default function Exams() {
 
         {/* Right Navigation */}
         <div className="right-nav">
-        <AllLinks isArabic={isArabic} />
+        <AllLinks isArabic={data.isArabic} />
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useContext } from "react"
 import { Bell, Menu, X } from "lucide-react"
-import Navbar from "./NavBar"
 import AllLinks from "./Links"
+import { MainContextObj } from "./shared/MainContext"
 
 // Sample notifications data
 const notifications = [
@@ -43,34 +43,27 @@ const notifications = [
 ]
 
 export default function Dashboard() {
-  const [isDarkTheme, setIsDarkTheme] = useState(() => {
-    return localStorage.getItem("theme") === "dark"
-  })
+  const data = useContext(MainContextObj)
 
-  const [isArabic, setIsArabic] = useState(() => {
-    return localStorage.getItem("lang") === "ar"
-  })
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const sidebarRef = useRef(null)
 
-  const [gradesProgress, setGradesProgress] = useState(90)
-  const [attendanceProgress, setAttendanceProgress] = useState(85)
+  const [gradesProgress , setGradesProgress] = useState(90)
+  const [attendanceProgress , setAttendanceProgress] = useState(85)
 
   useEffect(() => {
-    localStorage.setItem("theme", isDarkTheme ? "dark" : "light")
-    document.body.className = isDarkTheme ? "dark-theme" : "light-theme"
-  }, [isDarkTheme])
+    localStorage.setItem("theme", data.isDarkTheme ? "dark" : "light")
+    document.body.className = data.isDarkTheme ? "dark-theme" : "light-theme"
+  }, [data.isDarkTheme])
 
   useEffect(() => {
-    localStorage.setItem("lang", isArabic ? "ar" : "en")
-    document.dir = isArabic ? "rtl" : "ltr"
-  }, [isArabic])
+    localStorage.setItem("lang", data.isArabic ? "ar" : "en")
+    document.dir = data.isArabic ? "rtl" : "ltr"
+  }, [data.isArabic])
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target) && isSidebarOpen) {
-        setIsSidebarOpen(false)
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target) && data.isSidebarOpen) {
+        data.setIsSidebarOpen(false)
       }
     }
 
@@ -78,34 +71,22 @@ export default function Dashboard() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
     }
-  }, [isSidebarOpen])
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen)
-  }
+  }, [data.isSidebarOpen])
 
   return (
-    <div className={`dashboard ${isDarkTheme ? "dark-theme" : "light-theme"}`}>
-      <Navbar
-        isDarkTheme={isDarkTheme}
-        setIsDarkTheme={setIsDarkTheme}
-        isArabic={isArabic}
-        setIsArabic={setIsArabic}
-        toggleSidebar={toggleSidebar}
-        isSidebarOpen={isSidebarOpen}
-      />
+    <div className={`dashboard ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
 
       <div className="dashboard-container">
         {/* Left Sidebar */}
-        <div ref={sidebarRef} className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+        <div ref={sidebarRef} className={`sidebar ${data.isSidebarOpen ? "open" : ""}`}>
           <div className="profile-section">
             <img src="/placeholder.svg?height=80&width=80" alt="Profile" className="profile-image" />
-            <h3>{isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
-            <p>{isArabic ? "الصف الثاني" : "Second Grade"}</p>
+            <h3>{data.isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
+            <p>{data.isArabic ? "الصف الثاني" : "Second Grade"}</p>
           </div>
 
           <div className="sidebar-links">
-            <AllLinks isArabic={isArabic} />
+            <AllLinks isArabic={data.isArabic} />
           </div>
         </div>
 
@@ -113,9 +94,9 @@ export default function Dashboard() {
         <main className="main-content">
           <div className="welcome-banner">
           <div className="welcome-content">
-            <h1>{isArabic ? "اهلاً يوسف" : "Welcome Yousef"}</h1>
+            <h1>{data.isArabic ? "اهلاً يوسف" : "Welcome Yousef"}</h1>
             <p>
-              {isArabic ? "كن على اطلاع دائم لكل جديد في منصتنا" : "Stay updated with everything new on our platform"}
+              {data.isArabic ? "كن على اطلاع دائم لكل جديد في منصتنا" : "Stay updated with everything new on our platform"}
             </p>
             </div>
             <div className="notifications-container">
@@ -124,7 +105,7 @@ export default function Dashboard() {
                 <span className="notifications-count">{notifications.filter((n) => n.isNew).length}</span>
               </div>
               <div className="notifications-popover">
-                <h4 className="notifications-title">{isArabic ? "التنبيهات" : "Notifications"}</h4>
+                <h4 className="notifications-title">{data.isArabic ? "التنبيهات" : "Notifications"}</h4>
                 <div className="notifications-list">
                   {notifications.map((notification) => (
                     <div key={notification.id} className={`notification-item ${notification.isNew ? "new" : ""}`}>
@@ -133,7 +114,7 @@ export default function Dashboard() {
                         <div className="notification-type">{notification.type}</div>
                         <div className="notification-title">{notification.title}</div>
                       </div>
-                      {notification.isNew && <span className="notification-badge">{isArabic ? "جديد" : "New"}</span>}
+                      {notification.isNew && <span className="notification-badge">{data.isArabic ? "جديد" : "New"}</span>}
                     </div>
                   ))}
                 </div>
@@ -143,13 +124,13 @@ export default function Dashboard() {
 
           <div className="stats-container">
             <div className="stat-card">
-              <h4>{isArabic ? "لوحة الشرف" : "Honor Board"}</h4>
+              <h4>{data.isArabic ? "لوحة الشرف" : "Honor Board"}</h4>
               <div className="medal-icon">🏅</div>
               <p className="stat-value">550</p>
               <p className="stat-total">/600</p>
             </div>
             <div className="stat-card">
-              <h4>{isArabic ? "الدرجات" : "Grades"}</h4>
+              <h4>{data.isArabic ? "الدرجات" : "Grades"}</h4>
               <div className="progress-circle" style={{ "--progress": gradesProgress }}>
                 <svg>
                   <circle className="progress-background" cx="60" cy="60" r="54"></circle>
@@ -157,10 +138,10 @@ export default function Dashboard() {
                 </svg>
                 <span className="progress-percentage">{gradesProgress}%</span>
               </div>
-              <p className="stat-description">{isArabic ? "الدرجات المحصلة" : "Achieved Grades"}</p>
+              <p className="stat-description">{data.isArabic ? "الدرجات المحصلة" : "Achieved Grades"}</p>
             </div>
             <div className="stat-card">
-              <h4>{isArabic ? "الحضور" : "Attendance"}</h4>
+              <h4>{data.isArabic ? "الحضور" : "Attendance"}</h4>
               <div className="progress-circle" style={{ "--progress": attendanceProgress }}>
                 <svg>
                   <circle className="progress-background" cx="60" cy="60" r="54"></circle>
@@ -168,7 +149,7 @@ export default function Dashboard() {
                 </svg>
                 <span className="progress-percentage">{attendanceProgress}%</span>
               </div>
-              <p className="stat-description">{isArabic ? "نسبة الحضور" : "Attendance Rate"}</p>
+              <p className="stat-description">{data.isArabic ? "نسبة الحضور" : "Attendance Rate"}</p>
             </div>
           </div>
 
@@ -184,15 +165,15 @@ export default function Dashboard() {
           </div> */}
 
           <div className="daily-challenge">
-            <h3>{isArabic ? "تحدي اليوم" : "Daily Challenge"}</h3>
+            <h3>{data.isArabic ? "تحدي اليوم" : "Daily Challenge"}</h3>
             <div className="challenge-content">
               <div className="challenge-icon">🚀</div>
               <div className="challenge-info">
-                <p>{isArabic ? "قم بحل 5 تمارين في الرياضيات" : "Solve 5 Math Exercises"}</p>
+                <p>{data.isArabic ? "قم بحل 5 تمارين في الرياضيات" : "Solve 5 Math Exercises"}</p>
                 <div className="challenge-progress">
                   <div className="progress-bar" style={{ width: "60%" }}></div>
                 </div>
-                <p className="challenge-status">3/5 {isArabic ? "مكتمل" : "Completed"}</p>
+                <p className="challenge-status">3/5 {data.isArabic ? "مكتمل" : "Completed"}</p>
               </div>
             </div>
           </div>
@@ -200,7 +181,7 @@ export default function Dashboard() {
 
         {/* Right Navigation */}
         <div className="right-nav">
-          <AllLinks isArabic={isArabic} />
+          <AllLinks isArabic={data.isArabic} />
         </div>
       </div>
     </div>

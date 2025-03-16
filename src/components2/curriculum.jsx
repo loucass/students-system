@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { Menu, X } from "lucide-react"
-import Navbar from "./NavBar"
 import AllLinks from "./Links"
+import { MainContextObj } from "./shared/MainContext"
 
 // Sample curriculum data
 const curriculumData = {
@@ -63,32 +63,25 @@ const curriculumData = {
 }
 
 export default function Curriculum() {
-  const [isDarkTheme, setIsDarkTheme] = useState(() => {
-    return localStorage.getItem("theme") === "dark"
-  })
+  const data = useContext(MainContextObj)
 
-  const [isArabic, setIsArabic] = useState(() => {
-    return localStorage.getItem("lang") === "ar"
-  })
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [expandedChapters, setExpandedChapters] = useState([1])
   const sidebarRef = React.useRef(null)
 
   useEffect(() => {
-    localStorage.setItem("theme", isDarkTheme ? "dark" : "light")
-    document.body.className = isDarkTheme ? "dark-theme" : "light-theme"
-  }, [isDarkTheme])
+    localStorage.setItem("theme", data.isDarkTheme ? "dark" : "light")
+    document.body.className = data.isDarkTheme ? "dark-theme" : "light-theme"
+  }, [data.isDarkTheme])
 
   useEffect(() => {
-    localStorage.setItem("lang", isArabic ? "ar" : "en")
-    document.dir = isArabic ? "rtl" : "ltr"
-  }, [isArabic])
+    localStorage.setItem("lang", data.isArabic ? "ar" : "en")
+    document.dir = data.isArabic ? "rtl" : "ltr"
+  }, [data.isArabic])
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target) && isSidebarOpen) {
-        setIsSidebarOpen(false)
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target) && data.isSidebarOpen) {
+        data.setIsSidebarOpen(false)
       }
     }
 
@@ -96,11 +89,7 @@ export default function Curriculum() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
     }
-  }, [isSidebarOpen])
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen)
-  }
+  }, [data.isSidebarOpen])
 
   const toggleChapter = (chapterId) => {
     setExpandedChapters((prev) =>
@@ -109,34 +98,26 @@ export default function Curriculum() {
   }
 
   return (
-    <div className={`dashboard ${isDarkTheme ? "dark-theme" : "light-theme"}`}>
-      <Navbar
-        isDarkTheme={isDarkTheme}
-        setIsDarkTheme={setIsDarkTheme}
-        isArabic={isArabic}
-        setIsArabic={setIsArabic}
-        toggleSidebar={toggleSidebar}
-        isSidebarOpen={isSidebarOpen}
-      />
+    <div className={`dashboard ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
 
       <div className="dashboard-container">
         {/* Left Sidebar */}
-        <div ref={sidebarRef} className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+        <div ref={sidebarRef} className={`sidebar ${data.isSidebarOpen ? "open" : ""}`}>
           <div className="profile-section">
             <img src="/placeholder.svg?height=80&width=80" alt="Profile" className="profile-image" />
-            <h3>{isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
-            <p>{isArabic ? "الصف الثاني" : "Second Grade"}</p>
+            <h3>{data.isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
+            <p>{data.isArabic ? "الصف الثاني" : "Second Grade"}</p>
           </div>
 
           <div className="sidebar-links">
-          <AllLinks isArabic={isArabic} />
+          <AllLinks isArabic={data.isArabic} />
           </div>
         </div>
 
         {/* Main Content */}
         <main className="main-content">
           <div className="curriculum-header">
-            <h1>{isArabic ? "المنهج الدراسي" : "Curriculum"}</h1>
+            <h1>{data.isArabic ? "المنهج الدراسي" : "Curriculum"}</h1>
             <div className="progress-section">
               <div className="progress-bar-container">
                 <div
@@ -147,7 +128,7 @@ export default function Curriculum() {
                 />
               </div>
               <span className="progress-text">
-                {curriculumData.completedLessons} {isArabic ? "من" : "of"} {curriculumData.totalLessons}
+                {curriculumData.completedLessons} {data.isArabic ? "من" : "of"} {curriculumData.totalLessons}
               </span>
             </div>
           </div>
@@ -156,10 +137,10 @@ export default function Curriculum() {
             {curriculumData.chapters.map((chapter) => (
               <div key={chapter.id} className="chapter-card">
                 <button
-                  className={`chapter-header ${isDarkTheme ? "text-light" : ""} ${expandedChapters.includes(chapter.id) ? "expanded" : ""}`}
+                  className={`chapter-header ${data.isDarkTheme ? "text-light" : ""} ${expandedChapters.includes(chapter.id) ? "expanded" : ""}`}
                   onClick={() => toggleChapter(chapter.id)}
                 >
-                  <span>{isArabic ? chapter.title : chapter.titleEn}</span>
+                  <span>{data.isArabic ? chapter.title : chapter.titleEn}</span>
                   <svg
                     className="chapter-icon"
                     width="24"
@@ -178,7 +159,7 @@ export default function Curriculum() {
                   <div className="chapter-content">
                     {chapter.lessons.map((lesson) => (
                       <div key={lesson.id} className="lesson-item">
-                        <div className="lesson-title">{isArabic ? lesson.title : lesson.titleEn}</div>
+                        <div className="lesson-title">{data.isArabic ? lesson.title : lesson.titleEn}</div>
                         <div className="lesson-actions">
                           {lesson.hasVideo && (
                             <button className="btn-lesson video">
@@ -195,7 +176,7 @@ export default function Curriculum() {
                               >
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
                               </svg>
-                              <span>{isArabic ? "فيديو الدرس" : "Lesson Video"}</span>
+                              <span>{data.isArabic ? "فيديو الدرس" : "Lesson Video"}</span>
                             </button>
                           )}
                           {lesson.hasExam && (
@@ -214,7 +195,7 @@ export default function Curriculum() {
                                 <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
                                 <path d="M6 12v5c3 3 9 3 12 0v-5" />
                               </svg>
-                              <span>{isArabic ? "امتحان الدرس" : "Lesson Exam"}</span>
+                              <span>{data.isArabic ? "امتحان الدرس" : "Lesson Exam"}</span>
                             </button>
                           )}
                           {lesson.hasAttachments && (
@@ -232,7 +213,7 @@ export default function Curriculum() {
                               >
                                 <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
                               </svg>
-                              <span>{isArabic ? "تحميل المرفقات" : "Download Attachments"}</span>
+                              <span>{data.isArabic ? "تحميل المرفقات" : "Download Attachments"}</span>
                             </button>
                           )}
                         </div>
@@ -247,7 +228,7 @@ export default function Curriculum() {
 
         {/* Right Navigation */}
         <div className="right-nav">
-        <AllLinks isArabic={isArabic} />
+        <AllLinks isArabic={data.isArabic} />
         </div>
       </div>
     </div>
