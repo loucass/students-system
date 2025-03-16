@@ -15,7 +15,7 @@ import {
   ChevronLeft,
   FileText as FileIcon,
 } from "lucide-react"
-import "./TeacherExam.css"
+import "./teacherExam.css"
 import { MainContextObj } from "../shared/MainContext"
 
 // Mock data for exams
