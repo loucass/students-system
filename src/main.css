@@ -78,7 +78,7 @@ body {
 
 .dashboard-container {
   display: grid;
-  grid-template-columns: 250px 1fr 200px;
+  grid-template-columns: 250px 1fr;
   gap: 1rem;
   padding: 1rem;
   animation: fadeIn 0.5s ease-out;
@@ -1006,7 +1006,7 @@ input:checked + .slider:before {
 }
 
 .leaderboard-table tr.current-user {
-  background-color: #f3e8ff;
+  background-color: #623394;
 }
 
 .challenges-sections {
@@ -1074,7 +1074,7 @@ input:checked + .slider:before {
 
 .challenge-progress {
   background: var(--card-bg);
-  height: 8px;
+  height: 10px;
   border-radius: 999px;
   overflow: hidden;
   position: relative;
@@ -1093,7 +1093,8 @@ input:checked + .slider:before {
   top: 50%;
   transform: translateY(-50%);
   font-size: 0.75rem;
-  color: var(--primary-color);
+  /* color: var(--primary-color); */
+  color: #ffffff;
 }
 
 /* Revisions Specific Styles */
@@ -1343,7 +1344,7 @@ input:checked + .slider:before {
     left: -100%;
     height: 100vh;
     width: 250px;
-    z-index: 1000;
+    /* z-index: 1000; */
     transition: left 0.3s ease-in-out, background-color 0.3s ease;
     border-radius: 0;
     padding-top: 1rem;
@@ -1398,6 +1399,32 @@ input:checked + .slider:before {
 }
 
 @media (max-width: 768px) {
+  /* Existing styles */
+
+  .table-responsive {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .main-content {
+    overflow-x: auto;
+    padding: 1rem;
+  }
+
+  /* Make all tables fit within their containers */
+  table {
+    width: 100%;
+    min-width: 500px; /* Ensures tables don't get too squished */
+  }
+
+  /* Adjust grid layouts for mobile */
+  .materials-grid,
+  .current-exams,
+  .challenges-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
   .current-exams {
     grid-template-columns: 1fr;
   }
@@ -1528,7 +1555,7 @@ input:checked + .slider:before {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   display: none;
-  z-index: 1000;
+  z-index: 10;
 }
 
 .notifications-container:hover .notifications-popover {
@@ -1651,7 +1678,6 @@ input:checked + .slider:before {
 /* Ensure the notifications icon is always visible */
 .notifications-icon {
   position: relative;
-  z-index: 1001;
 }
 
 /* Adjust the welcome banner for better mobile layout */
@@ -1685,7 +1711,6 @@ input:checked + .slider:before {
   width: 100%;
   height: 4px;
   background-color: var(--border-color);
-  z-index: 1000;
 }
 
 .progress-fill {

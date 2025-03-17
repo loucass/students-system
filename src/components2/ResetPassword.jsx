@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { Check } from "lucide-react"
 import { MainContextObj } from "./shared/MainContext"
@@ -6,6 +6,16 @@ import { MainContextObj } from "./shared/MainContext"
 export default function ResetPassword() {
   const data = useContext(MainContextObj)
   let navigate = useNavigate()
+
+  useEffect(() => {
+    localStorage.setItem("theme", data.isDarkTheme ? "dark" : "light")
+    document.body.className = data.isDarkTheme ? "dark-theme" : "light-theme"
+  }, [data.isDarkTheme])
+
+  useEffect(() => {
+    localStorage.setItem("lang", data.isArabic ? "ar" : "en")
+    document.dir = data.isArabic ? "rtl" : "ltr"
+  }, [data.isArabic])
 
   const [formData, setFormData] = useState({
     password: "",
@@ -68,7 +78,7 @@ export default function ResetPassword() {
         <div className="auth-card">
           <div className="auth-form-section">
             <div className="register-header">
-              <img src="/placeholder.svg?height=40&width=40" alt="Logo" />
+              {/* <img src="/placeholder.svg?height=40&width=40" alt="Logo" /> */}
             </div>
 
             <form onSubmit={handleSubmit} className="auth-form">

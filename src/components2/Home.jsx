@@ -1,10 +1,20 @@
 import { useContext, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
-import { GraduationCap, Book, Trophy, Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin, Zap, Users, BookOpen, BarChart, StarsIcon, Rocket, Target, Award } from 'lucide-react'
+import { Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin, Zap, Users, BookOpen, BarChart, StarsIcon, Rocket, Target, Award } from 'lucide-react'
 import { MainContextObj } from "./shared/MainContext"
 
 export default function LandingPage() {
   const data = useContext(MainContextObj)
+
+  useEffect(() => {
+    localStorage.setItem("theme", data.isDarkTheme ? "dark" : "light")
+    document.body.className = data.isDarkTheme ? "dark-theme" : "light-theme"
+  }, [data.isDarkTheme])
+
+  useEffect(() => {
+    localStorage.setItem("lang", data.isArabic ? "ar" : "en")
+    document.dir = data.isArabic ? "rtl" : "ltr"
+  }, [data.isArabic])
 
     const features = [
       {
@@ -98,7 +108,7 @@ export default function LandingPage() {
                   : "Join thousands of students achieving their dreams through our advanced learning platform"}
               </p>
               <div className="hero-buttons">
-                <Link to="/register" className="auth-button">
+                <Link to="/register" className="auth-button text-decoration-none">
                   {data.isArabic ? "ابدأ الآن" : "Get Started"}
                 </Link>
               </div>

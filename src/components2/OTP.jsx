@@ -1,10 +1,20 @@
-import { useState, useRef, useContext } from "react"
+import { useState, useRef, useContext, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { MainContextObj } from "./shared/MainContext"
 
 export default function OtpVerification() {
   const data = useContext(MainContextObj)
   let navigate = useNavigate()
+
+  useEffect(() => {
+    localStorage.setItem("theme", data.isDarkTheme ? "dark" : "light")
+    document.body.className = data.isDarkTheme ? "dark-theme" : "light-theme"
+  }, [data.isDarkTheme])
+
+  useEffect(() => {
+    localStorage.setItem("lang", data.isArabic ? "ar" : "en")
+    document.dir = data.isArabic ? "rtl" : "ltr"
+  }, [data.isArabic])
 
   const [otp, setOtp] = useState(["", "", "", ""])
   const inputRefs = [useRef(), useRef(), useRef(), useRef()]
@@ -44,7 +54,7 @@ export default function OtpVerification() {
         <div className="auth-card">
           <div className="auth-form-section">
             <div className="register-header">
-              <img src="/placeholder.svg?height=40&width=40" alt="Logo" />
+              {/* <img src="/placeholder.svg?height=40&width=40" alt="Logo" /> */}
             </div>
 
             <form onSubmit={handleSubmit} className="auth-form">
@@ -72,9 +82,9 @@ export default function OtpVerification() {
               </button>
             </form>
 
-            <p className="auth-link">
+            {/* <p className="auth-link">
               <Link to="/login">{data.isArabic ? "العودة إلى تسجيل الدخول" : "Back to Login"}</Link>
-            </p>
+            </p> */}
           </div>
 
           <div className="auth-image-section">

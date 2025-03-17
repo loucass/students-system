@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useContext } from "react"
-import { Bell, Menu, X } from "lucide-react"
+import { Bell } from "lucide-react"
 import AllLinks from "./Links"
 import { MainContextObj } from "./shared/MainContext"
 
@@ -63,7 +63,7 @@ export default function Dashboard() {
   useEffect(() => {
     function handleClickOutside(event) {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target) && data.isSidebarOpen) {
-        data.setIsSidebarOpen(false)
+        data.toggleSidebar()
       }
     }
 
@@ -76,7 +76,7 @@ export default function Dashboard() {
   return (
     <div className={`dashboard ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
 
-      <div className="dashboard-container">
+      <div className="dashboard-container w-100">
         {/* Left Sidebar */}
         <div ref={sidebarRef} className={`sidebar ${data.isSidebarOpen ? "open" : ""}`}>
           <div className="profile-section">
@@ -91,7 +91,7 @@ export default function Dashboard() {
         </div>
 
         {/* Main Content */}
-        <main className="main-content">
+        <main className="main-content w-100">
           <div className="welcome-banner">
           <div className="welcome-content">
             <h1>{data.isArabic ? "اهلاً يوسف" : "Welcome Yousef"}</h1>
@@ -178,11 +178,6 @@ export default function Dashboard() {
             </div>
           </div>
         </main>
-
-        {/* Right Navigation */}
-        <div className="right-nav">
-          <AllLinks isArabic={data.isArabic} />
-        </div>
       </div>
     </div>
   )

@@ -1,6 +1,5 @@
 import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import Navbar from "../NavBar"
+import { useNavigate } from "react-router-dom"
 
 export default function Login() {
     let navigate = useNavigate()
@@ -33,14 +32,6 @@ export default function Login() {
 
   return (
     <div className={isDarkTheme ? "dark-theme" : "light-theme"}>
-      <Navbar
-        isDarkTheme={isDarkTheme}
-        setIsDarkTheme={setIsDarkTheme}
-        isArabic={isArabic}
-        setIsArabic={setIsArabic}
-        toggleSidebar={() => {}}
-        isSidebarOpen={false}
-      />
 
       <div className="auth-container">
         <div className="auth-card">

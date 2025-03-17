@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react"
+import { useEffect, useContext } from "react"
 import { Link } from "react-router-dom"
 import { Home } from "lucide-react"
 import { MainContextObj } from "./shared/MainContext"

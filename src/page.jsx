@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.js'
 import "./main.css"
 import { createBrowserRouter, Route, RouterProvider, Routes } from "react-router-dom"
 import Dashboard from "./components2/Dashboard"

@@ -9,8 +9,6 @@ import {
   Award,
   Settings,
   LogOut,
-  Search,
-  Bell,
   ChevronDown,
   ChevronLeft,
   FileText as FileIcon,

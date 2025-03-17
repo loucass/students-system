@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext } from "react"
+import { useEffect, useRef, useContext } from "react"
 import { FileIcon as FilePdf, Download } from "lucide-react"
 import AllLinks from "./Links"
 import { MainContextObj } from "./shared/MainContext"
@@ -105,7 +105,7 @@ export default function Revisions() {
   useEffect(() => {
     function handleClickOutside(event) {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target) && data.isSidebarOpen) {
-        data.setIsSidebarOpen(false)
+        data.toggleSidebar()
       }
     }
 
@@ -114,10 +114,6 @@ export default function Revisions() {
       document.removeEventListener("mousedown", handleClickOutside)
     }
   }, [data.isSidebarOpen])
-
-  const toggleSidebar = () => {
-    data.setIsSidebarOpen(!data.isSidebarOpen)
-  }
 
   return (
     <div className={`dashboard ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
@@ -137,12 +133,12 @@ export default function Revisions() {
         </div>
 
         {/* Main Content */}
-        <main className="main-content">
+        <main className="main-content" style={{ overflowX: "auto" }}>
           <div className="revisions-container">
             <h1>{data.isArabic ? "المراجعات" : "Revisions"}</h1>
 
             {/* Revision Materials */}
-            <div className="materials-grid">
+            <div className="materials-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "1.5rem" }}>
               {revisionsData.materials.map((material) => (
                 <div key={material.id} className="material-card">
                   <div className="material-icon">
@@ -163,7 +159,7 @@ export default function Revisions() {
             {/* Purchase Requests */}
             <div className="requests-section">
               <h2>{data.isArabic ? "طلباتي" : "My Requests"}</h2>
-              <div className="table-responsive">
+              <div className="table-responsive" style={{ overflowX: "auto", width: "100%" }}>
                 <table className="requests-table">
                   <thead>
                     <tr>
@@ -196,11 +192,6 @@ export default function Revisions() {
             </div>
           </div>
         </main>
-
-        {/* Right Navigation */}
-        <div className="right-nav">
-        <AllLinks isArabic={data.isArabic} />
-        </div>
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef, useContext } from "react"
+import { useEffect, useRef, useContext } from "react"
 import { Link } from "react-router-dom"
-import { Menu, X, Clock, FileText, ChevronLeft } from "lucide-react"
+import { Clock, FileText, ChevronLeft } from "lucide-react"
 import AllLinks from "./Links"
 import { MainContextObj } from "./shared/MainContext"
 
@@ -93,7 +93,7 @@ export default function Exams() {
   useEffect(() => {
     function handleClickOutside(event) {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target) && data.isSidebarOpen) {
-        data.setIsSidebarOpen(false)
+        data.toggleSidebar()
       }
     }
 
@@ -102,10 +102,6 @@ export default function Exams() {
       document.removeEventListener("mousedown", handleClickOutside)
     }
   }, [data.isSidebarOpen])
-
-  const toggleSidebar = () => {
-    data.setIsSidebarOpen(!data.isSidebarOpen)
-  }
 
   return (
     <div className={`dashboard ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
@@ -125,12 +121,12 @@ export default function Exams() {
         </div>
 
         {/* Main Content */}
-        <main className="main-content">
+        <main className="main-content" style={{ overflowX: "auto" }}>
           <div className="exams-container">
             <h1>{data.isArabic ? "الاختبارات" : "Exams"}</h1>
 
             {/* Current Exams */}
-            <div className="current-exams">
+            <div classname="current-exams" style={{display:"grid",gridtemplatecolumns:"repeat(auto-fit , minmax(280px,1fr))", gap:"1.5rem" }} >
               {examData.currentExams.map((exam) => (
                 <div key={exam.id} className="exam-card">
                   <h3>{exam.title}</h3>
@@ -164,7 +160,7 @@ export default function Exams() {
             {/* Upcoming Exams */}
             <div className="exams-section">
               <h2>{data.isArabic ? "امتحانات قادمة" : "Upcoming Exams"}</h2>
-              <div className="table-responsive">
+              <div className="table-responsive" style={{ overflowX: "auto", width: "100%" }}>
                 <table className="exams-table">
                   <thead>
                     <tr>
@@ -199,7 +195,7 @@ export default function Exams() {
             {/* Exam Results */}
             <div className="exams-section">
               <h2>{data.isArabic ? "نتيجة الامتحانات" : "Exam Results"}</h2>
-              <div className="table-responsive">
+              <div className="table-responsive" style={{ overflowX: "auto", width: "100%" }}>
                 <table className="exams-table results-table">
                   <thead>
                     <tr>
@@ -232,11 +228,6 @@ export default function Exams() {
             </div>
           </div>
         </main>
-
-        {/* Right Navigation */}
-        <div className="right-nav">
-        <AllLinks isArabic={data.isArabic} />
-        </div>
       </div>
     </div>
   )

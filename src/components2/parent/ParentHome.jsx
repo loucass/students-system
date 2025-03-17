@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react"
-import { Menu, X, Download, FileText, Phone, Mail, HelpCircle } from "lucide-react"
+import { useState, useEffect, useContext, useRef } from "react"
+import { Download, FileText, Phone, Mail, HelpCircle } from "lucide-react"
 import "./parentstyle.css"
-import Navbar from "../NavBar"
+import { MainContextObj } from "../shared/MainContext"
+import AllLinks from "../Links"
 
 // Mock API data
 const mockStudentData = {
@@ -117,27 +118,23 @@ const mockStudentData = {
 }
 
 export default function StudentProfile() {
-  const [isDarkTheme, setIsDarkTheme] = useState(() => {
-    return localStorage.getItem("theme") === "dark"
-  })
+  const data = useContext(MainContextObj)
 
-  const [isArabic, setIsArabic] = useState(() => {
-    return localStorage.getItem("lang") === "ar"
-  })
+  const sidebarRef = useRef(null)
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+
   const [studentData, setStudentData] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    localStorage.setItem("theme", isDarkTheme ? "dark" : "light")
-    document.body.className = isDarkTheme ? "dark-theme" : "light-theme"
-  }, [isDarkTheme])
+    localStorage.setItem("theme", data.isDarkTheme ? "dark" : "light")
+    document.body.className = data.isDarkTheme ? "dark-theme" : "light-theme"
+  }, [data.isDarkTheme])
 
   useEffect(() => {
-    localStorage.setItem("lang", isArabic ? "ar" : "en")
-    document.dir = isArabic ? "rtl" : "ltr"
-  }, [isArabic])
+    localStorage.setItem("lang", data.isArabic ? "ar" : "en")
+    document.dir = data.isArabic ? "rtl" : "ltr"
+  }, [data.isArabic])
 
   // Simulate API fetch
   useEffect(() => {
@@ -156,6 +153,19 @@ export default function StudentProfile() {
     fetchData()
   }, [])
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target) && data.isSidebarOpen) {
+        data.toggleSidebar()
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [data.isSidebarOpen])
+
   if (loading) {
     return <div className="loading-spinner">Loading...</div>
   }
@@ -166,37 +176,41 @@ export default function StudentProfile() {
 
   return (
     <div className="dashboard student-profile-page">
-      <Navbar
-        isDarkTheme={isDarkTheme}
-        setIsDarkTheme={setIsDarkTheme}
-        isArabic={isArabic}
-        setIsArabic={setIsArabic}
-        toggleSidebar={() => {}}
-        isSidebarOpen={false}
-      />
 
       <div className="dashboard-container">
+        {/* Left Sidebar */}
+        <div ref={sidebarRef} className={`sidebar d-lg-none ${data.isSidebarOpen ? "open" : ""}`}>
+          <div className="profile-section">
+            <img src="/placeholder.svg?height=80&width=80" alt="Profile" className="profile-image" />
+            <h3>{data.isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
+            <p>{data.isArabic ? "الصف الثاني" : "Second Grade"}</p>
+          </div>
+
+          <div className="sidebar-links">
+            <AllLinks isArabic={data.isArabic} />
+          </div>
+        </div>
         <div className="student-profile-content">
           {/* Header Section */}
           <div className="profile-header">
             <div className="profile-info">
               <img src="/placeholder.svg?height=100&width=100" alt="Profile" className="profile-image" />
               <div className="profile-details">
-                <h1>{isArabic ? studentData.student.nameAr : studentData.student.nameEn}</h1>
-                <p>{isArabic ? studentData.student.grade : studentData.student.gradeEn}</p>
+                <h1>{data.isArabic ? studentData.student.nameAr : studentData.student.nameEn}</h1>
+                <p>{data.isArabic ? studentData.student.grade : studentData.student.gradeEn}</p>
               </div>
             </div>
             <div className="contact-info">
               <div className="info-item">
-                <label>{isArabic ? "البريد الإلكتروني" : "Email"}</label>
+                <label>{data.isArabic ? "البريد الإلكتروني" : "Email"}</label>
                 <p>{studentData.student.email}</p>
               </div>
               <div className="info-item">
-                <label>{isArabic ? "رقم ولي الأمر" : "Guardian Phone"}</label>
+                <label>{data.isArabic ? "رقم ولي الأمر" : "Guardian Phone"}</label>
                 <p>{studentData.student.guardianPhone}</p>
               </div>
               <div className="info-item">
-                <label>{isArabic ? "رقم الطالب" : "Student ID"}</label>
+                <label>{data.isArabic ? "رقم الطالب" : "Student ID"}</label>
                 <p>{studentData.student.id}</p>
               </div>
             </div>
@@ -205,16 +219,16 @@ export default function StudentProfile() {
           {/* Notes Section */}
           <div className="notes-section">
             <div className="notes-container">
-              <h3>{isArabic ? "ملاحظات المدرس" : "Teacher Notes"}</h3>
+              <h3>{data.isArabic ? "ملاحظات المدرس" : "Teacher Notes"}</h3>
               <textarea
-                placeholder={isArabic ? "اكتب ملاحظات المدرس هنا..." : "Write teacher notes here..."}
+                placeholder={data.isArabic ? "اكتب ملاحظات المدرس هنا..." : "Write teacher notes here..."}
                 rows={4}
               />
             </div>
             <div className="notes-container">
-              <h3>{isArabic ? "ملاحظات ولي الأمر" : "Guardian Notes"}</h3>
+              <h3>{data.isArabic ? "ملاحظات ولي الأمر" : "Guardian Notes"}</h3>
               <textarea
-                placeholder={isArabic ? "اكتب ملاحظات ولي الأمر هنا..." : "Write guardian notes here..."}
+                placeholder={data.isArabic ? "اكتب ملاحظات ولي الأمر هنا..." : "Write guardian notes here..."}
                 rows={4}
               />
             </div>
@@ -224,7 +238,7 @@ export default function StudentProfile() {
           <div className="progress-cards">
             <div className="progress-card">
               <div className="card-icon">🏆</div>
-              <h4>{isArabic ? "لوحة الشرف" : "Honor Board"}</h4>
+              <h4>{data.isArabic ? "لوحة الشرف" : "Honor Board"}</h4>
               <div
                 className="progress-circle"
                 style={{
@@ -242,7 +256,7 @@ export default function StudentProfile() {
             </div>
             <div className="progress-card">
               <div className="card-icon">📚</div>
-              <h4>{isArabic ? "الواجبات" : "Homework"}</h4>
+              <h4>{data.isArabic ? "الواجبات" : "Homework"}</h4>
               <div
                 className="progress-circle"
                 style={{
@@ -258,7 +272,7 @@ export default function StudentProfile() {
             </div>
             <div className="progress-card">
               <div className="card-icon">📅</div>
-              <h4>{isArabic ? "الحضور" : "Attendance"}</h4>
+              <h4>{data.isArabic ? "الحضور" : "Attendance"}</h4>
               <div
                 className="progress-circle"
                 style={{
@@ -274,7 +288,7 @@ export default function StudentProfile() {
             </div>
             <div className="progress-card">
               <div className="card-icon">📝</div>
-              <h4>{isArabic ? "الاختبارات" : "Exams"}</h4>
+              <h4>{data.isArabic ? "الاختبارات" : "Exams"}</h4>
               <div
                 className="progress-circle"
                 style={{ "--progress": (studentData.progress.exams.score / studentData.progress.exams.total) * 100 }}
@@ -293,7 +307,7 @@ export default function StudentProfile() {
             <div className="main-content-left">
               {/* Performance Graph */}
               <div className="performance-section">
-                <h3>{isArabic ? "الأداء الأكاديمي" : "Academic Performance"}</h3>
+                <h3>{data.isArabic ? "الأداء الأكاديمي" : "Academic Performance"}</h3>
                 <div className="performance-graph">
                   <div className="graph-container">
                     <div
@@ -315,26 +329,26 @@ export default function StudentProfile() {
             <div className="main-content-right">
               {/* Attendance Table */}
               <div className="attendance-section">
-                <h3>{isArabic ? "سجل الحضور" : "Attendance Record"}</h3>
+                <h3>{data.isArabic ? "سجل الحضور" : "Attendance Record"}</h3>
                 <div className="table-responsive">
                   <table className="attendance-table">
                     <thead>
                       <tr>
-                        <th>{isArabic ? "التاريخ" : "Date"}</th>
-                        <th>{isArabic ? "المادة" : "Subject"}</th>
-                        <th>{isArabic ? "الوقت" : "Time"}</th>
-                        <th>{isArabic ? "الحالة" : "Status"}</th>
+                        <th>{data.isArabic ? "التاريخ" : "Date"}</th>
+                        <th>{data.isArabic ? "المادة" : "Subject"}</th>
+                        <th>{data.isArabic ? "الوقت" : "Time"}</th>
+                        <th>{data.isArabic ? "الحالة" : "Status"}</th>
                       </tr>
                     </thead>
                     <tbody>
                       {studentData.attendance.map((record) => (
                         <tr key={record.id}>
-                          <td>{isArabic ? record.dateAr : record.dateEn}</td>
-                          <td>{isArabic ? record.subjectAr : record.subjectEn}</td>
-                          <td>{isArabic ? record.timeAr : record.timeEn}</td>
+                          <td>{data.isArabic ? record.dateAr : record.dateEn}</td>
+                          <td>{data.isArabic ? record.subjectAr : record.subjectEn}</td>
+                          <td>{data.isArabic ? record.timeAr : record.timeEn}</td>
                           <td>
                             <span className={`status-badge ${record.statusEn.toLowerCase()}`}>
-                              {isArabic ? record.statusAr : record.statusEn}
+                              {data.isArabic ? record.statusAr : record.statusEn}
                             </span>
                           </td>
                         </tr>
@@ -348,18 +362,18 @@ export default function StudentProfile() {
 
           {/* Documents Section */}
           <div className="documents-section">
-            <h3>{isArabic ? "الملفات المستندة" : "Documents"}</h3>
+            <h3>{data.isArabic ? "الملفات المستندة" : "Documents"}</h3>
             <div className="documents-grid">
               {studentData.documents.map((doc) => (
                 <div key={doc.id} className="document-card">
                   <FileText className="doc-icon" />
                   <div className="doc-info">
-                    <h4>{isArabic ? doc.titleAr : doc.titleEn}</h4>
+                    <h4>{data.isArabic ? doc.titleAr : doc.titleEn}</h4>
                     <p>{doc.size}</p>
                   </div>
                   <button className="download-btn">
                     <Download size={16} />
-                    <span>{isArabic ? "تحميل" : "Download"}</span>
+                    <span>{data.isArabic ? "تحميل" : "Download"}</span>
                   </button>
                 </div>
               ))}
@@ -372,20 +386,20 @@ export default function StudentProfile() {
               <HelpCircle size={24} />
             </div>
             <div className="support-content">
-              <h3>{isArabic ? "هل تواجه مشكلة؟" : "Having an issue?"}</h3>
+              <h3>{data.isArabic ? "هل تواجه مشكلة؟" : "Having an issue?"}</h3>
               <p>
-                {isArabic
+                {data.isArabic
                   ? "إذا كنت تواجه أي مشكلة مع الطالب، يرجى التواصل مع فريق الدعم الفني:"
                   : "If you're experiencing any issues with the student, please contact our support team:"}
               </p>
               <div className="support-contacts">
                 <div className="support-contact">
                   <Phone size={16} />
-                  <span>{isArabic ? studentData.support.phoneAr : studentData.support.phoneEn}</span>
+                  <span>{data.isArabic ? studentData.support.phoneAr : studentData.support.phoneEn}</span>
                 </div>
                 <div className="support-contact">
                   <Mail size={16} />
-                  <span>{isArabic ? studentData.support.emailAr : studentData.support.emailEn}</span>
+                  <span>{data.isArabic ? studentData.support.emailAr : studentData.support.emailEn}</span>
                 </div>
               </div>
             </div>

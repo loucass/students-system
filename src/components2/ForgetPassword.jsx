@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { MainContextObj } from "./shared/MainContext"
 
@@ -8,6 +8,16 @@ export default function ForgotPassword() {
   let navigate = useNavigate()
 
   const [phoneNumber, setPhoneNumber] = useState("")
+
+  useEffect(() => {
+    localStorage.setItem("theme", data.isDarkTheme ? "dark" : "light")
+    document.body.className = data.isDarkTheme ? "dark-theme" : "light-theme"
+  }, [data.isDarkTheme])
+
+  useEffect(() => {
+    localStorage.setItem("lang", data.isArabic ? "ar" : "en")
+    document.dir = data.isArabic ? "rtl" : "ltr"
+  }, [data.isArabic])
 
   const handleSubmit = (e) => {
     e.preventDefault()

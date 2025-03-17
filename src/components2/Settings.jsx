@@ -169,11 +169,6 @@ export default function Settings() {
             </form>
           </div>
         </main>
-
-        {/* Right Navigation */}
-        <div className="right-nav">
-        <AllLinks isArabic={data.isArabic} />
-        </div>
       </div>
     </div>
   )
