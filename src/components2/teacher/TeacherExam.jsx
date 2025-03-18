@@ -1,20 +1,12 @@
 import { useState, useEffect, useContext } from "react"
 import { Link } from "react-router-dom"
 import {
-  Grid,
-  User,
-  MessageSquare,
-  FileText,
-  BookOpen,
-  Award,
-  Settings,
-  LogOut,
-  ChevronDown,
   ChevronLeft,
   FileText as FileIcon,
 } from "lucide-react"
 import "./teacherExam.css"
 import { MainContextObj } from "../shared/MainContext"
+import TeacherSidebar from "./TeacherSidebar"
 
 // Mock data for exams
 const mockExamData = {
@@ -155,11 +147,10 @@ const mockExamData = {
 }
 
 export default function TeacherExam() {
-    const data = useContext(MainContextObj)
+  const data = useContext(MainContextObj)
 
   const [examData, setExamData] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [searchQuery, setSearchQuery] = useState("")
 
   // New exam form state
   const [newExam, setNewExam] = useState({
@@ -288,81 +279,18 @@ export default function TeacherExam() {
   }
 
   if (loading) {
-    return <div className="teacher-exam-styling-loading">جاري التحميل...</div>
+    return <div className="teacher-exam-styling-loading">{data.isArabic ? "جاري التحميل..." : "loading..."}</div>
   }
 
   if (!examData) {
-    return <div className="teacher-exam-styling-error">حدث خطأ في تحميل البيانات</div>
+    return <div className="teacher-exam-styling-error">{data.isArabic ? "حدث خطأ في تحميل البيانات" : "error loading the data"}</div>
   }
 
   return (
     <div className={`dashboard ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
 
       <div className="teacher-exam-styling-dashboard-container">
-        {/* Sidebar */}
-        <aside className="teacher-exam-styling-sidebar">
-          <div className="teacher-exam-styling-profile">
-            <img
-              src={examData.teacher.avatar || "/placeholder.svg"}
-              alt="Teacher Profile"
-              className="teacher-exam-styling-profile-image"
-            />
-            <h3 className="teacher-exam-styling-profile-name">{examData.teacher.name}</h3>
-          </div>
-
-          <div className="teacher-exam-styling-class-selector">
-            <span>{examData.currentClass.name}</span>
-            <ChevronDown />
-          </div>
-
-          <nav className="teacher-exam-styling-nav">
-            <Link to="/teacher" className="teacher-exam-styling-nav-item">
-              <Grid size={20} />
-              <span>{data.isArabic ? "الرئيسية" : "Dashboard"}</span>
-            </Link>
-            <Link to="/teacher/students" className="teacher-exam-styling-nav-item">
-              <User size={20} />
-              <span>{data.isArabic ? "الطلاب" : "Students"}</span>
-            </Link>
-            <Link to="/teacher/live-lessons" className="teacher-exam-styling-nav-item">
-              <MessageSquare size={20} />
-              <span>{data.isArabic ? "الدروس المباشرة" : "Live Lessons"}</span>
-            </Link>
-            <Link to="/teacher/exams" className="teacher-exam-styling-nav-item active">
-              <FileText size={20} />
-              <span>{data.isArabic ? "الاختبارات" : "Exams"}</span>
-            </Link>
-            <Link to="/teacher/curriculum" className="teacher-exam-styling-nav-item">
-              <BookOpen size={20} />
-              <span>{data.isArabic ? "المنهج" : "Curriculum"}</span>
-            </Link>
-            <Link to="/teacher/revisions" className="teacher-exam-styling-nav-item">
-              <FileText size={20} />
-              <span>{data.isArabic ? "المراجعات" : "Revisions"}</span>
-            </Link>
-            <Link to="/teacher/challenges" className="teacher-exam-styling-nav-item">
-              <Award size={20} />
-              <span>{data.isArabic ? "التحديات" : "Challenges"}</span>
-            </Link>
-            <Link to="/teacher/chat" className="teacher-exam-styling-nav-item">
-              <MessageSquare size={20} />
-              <span>{data.isArabic ? "المحادثات" : "Chat"}</span>
-            </Link>
-            <Link to="/teacher/help" className="teacher-exam-styling-nav-item">
-              <User size={20} />
-              <span>{data.isArabic ? "المساعدة" : "Help"}</span>
-            </Link>
-            <Link to="/teacher/settings" className="teacher-exam-styling-nav-item">
-              <Settings size={20} />
-              <span>{data.isArabic ? "الإعدادات" : "Settings"}</span>
-            </Link>
-          </nav>
-
-          <div className="teacher-exam-styling-logout">
-            <LogOut size={20} />
-            <span>{data.isArabic ? "تسجيل الخروج" : "Logout"}</span>
-          </div>
-        </aside>
+        <TeacherSidebar currentPage="exams" currentClass={examData.currentClass.name} teacherName={examData.teacher.name} />
 
         {/* Main Content */}
         <main className="teacher-exam-styling-main">
@@ -377,74 +305,12 @@ export default function TeacherExam() {
                 {data.isArabic ? "اضف امتحان جديد" : "Add New Exam"}
               </h2>
             </div>
-            <form onSubmit={handleSubmit} className="teacher-exam-styling-create-exam-form">
-              <div className="teacher-exam-styling-form-row">
-                <div className="teacher-exam-styling-form-group">
-                  <input
-                    type="text"
-                    className="teacher-exam-styling-form-control"
-                    placeholder={data.isArabic ? "عنوان الامتحان..." : "Exam Title..."}
-                    name="title"
-                    value={newExam.title}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="teacher-exam-styling-form-group">
-                  <input
-                    type="number"
-                    className="teacher-exam-styling-form-control"
-                    placeholder={data.isArabic ? "مدة الامتحان..." : "Exam Duration..."}
-                    name="duration"
-                    value={newExam.duration}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="teacher-exam-styling-form-group">
-                  <input
-                    type="number"
-                    className="teacher-exam-styling-form-control"
-                    placeholder={data.isArabic ? "الدرجة النهائية..." : "Final Grade..."}
-                    name="grade"
-                    value={newExam.grade}
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-              <div className="teacher-exam-styling-form-row">
-                <div className="teacher-exam-styling-form-group">
-                  <input
-                    type="date"
-                    className="teacher-exam-styling-form-control"
-                    placeholder={data.isArabic ? "التاريخ..." : "Date..."}
-                    name="date"
-                    value={newExam.date}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="teacher-exam-styling-form-group">
-                  <input
-                    type="time"
-                    className="teacher-exam-styling-form-control"
-                    placeholder={data.isArabic ? "الوقت..." : "Time..."}
-                    name="time"
-                    value={newExam.time}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="teacher-exam-styling-form-group">
-                  <Link to="/teacher/exams/questions" className="teacher-exam-styling-add-questions-btn">
-                    {data.isArabic ? "ادخل الأسئلة" : "Add Questions"}
-                    <ChevronLeft className="teacher-exam-styling-icon-left" />
-                  </Link>
-                </div>
-              </div>
-              <div className="teacher-exam-styling-form-actions">
-                <button type="submit" className="teacher-exam-styling-submit-btn">
-                  <FileIcon size={18} />
-                  <span>{data.isArabic ? "اضف الامتحان" : "Add Exam"}</span>
-                </button>
-              </div>
-            </form>
+            <button type="submit" className="m-auto teacher-exam-styling-submit-btn">
+              <Link to="/teacher/exams/questions" className="teacher-exam-styling-add-questions-btn">
+              <span>{data.isArabic ? "اضف الامتحان" : "Add Exam"}</span>
+                {data.isArabic ? "ادخل الأسئلة" : "Add Questions"}
+              </Link>
+            </button>
           </div>
 
           {/* Exams Tables */}

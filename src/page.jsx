@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.js'
 import "./main.css"
-import { createBrowserRouter, Route, RouterProvider, Routes } from "react-router-dom"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Dashboard from "./components2/Dashboard"
 import Curriculum from "./components2/curriculum"
 import Settings from "./components2/Settings"
@@ -22,6 +22,10 @@ import MainContext from './components2/shared/MainContext'
 import Navbar from './components2/NavBar'
 import TeacherHome from './components2/teacher/TeacherHome'
 import TeacherExam from './components2/teacher/TeacherExam'
+import TeacherExamReport from './components2/teacher/TeacherExamReport'
+import TeacherChat from './components2/teacher/TeacherChat'
+import TeacherExamGenerator from './components2/teacher/TeacherExamGenerator'
+import TeacherSettings from './components2/teacher/TeacherSettings'
 
 export default function Home() {
 
@@ -88,7 +92,7 @@ export default function Home() {
         element: <ParentLogin />,
       },
       {
-        path: "/teacher/dashboard",
+        path: "/teacher",
         element: <TeacherHome />,
       },
       {
@@ -96,11 +100,26 @@ export default function Home() {
         element: <TeacherExam />,
       },
       {
+        path: "/teacher/exams-report",
+        element: <TeacherExamReport />,
+      },
+      {
+        path: "/teacher/chat",
+        element: <TeacherChat />,
+      },
+      {
+        path: "/teacher/exams/questions",
+        element: <TeacherExamGenerator />,
+      },
+      {
+        path: "/teacher/settings",
+        element: <TeacherSettings />,
+      },
+      {
         path: "*",
         element: <NotFound />,
       },
     ]
-    
   )
 
   return (

@@ -213,8 +213,9 @@
   width: calc(100% - 250px); /* Ensure it takes the remaining width */
 }
 
-.dark-theme .teacherstyling-main {
-  background-color: #1a1a2e;
+.dark-theme .teacherstyling-main,
+.dark-theme .dashboard {
+  background-color: #1a1a1a;
 }
 
 /* Stats Grid */
