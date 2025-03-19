@@ -40,10 +40,10 @@ export default function TeacherSidebar({teacherName , currentClass , currentPage
               <Grid size={20} />
               <span>{data.isArabic ? "الرئيسية" : "Dashboard"}</span>
             </Link>
-            <Link to="/teacher/students" className={`${currentPage=="students"? "active ": ""} teacher-chat-styling-nav-item`}>
+            {/* <Link to="/teacher/students" className={`${currentPage=="students"? "active ": ""} teacher-chat-styling-nav-item`}>
               <User size={20} />
               <span>{data.isArabic ? "الطلاب" : "Students"}</span>
-            </Link>
+            </Link> */}
             <Link to="/teacher/exams-report" className={`${currentPage=="reports"? "active ": ""} teacher-chat-styling-nav-item`}>
               <MessageSquare size={20} />
               <span>{data.isArabic ? "تقارير الامتحانات" : "Exams Reports"}</span>

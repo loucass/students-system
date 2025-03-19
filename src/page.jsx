@@ -26,6 +26,11 @@ import TeacherExamReport from './components2/teacher/TeacherExamReport'
 import TeacherChat from './components2/teacher/TeacherChat'
 import TeacherExamGenerator from './components2/teacher/TeacherExamGenerator'
 import TeacherSettings from './components2/teacher/TeacherSettings'
+import TeacherSupport from './components2/teacher/TeacherSupport'
+import TeacherCurriculum from './components2/teacher/TeacherCurriculum'
+import TeacherAddChapter from './components2/teacher/TeacherAddChapter'
+import TeacherRevision from './components2/teacher/TeacherRevision'
+import TeacherAddRevision from './components2/teacher/TeacherAddRevision'
 
 export default function Home() {
 
@@ -114,6 +119,26 @@ export default function Home() {
       {
         path: "/teacher/settings",
         element: <TeacherSettings />,
+      },
+      {
+        path: "/teacher/help",
+        element: <TeacherSupport />,
+      },
+      {
+        path: "/teacher/curriculum",
+        element: <TeacherCurriculum />,
+      },
+      {
+        path: "/teacher/curriculum/add-chapter",
+        element: <TeacherAddChapter />,
+      },
+      {
+        path: "/teacher/revisions",
+        element: <TeacherRevision />,
+      },
+      {
+        path: "/teacher/revisions/add",
+        element: <TeacherAddRevision />,
       },
       {
         path: "*",

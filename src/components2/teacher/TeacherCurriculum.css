@@ -1,0 +1,552 @@
+/* TeacherCurriculum Specific Styles */
+.teacher-curriculum-styling-loading,
+.teacher-curriculum-styling-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+/* Header Styles */
+.teacher-curriculum-styling-search-container {
+  position: relative;
+  width: 300px;
+}
+
+.teacher-curriculum-styling-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  width: 18px;
+  height: 18px;
+}
+
+[dir="rtl"] .teacher-curriculum-styling-search-icon {
+  left: auto;
+  right: 10px;
+}
+
+.teacher-curriculum-styling-search-input {
+  width: 100%;
+  padding: 0.6rem 2.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.teacher-curriculum-styling-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.2);
+}
+
+.teacher-curriculum-styling-notification,
+.teacher-curriculum-styling-assistant {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  color: var(--text-color);
+}
+
+.teacher-curriculum-styling-notification:hover,
+.teacher-curriculum-styling-assistant:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+}
+
+.teacher-curriculum-styling-notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ff4081;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[dir="rtl"] .teacher-curriculum-styling-notification-badge {
+  right: auto;
+  left: 0;
+}
+
+.teacher-curriculum-styling-notification-text {
+  font-size: 0.9rem;
+}
+
+/* Dashboard Container */
+.teacher-curriculum-styling-dashboard-container {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 56px - 60px); /* Adjust for navbar and footer */
+  position: relative;
+}
+
+/* Sidebar Styles */
+.teacher-curriculum-styling-sidebar {
+  width: 250px;
+  background-color: var(--card-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 56px; /* Adjust for navbar height */
+  height: calc(100vh - 56px); /* Adjust for navbar height */
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+[dir="rtl"] .teacher-curriculum-styling-sidebar {
+  border-right: none;
+  border-left: 1px solid var(--border-color);
+}
+
+.teacher-curriculum-styling-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.teacher-curriculum-styling-profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+.teacher-curriculum-styling-profile-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  color: var(--heading-color);
+}
+
+.teacher-curriculum-styling-class-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(124, 77, 255, 0.1);
+  color: var(--primary-color);
+  margin: 0 1rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.teacher-curriculum-styling-class-selector:hover {
+  background-color: rgba(124, 77, 255, 0.2);
+}
+
+.teacher-curriculum-styling-nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.teacher-curriculum-styling-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-bottom: 0.5rem;
+}
+
+.teacher-curriculum-styling-nav-item:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+  color: var(--primary-color);
+}
+
+.teacher-curriculum-styling-nav-item.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.teacher-curriculum-styling-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+  color: #ff4081;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-curriculum-styling-logout:hover {
+  background-color: rgba(255, 64, 129, 0.1);
+}
+
+/* Main Content Styles */
+.teacher-curriculum-styling-main {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  width: calc(100% - 250px); /* Ensure it takes the remaining width */
+}
+
+.teacher-curriculum-styling-curriculum-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.teacher-curriculum-styling-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.teacher-curriculum-styling-title {
+  font-size: 1.8rem;
+  color: var(--heading-color);
+  margin: 0;
+}
+
+.teacher-curriculum-styling-add-chapter-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-curriculum-styling-add-chapter-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Chapters List */
+.teacher-curriculum-styling-chapters-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.teacher-curriculum-styling-chapter-card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme .teacher-curriculum-styling-chapter-card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-curriculum-styling-chapter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background-color: rgba(124, 77, 255, 0.05);
+}
+
+.teacher-curriculum-styling-chapter-header:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+}
+
+.teacher-curriculum-styling-chapter-header.expanded {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.teacher-curriculum-styling-chapter-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.teacher-curriculum-styling-chapter-icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.teacher-curriculum-styling-chapter-content {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Lesson Item */
+.teacher-curriculum-styling-lesson-item {
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.teacher-curriculum-styling-lesson-item:last-child {
+  border-bottom: none;
+}
+
+.teacher-curriculum-styling-lesson-info {
+  margin-bottom: 1rem;
+}
+
+.teacher-curriculum-styling-lesson-info h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--heading-color);
+}
+
+.teacher-curriculum-styling-lesson-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.teacher-curriculum-styling-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-curriculum-styling-action-btn.video {
+  background-color: #e0f2fe;
+  color: #0284c7;
+}
+
+.teacher-curriculum-styling-action-btn.video:hover {
+  background-color: #bae6fd;
+}
+
+.teacher-curriculum-styling-action-btn.exam {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.teacher-curriculum-styling-action-btn.exam:hover {
+  background-color: #fde68a;
+}
+
+.teacher-curriculum-styling-action-btn.attachment {
+  background-color: #f3e8ff;
+  color: #7c3aed;
+}
+
+.teacher-curriculum-styling-action-btn.attachment:hover {
+  background-color: #e9d5ff;
+}
+
+.teacher-curriculum-styling-action-btn.edit {
+  background-color: #e2e8f0;
+  color: #475569;
+}
+
+.teacher-curriculum-styling-action-btn.edit:hover {
+  background-color: #cbd5e1;
+}
+
+/* Empty Lessons */
+.teacher-curriculum-styling-empty-lessons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.teacher-curriculum-styling-empty-lessons p {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.teacher-curriculum-styling-add-lesson-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-curriculum-styling-add-lesson-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Footer */
+.teacher-curriculum-styling-footer {
+  background-color: var(--card-bg);
+  padding: 1rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.teacher-curriculum-styling-footer p {
+  margin: 0.25rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .teacher-curriculum-styling-sidebar {
+    width: 80px;
+    padding: 1rem 0;
+  }
+
+  .teacher-curriculum-styling-profile-name,
+  .teacher-curriculum-styling-class-selector span,
+  .teacher-curriculum-styling-nav-item span,
+  .teacher-curriculum-styling-logout span {
+    display: none;
+  }
+
+  .teacher-curriculum-styling-class-selector {
+    justify-content: center;
+    padding: 0.75rem;
+    margin: 0 0.5rem 1.5rem;
+  }
+
+  .teacher-curriculum-styling-nav-item,
+  .teacher-curriculum-styling-logout {
+    justify-content: center;
+    padding: 0.75rem;
+  }
+
+  .teacher-curriculum-styling-profile-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .teacher-curriculum-styling-main {
+    width: calc(100% - 80px);
+  }
+}
+
+@media (max-width: 768px) {
+  .teacher-curriculum-styling-search-container {
+    width: 100%;
+  }
+
+  .teacher-curriculum-styling-dashboard-container {
+    flex-direction: column;
+  }
+
+  .teacher-curriculum-styling-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 1rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .teacher-curriculum-styling-main {
+    width: 100%;
+  }
+
+  .teacher-curriculum-styling-profile,
+  .teacher-curriculum-styling-class-selector {
+    display: none;
+  }
+
+  .teacher-curriculum-styling-nav {
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .teacher-curriculum-styling-nav-item,
+  .teacher-curriculum-styling-logout {
+    padding: 0.5rem;
+    margin: 0 0.25rem;
+  }
+
+  .teacher-curriculum-styling-nav-item span,
+  .teacher-curriculum-styling-logout span {
+    display: none;
+  }
+
+  .teacher-curriculum-styling-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .teacher-curriculum-styling-lesson-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .teacher-curriculum-styling-action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .teacher-curriculum-styling-main {
+    padding: 1rem;
+  }
+
+  .teacher-curriculum-styling-chapter-header {
+    padding: 1rem;
+  }
+
+  .teacher-curriculum-styling-chapter-content {
+    padding: 1rem;
+  }
+
+  .teacher-curriculum-styling-lesson-item {
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,595 @@
+/* TeacherHelp Specific Styles */
+.teacher-help-styling-loading,
+.teacher-help-styling-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+/* Header Styles */
+.teacher-help-styling-search-container {
+  position: relative;
+  width: 300px;
+}
+
+.teacher-help-styling-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  width: 18px;
+  height: 18px;
+}
+
+[dir="rtl"] .teacher-help-styling-search-icon {
+  left: auto;
+  right: 10px;
+}
+
+.teacher-help-styling-search-input {
+  width: 100%;
+  padding: 0.6rem 2.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.teacher-help-styling-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.2);
+}
+
+.teacher-help-styling-notification,
+.teacher-help-styling-assistant {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  color: var(--text-color);
+}
+
+.teacher-help-styling-notification:hover,
+.teacher-help-styling-assistant:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+}
+
+.teacher-help-styling-notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ff4081;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[dir="rtl"] .teacher-help-styling-notification-badge {
+  right: auto;
+  left: 0;
+}
+
+.teacher-help-styling-notification-text {
+  font-size: 0.9rem;
+}
+
+/* Dashboard Container */
+.teacher-help-styling-dashboard-container {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 56px - 60px); /* Adjust for navbar and footer */
+  position: relative;
+}
+
+/* Sidebar Styles */
+.teacher-help-styling-sidebar {
+  width: 250px;
+  background-color: var(--card-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 56px; /* Adjust for navbar height */
+  height: calc(100vh - 56px); /* Adjust for navbar height */
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+[dir="rtl"] .teacher-help-styling-sidebar {
+  border-right: none;
+  border-left: 1px solid var(--border-color);
+}
+
+.teacher-help-styling-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.teacher-help-styling-profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+.teacher-help-styling-profile-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  color: var(--heading-color);
+}
+
+.teacher-help-styling-class-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(124, 77, 255, 0.1);
+  color: var(--primary-color);
+  margin: 0 1rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.teacher-help-styling-class-selector:hover {
+  background-color: rgba(124, 77, 255, 0.2);
+}
+
+.teacher-help-styling-nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.teacher-help-styling-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-bottom: 0.5rem;
+}
+
+.teacher-help-styling-nav-item:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+  color: var(--primary-color);
+}
+
+.teacher-help-styling-nav-item.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.teacher-help-styling-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+  color: #ff4081;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-help-styling-logout:hover {
+  background-color: rgba(255, 64, 129, 0.1);
+}
+
+/* Main Content Styles */
+.teacher-help-styling-main {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  width: calc(100% - 250px); /* Ensure it takes the remaining width */
+}
+
+.teacher-help-styling-help-center {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.teacher-help-styling-help-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.teacher-help-styling-help-header h1 {
+  font-size: 2rem;
+  color: var(--heading-color);
+  margin: 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Search Section */
+.teacher-help-styling-search-section {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme .teacher-help-styling-search-section {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-help-styling-search-section h2 {
+  font-size: 1.5rem;
+  color: var(--heading-color);
+  margin-bottom: 0.5rem;
+}
+
+.teacher-help-styling-search-section p {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.teacher-help-styling-search-box {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.teacher-help-styling-search-box-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+[dir="rtl"] .teacher-help-styling-search-box-icon {
+  left: auto;
+  right: 16px;
+}
+
+.teacher-help-styling-search-box-input {
+  width: 100%;
+  padding: 1rem 3rem;
+  border: 1px solid var(--border-color);
+  border-radius: 30px;
+  font-size: 1rem;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.teacher-help-styling-search-box-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.2);
+}
+
+/* Content Container */
+.teacher-help-styling-content-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 992px) {
+  .teacher-help-styling-content-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* FAQ Section */
+.teacher-help-styling-faq-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.teacher-help-styling-faq-item {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme .teacher-help-styling-faq-item {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-help-styling-faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background-color: rgba(124, 77, 255, 0.05);
+}
+
+.teacher-help-styling-faq-question:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+}
+
+.teacher-help-styling-faq-question.expanded {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.teacher-help-styling-faq-question h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.teacher-help-styling-faq-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.teacher-help-styling-faq-answer {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.teacher-help-styling-faq-answer p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Contact Section */
+.teacher-help-styling-contact-section {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme .teacher-help-styling-contact-section {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-help-styling-contact-section h2 {
+  font-size: 1.3rem;
+  color: var(--heading-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.teacher-help-styling-success-message {
+  background-color: #dcfce7;
+  color: #15803d;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.teacher-help-styling-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.teacher-help-styling-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.teacher-help-styling-form-group label {
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.teacher-help-styling-form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.teacher-help-styling-form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.2);
+}
+
+.teacher-help-styling-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: center;
+  margin-top: 0.5rem;
+}
+
+.teacher-help-styling-submit-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.teacher-help-styling-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Footer */
+.teacher-help-styling-footer {
+  background-color: var(--card-bg);
+  padding: 1rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.teacher-help-styling-footer p {
+  margin: 0.25rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .teacher-help-styling-sidebar {
+    width: 80px;
+    padding: 1rem 0;
+  }
+
+  .teacher-help-styling-profile-name,
+  .teacher-help-styling-class-selector span,
+  .teacher-help-styling-nav-item span,
+  .teacher-help-styling-logout span {
+    display: none;
+  }
+
+  .teacher-help-styling-class-selector {
+    justify-content: center;
+    padding: 0.75rem;
+    margin: 0 0.5rem 1.5rem;
+  }
+
+  .teacher-help-styling-nav-item,
+  .teacher-help-styling-logout {
+    justify-content: center;
+    padding: 0.75rem;
+  }
+
+  .teacher-help-styling-profile-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .teacher-help-styling-main {
+    width: calc(100% - 80px);
+  }
+}
+
+@media (max-width: 768px) {
+  .teacher-help-styling-search-container {
+    width: 100%;
+  }
+
+  .teacher-help-styling-dashboard-container {
+    flex-direction: column;
+  }
+
+  .teacher-help-styling-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 1rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .teacher-help-styling-main {
+    width: 100%;
+  }
+
+  .teacher-help-styling-profile,
+  .teacher-help-styling-class-selector {
+    display: none;
+  }
+
+  .teacher-help-styling-nav {
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .teacher-help-styling-nav-item,
+  .teacher-help-styling-logout {
+    padding: 0.5rem;
+    margin: 0 0.25rem;
+  }
+
+  .teacher-help-styling-nav-item span,
+  .teacher-help-styling-logout span {
+    display: none;
+  }
+
+  .teacher-help-styling-search-section {
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .teacher-help-styling-main {
+    padding: 1rem;
+  }
+
+  .teacher-help-styling-faq-question {
+    padding: 1rem;
+  }
+
+  .teacher-help-styling-faq-answer {
+    padding: 1rem;
+  }
+
+  .teacher-help-styling-contact-section {
+    padding: 1rem;
+  }
+}

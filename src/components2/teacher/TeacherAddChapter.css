@@ -1,0 +1,697 @@
+/* TeacherAddChapter Specific Styles */
+.teacher-add-chapter-styling-loading,
+.teacher-add-chapter-styling-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+/* Header Styles */
+.teacher-add-chapter-styling-search-container {
+  position: relative;
+  width: 300px;
+}
+
+.teacher-add-chapter-styling-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  width: 18px;
+  height: 18px;
+}
+
+[dir="rtl"] .teacher-add-chapter-styling-search-icon {
+  left: auto;
+  right: 10px;
+}
+
+.teacher-add-chapter-styling-search-input {
+  width: 100%;
+  padding: 0.6rem 2.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.teacher-add-chapter-styling-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.2);
+}
+
+.teacher-add-chapter-styling-notification,
+.teacher-add-chapter-styling-assistant {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  color: var(--text-color);
+}
+
+.teacher-add-chapter-styling-notification:hover,
+.teacher-add-chapter-styling-assistant:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+}
+
+.teacher-add-chapter-styling-notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ff4081;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[dir="rtl"] .teacher-add-chapter-styling-notification-badge {
+  right: auto;
+  left: 0;
+}
+
+.teacher-add-chapter-styling-notification-text {
+  font-size: 0.9rem;
+}
+
+/* Dashboard Container */
+.teacher-add-chapter-styling-dashboard-container {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 56px - 60px); /* Adjust for navbar and footer */
+  position: relative;
+}
+
+/* Sidebar Styles */
+.teacher-add-chapter-styling-sidebar {
+  width: 250px;
+  background-color: var(--card-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 56px; /* Adjust for navbar height */
+  height: calc(100vh - 56px); /* Adjust for navbar height */
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+[dir="rtl"] .teacher-add-chapter-styling-sidebar {
+  border-right: none;
+  border-left: 1px solid var(--border-color);
+}
+
+.teacher-add-chapter-styling-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.teacher-add-chapter-styling-profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+.teacher-add-chapter-styling-profile-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  color: var(--heading-color);
+}
+
+.teacher-add-chapter-styling-class-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(124, 77, 255, 0.1);
+  color: var(--primary-color);
+  margin: 0 1rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.teacher-add-chapter-styling-class-selector:hover {
+  background-color: rgba(124, 77, 255, 0.2);
+}
+
+.teacher-add-chapter-styling-nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.teacher-add-chapter-styling-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-bottom: 0.5rem;
+}
+
+.teacher-add-chapter-styling-nav-item:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+  color: var(--primary-color);
+}
+
+.teacher-add-chapter-styling-nav-item.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.teacher-add-chapter-styling-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+  color: #ff4081;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-add-chapter-styling-logout:hover {
+  background-color: rgba(255, 64, 129, 0.1);
+}
+
+/* Main Content Styles */
+.teacher-add-chapter-styling-main {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  width: calc(100% - 250px); /* Ensure it takes the remaining width */
+}
+
+.teacher-add-chapter-styling-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.teacher-add-chapter-styling-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.teacher-add-chapter-styling-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--hover-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.teacher-add-chapter-styling-back-btn:hover {
+  background-color: var(--border-color);
+}
+
+.teacher-add-chapter-styling-title {
+  font-size: 1.8rem;
+  color: var(--heading-color);
+  margin: 0;
+}
+
+/* Form Styles */
+.teacher-add-chapter-styling-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.teacher-add-chapter-styling-card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme .teacher-add-chapter-styling-card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-add-chapter-styling-card-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.teacher-add-chapter-styling-card-title {
+  font-size: 1.25rem;
+  color: var(--heading-color);
+  margin: 0;
+}
+
+.teacher-add-chapter-styling-card-body {
+  padding: 1.5rem;
+}
+
+.teacher-add-chapter-styling-form-group {
+  margin-bottom: 1.25rem;
+}
+
+.teacher-add-chapter-styling-form-group:last-child {
+  margin-bottom: 0;
+}
+
+.teacher-add-chapter-styling-form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.teacher-add-chapter-styling-form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.teacher-add-chapter-styling-form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.2);
+}
+
+.teacher-add-chapter-styling-form-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Lessons Container */
+.teacher-add-chapter-styling-lessons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.teacher-add-chapter-styling-lessons-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.teacher-add-chapter-styling-lessons-title {
+  font-size: 1.5rem;
+  color: var(--heading-color);
+  margin: 0;
+}
+
+.teacher-add-chapter-styling-add-lesson-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-add-chapter-styling-add-lesson-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Lesson Card */
+.teacher-add-chapter-styling-lesson-card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme .teacher-add-chapter-styling-lesson-card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-add-chapter-styling-lesson-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  background-color: rgba(124, 77, 255, 0.05);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.teacher-add-chapter-styling-lesson-title {
+  font-size: 1.2rem;
+  color: var(--heading-color);
+  margin: 0;
+}
+
+.teacher-add-chapter-styling-remove-lesson-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #fee2e2;
+  color: #dc2626;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-add-chapter-styling-remove-lesson-btn:hover {
+  background-color: #fecaca;
+}
+
+.teacher-add-chapter-styling-lesson-body {
+  padding: 1.5rem;
+}
+
+/* Lesson Content */
+.teacher-add-chapter-styling-lesson-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.teacher-add-chapter-styling-content-section {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.teacher-add-chapter-styling-content-header {
+  padding: 1rem;
+  background-color: var(--hover-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.teacher-add-chapter-styling-content-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--heading-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.teacher-add-chapter-styling-upload-container {
+  padding: 1.5rem;
+}
+
+.teacher-add-chapter-styling-file-input {
+  display: none;
+}
+
+.teacher-add-chapter-styling-upload-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--hover-color);
+  color: var(--text-color);
+  border: 1px dashed var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.teacher-add-chapter-styling-upload-label:hover {
+  background-color: var(--border-color);
+}
+
+/* Add this style for disabled upload labels */
+.teacher-add-chapter-styling-upload-label.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: var(--hover-color);
+}
+
+.teacher-add-chapter-styling-upload-label.disabled:hover {
+  background-color: var(--hover-color);
+}
+
+/* Attachments List */
+.teacher-add-chapter-styling-attachments-list {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.teacher-add-chapter-styling-attachments-list h5 {
+  font-size: 0.95rem;
+  color: var(--heading-color);
+  margin: 0 0 0.75rem;
+}
+
+.teacher-add-chapter-styling-attachments-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.teacher-add-chapter-styling-attachment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--hover-color);
+  border-radius: 6px;
+}
+
+.teacher-add-chapter-styling-attachment-name {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+
+.teacher-add-chapter-styling-remove-attachment-btn {
+  background: none;
+  border: none;
+  color: #dc2626;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.teacher-add-chapter-styling-remove-attachment-btn:hover {
+  background-color: #fee2e2;
+}
+
+/* Form Actions */
+.teacher-add-chapter-styling-form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.teacher-add-chapter-styling-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-add-chapter-styling-submit-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.teacher-add-chapter-styling-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Footer */
+.teacher-add-chapter-styling-footer {
+  background-color: var(--card-bg);
+  padding: 1rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.teacher-add-chapter-styling-footer p {
+  margin: 0.25rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .teacher-add-chapter-styling-sidebar {
+    width: 80px;
+    padding: 1rem 0;
+  }
+
+  .teacher-add-chapter-styling-profile-name,
+  .teacher-add-chapter-styling-class-selector span,
+  .teacher-add-chapter-styling-nav-item span,
+  .teacher-add-chapter-styling-logout span {
+    display: none;
+  }
+
+  .teacher-add-chapter-styling-class-selector {
+    justify-content: center;
+    padding: 0.75rem;
+    margin: 0 0.5rem 1.5rem;
+  }
+
+  .teacher-add-chapter-styling-nav-item,
+  .teacher-add-chapter-styling-logout {
+    justify-content: center;
+    padding: 0.75rem;
+  }
+
+  .teacher-add-chapter-styling-profile-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .teacher-add-chapter-styling-main {
+    width: calc(100% - 80px);
+  }
+
+  .teacher-add-chapter-styling-form-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .teacher-add-chapter-styling-search-container {
+    width: 100%;
+  }
+
+  .teacher-add-chapter-styling-dashboard-container {
+    flex-direction: column;
+  }
+
+  .teacher-add-chapter-styling-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 1rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .teacher-add-chapter-styling-main {
+    width: 100%;
+  }
+
+  .teacher-add-chapter-styling-profile,
+  .teacher-add-chapter-styling-class-selector {
+    display: none;
+  }
+
+  .teacher-add-chapter-styling-nav {
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .teacher-add-chapter-styling-nav-item,
+  .teacher-add-chapter-styling-logout {
+    padding: 0.5rem;
+    margin: 0 0.25rem;
+  }
+
+  .teacher-add-chapter-styling-nav-item span,
+  .teacher-add-chapter-styling-logout span {
+    display: none;
+  }
+
+  .teacher-add-chapter-styling-lessons-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .teacher-add-chapter-styling-lesson-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .teacher-add-chapter-styling-remove-lesson-btn {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 576px) {
+  .teacher-add-chapter-styling-main {
+    padding: 1rem;
+  }
+
+  .teacher-add-chapter-styling-card-header,
+  .teacher-add-chapter-styling-card-body,
+  .teacher-add-chapter-styling-lesson-header,
+  .teacher-add-chapter-styling-lesson-body {
+    padding: 1rem;
+  }
+
+  .teacher-add-chapter-styling-upload-label {
+    padding: 0.75rem 1rem;
+  }
+
+  .teacher-add-chapter-styling-attachment-name {
+    max-width: 200px;
+  }
+}

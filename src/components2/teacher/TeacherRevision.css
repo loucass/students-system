@@ -1,0 +1,700 @@
+/* TeacherRevisions Specific Styles */
+.teacher-revisions-styling-loading,
+.teacher-revisions-styling-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+/* Header Styles */
+.teacher-revisions-styling-search-container {
+  position: relative;
+  width: 300px;
+}
+
+.teacher-revisions-styling-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  width: 18px;
+  height: 18px;
+}
+
+[dir="rtl"] .teacher-revisions-styling-search-icon {
+  left: auto;
+  right: 10px;
+}
+
+.teacher-revisions-styling-search-input {
+  width: 100%;
+  padding: 0.6rem 2.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.teacher-revisions-styling-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.2);
+}
+
+.teacher-revisions-styling-notification,
+.teacher-revisions-styling-assistant {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  color: var(--text-color);
+}
+
+.teacher-revisions-styling-notification:hover,
+.teacher-revisions-styling-assistant:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+}
+
+.teacher-revisions-styling-notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ff4081;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[dir="rtl"] .teacher-revisions-styling-notification-badge {
+  right: auto;
+  left: 0;
+}
+
+.teacher-revisions-styling-notification-text {
+  font-size: 0.9rem;
+}
+
+/* Dashboard Container */
+.teacher-revisions-styling-dashboard-container {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 56px - 60px); /* Adjust for navbar and footer */
+  position: relative;
+}
+
+/* Sidebar Styles */
+.teacher-revisions-styling-sidebar {
+  width: 250px;
+  background-color: var(--card-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 56px; /* Adjust for navbar height */
+  height: calc(100vh - 56px); /* Adjust for navbar height */
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+[dir="rtl"] .teacher-revisions-styling-sidebar {
+  border-right: none;
+  border-left: 1px solid var(--border-color);
+}
+
+.teacher-revisions-styling-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.teacher-revisions-styling-profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+.teacher-revisions-styling-profile-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  color: var(--heading-color);
+}
+
+.teacher-revisions-styling-class-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(124, 77, 255, 0.1);
+  color: var(--primary-color);
+  margin: 0 1rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.teacher-revisions-styling-class-selector:hover {
+  background-color: rgba(124, 77, 255, 0.2);
+}
+
+.teacher-revisions-styling-nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.teacher-revisions-styling-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-bottom: 0.5rem;
+}
+
+.teacher-revisions-styling-nav-item:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+  color: var(--primary-color);
+}
+
+.teacher-revisions-styling-nav-item.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.teacher-revisions-styling-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+  color: #ff4081;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-revisions-styling-logout:hover {
+  background-color: rgba(255, 64, 129, 0.1);
+}
+
+/* Main Content Styles */
+.teacher-revisions-styling-main {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  width: calc(100% - 250px); /* Ensure it takes the remaining width */
+}
+
+.teacher-revisions-styling-revisions-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.teacher-revisions-styling-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.teacher-revisions-styling-title {
+  font-size: 1.8rem;
+  color: var(--heading-color);
+  margin: 0;
+}
+
+.teacher-revisions-styling-add-revision-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-revisions-styling-add-revision-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Stats Cards */
+.teacher-revisions-styling-stats-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.teacher-revisions-styling-stats-card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme .teacher-revisions-styling-stats-card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-revisions-styling-stats-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background-color: rgba(124, 77, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+}
+
+.teacher-revisions-styling-stats-content {
+  flex: 1;
+}
+
+.teacher-revisions-styling-stats-title {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+}
+
+.teacher-revisions-styling-stats-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin: 0;
+}
+
+/* Chart Container */
+.teacher-revisions-styling-chart-container {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dark-theme .teacher-revisions-styling-chart-container {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-revisions-styling-chart-title {
+  font-size: 1.25rem;
+  color: var(--heading-color);
+  margin: 0 0 1rem;
+}
+
+.teacher-revisions-styling-chart {
+  height: 200px;
+  width: 100%;
+}
+
+.teacher-revisions-styling-chart-placeholder {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  background-color: var(--hover-color);
+  border-radius: 8px;
+  gap: 0.5rem;
+}
+
+/* Tabs */
+.teacher-revisions-styling-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.teacher-revisions-styling-tab {
+  padding: 0.75rem 1.5rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-color);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-revisions-styling-tab:hover {
+  color: var(--primary-color);
+}
+
+.teacher-revisions-styling-tab.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+/* Table Styles */
+.teacher-revisions-styling-table-container {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.dark-theme .teacher-revisions-styling-table-container {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-revisions-styling-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.teacher-revisions-styling-table-title {
+  font-size: 1.25rem;
+  color: var(--heading-color);
+  margin: 0;
+}
+
+.teacher-revisions-styling-sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.teacher-revisions-styling-sort-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.teacher-revisions-styling-sort-select {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
+
+.teacher-revisions-styling-sort-direction {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-revisions-styling-sort-direction:hover {
+  background-color: var(--hover-color);
+}
+
+.teacher-revisions-styling-table-wrapper {
+  overflow-x: auto;
+}
+
+.teacher-revisions-styling-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.teacher-revisions-styling-table th,
+.teacher-revisions-styling-table td {
+  padding: 1rem;
+  text-align: start;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.teacher-revisions-styling-table th {
+  font-weight: 600;
+  color: var(--text-muted);
+  background-color: var(--hover-color);
+}
+
+.teacher-revisions-styling-sortable {
+  cursor: pointer;
+  position: relative;
+}
+
+.teacher-revisions-styling-sortable:hover {
+  background-color: rgba(124, 77, 255, 0.05);
+}
+
+.teacher-revisions-styling-sort-indicator {
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+}
+
+[dir="rtl"] .teacher-revisions-styling-sort-indicator {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+.teacher-revisions-styling-table tr:hover td {
+  background-color: rgba(124, 77, 255, 0.05);
+}
+
+.teacher-revisions-styling-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.teacher-revisions-styling-action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-revisions-styling-action-btn.download {
+  background-color: #e0f2fe;
+  color: #0284c7;
+}
+
+.teacher-revisions-styling-action-btn.download:hover {
+  background-color: #bae6fd;
+}
+
+.teacher-revisions-styling-action-btn.edit {
+  background-color: #f3e8ff;
+  color: #7c3aed;
+}
+
+.teacher-revisions-styling-action-btn.edit:hover {
+  background-color: #e9d5ff;
+}
+
+.teacher-revisions-styling-action-btn.delete {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.teacher-revisions-styling-action-btn.delete:hover {
+  background-color: #fecaca;
+}
+
+.teacher-revisions-styling-status-controls {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.teacher-revisions-styling-status-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.teacher-revisions-styling-status-btn.reject {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.teacher-revisions-styling-status-btn.reject:hover,
+.teacher-revisions-styling-status-btn.reject.active {
+  background-color: #dc2626;
+  color: white;
+}
+
+.teacher-revisions-styling-status-btn.approve {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.teacher-revisions-styling-status-btn.approve:hover,
+.teacher-revisions-styling-status-btn.approve.active {
+  background-color: #15803d;
+  color: white;
+}
+
+/* Footer */
+.teacher-revisions-styling-footer {
+  background-color: var(--card-bg);
+  padding: 1rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.teacher-revisions-styling-footer p {
+  margin: 0.25rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .teacher-revisions-styling-stats-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .teacher-revisions-styling-sidebar {
+    width: 80px;
+    padding: 1rem 0;
+  }
+
+  .teacher-revisions-styling-profile-name,
+  .teacher-revisions-styling-class-selector span,
+  .teacher-revisions-styling-nav-item span,
+  .teacher-revisions-styling-logout span {
+    display: none;
+  }
+
+  .teacher-revisions-styling-class-selector {
+    justify-content: center;
+    padding: 0.75rem;
+    margin: 0 0.5rem 1.5rem;
+  }
+
+  .teacher-revisions-styling-nav-item,
+  .teacher-revisions-styling-logout {
+    justify-content: center;
+    padding: 0.75rem;
+  }
+
+  .teacher-revisions-styling-profile-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .teacher-revisions-styling-main {
+    width: calc(100% - 80px);
+  }
+}
+
+@media (max-width: 768px) {
+  .teacher-revisions-styling-search-container {
+    width: 100%;
+  }
+
+  .teacher-revisions-styling-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .teacher-revisions-styling-dashboard-container {
+    flex-direction: column;
+  }
+
+  .teacher-revisions-styling-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 1rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .teacher-revisions-styling-main {
+    width: 100%;
+  }
+
+  .teacher-revisions-styling-profile,
+  .teacher-revisions-styling-class-selector {
+    display: none;
+  }
+
+  .teacher-revisions-styling-nav {
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .teacher-revisions-styling-nav-item,
+  .teacher-revisions-styling-logout {
+    padding: 0.5rem;
+    margin: 0 0.25rem;
+  }
+
+  .teacher-revisions-styling-nav-item span,
+  .teacher-revisions-styling-logout span {
+    display: none;
+  }
+
+  .teacher-revisions-styling-table-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .teacher-revisions-styling-sort-controls {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .teacher-revisions-styling-main {
+    padding: 1rem;
+  }
+
+  .teacher-revisions-styling-table-container {
+    padding: 1rem;
+  }
+
+  .teacher-revisions-styling-table th,
+  .teacher-revisions-styling-table td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .teacher-revisions-styling-action-btn,
+  .teacher-revisions-styling-status-btn {
+    width: 28px;
+    height: 28px;
+  }
+}
