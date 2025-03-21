@@ -31,122 +31,174 @@ import TeacherCurriculum from './components2/teacher/TeacherCurriculum'
 import TeacherAddChapter from './components2/teacher/TeacherAddChapter'
 import TeacherRevision from './components2/teacher/TeacherRevision'
 import TeacherAddRevision from './components2/teacher/TeacherAddRevision'
+import TeacherChallenges from './components2/teacher/TeacherChallenges'
 
 export default function Home() {
 
-  const MainRoutes = createBrowserRouter(
-    [
-      {
-        path: "/",
-        element: <LandingPage />,
-      },
-      {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
-      {
-        path: "/curriculum",
-        element: <Curriculum />,
-      },
-      {
-        path: "/settings",
-        element: <Settings />,
-      },
-      {
-        path: "/exams",
-        element: <Exams />,
-      },
-      {
-        path: "/examPage/:examID",
-        element: <ExamPage />,
-      },
-      {
-        path: "/challenges",
-        element: <Challenges />,
-      },
-      {
-        path: "/Revisions",
-        element: <Revisions />,
-      },
-      {
-        path: "/register",
-        element: <Register />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/forgot-password",
-        element: <ForgotPassword />,
-      },
-      {
-        path: "/otp-verification",
-        element: <OtpVerification />,
-      },
-      {
-        path: "/reset-password",
-        element: <ResetPassword />,
-      },
-      {
-        path: "/parent/dashboard",
-        element: <ParentHome />,
-      },
-      {
-        path: "/parent/login",
-        element: <ParentLogin />,
-      },
-      {
-        path: "/teacher",
-        element: <TeacherHome />,
-      },
-      {
-        path: "/teacher/exams",
-        element: <TeacherExam />,
-      },
-      {
-        path: "/teacher/exams-report",
-        element: <TeacherExamReport />,
-      },
-      {
-        path: "/teacher/chat",
-        element: <TeacherChat />,
-      },
-      {
-        path: "/teacher/exams/questions",
-        element: <TeacherExamGenerator />,
-      },
-      {
-        path: "/teacher/settings",
-        element: <TeacherSettings />,
-      },
-      {
-        path: "/teacher/help",
-        element: <TeacherSupport />,
-      },
-      {
-        path: "/teacher/curriculum",
-        element: <TeacherCurriculum />,
-      },
-      {
-        path: "/teacher/curriculum/add-chapter",
-        element: <TeacherAddChapter />,
-      },
-      {
-        path: "/teacher/revisions",
-        element: <TeacherRevision />,
-      },
-      {
-        path: "/teacher/revisions/add",
-        element: <TeacherAddRevision />,
-      },
-      {
-        path: "*",
-        element: <NotFound />,
-      },
-    ]
-  )
-
+  const MainRoutes = createBrowserRouter([
+    // Public Routes
+    {
+      path: "/",
+      element: <LandingPage />,
+    },
+    {
+      path: "/",
+      children: [
+        {
+          path: "register",
+          element: <Register />,
+        },
+        {
+          path: "login",
+          element: <Login />,
+        },
+        {
+          path: "forgot-password",
+          element: <ForgotPassword />,
+        },
+        {
+          path: "otp-verification",
+          element: <OtpVerification />,
+        },
+        {
+          path: "reset-password",
+          element: <ResetPassword />,
+        },
+      ],
+    },
+  
+    // Student Routes
+    {
+      path: "/",
+      children: [
+        {
+          path: "dashboard",
+          element: <Dashboard />,
+        },
+        {
+          path: "curriculum",
+          element: <Curriculum />,
+        },
+        {
+          path: "settings",
+          element: <Settings />,
+        },
+        {
+          path: "exams",
+          children: [
+            {
+              index: true,
+              element: <Exams />,
+            },
+            {
+              path: ":examID",
+              element: <ExamPage />,
+            },
+          ],
+        },
+        {
+          path: "challenges",
+          element: <Challenges />,
+        },
+        {
+          path: "revisions",
+          element: <Revisions />,
+        },
+      ],
+    },
+  
+    // Parent Routes
+    {
+      path: "/parent",
+      children: [
+        {
+          path: "dashboard",
+          element: <ParentHome />,
+        },
+        {
+          path: "login",
+          element: <ParentLogin />,
+        },
+      ],
+    },
+  
+    // Teacher Routes
+    {
+      path: "/teacher",
+      children: [
+        {
+          index: true,
+          element: <TeacherHome />,
+        },
+        {
+          path: "exams",
+          children: [
+            {
+              index: true,
+              element: <TeacherExam />,
+            },
+            {
+              path: "questions",
+              element: <TeacherExamGenerator />,
+            },
+          ],
+        },
+        {
+          path: "exams-report",
+          element: <TeacherExamReport />,
+        },
+        {
+          path: "chat",
+          element: <TeacherChat />,
+        },
+        {
+          path: "settings",
+          element: <TeacherSettings />,
+        },
+        {
+          path: "help",
+          element: <TeacherSupport />,
+        },
+        {
+          path: "challenges",
+          element: <TeacherChallenges />,
+        },
+        {
+          path: "curriculum",
+          children: [
+            {
+              index: true,
+              element: <TeacherCurriculum />,
+            },
+            {
+              path: "add-chapter",
+              element: <TeacherAddChapter />,
+            },
+          ],
+        },
+        {
+          path: "revisions",
+          children: [
+            {
+              index: true,
+              element: <TeacherRevision />,
+            },
+            {
+              path: "add",
+              element: <TeacherAddRevision />,
+            },
+          ],
+        },
+      ],
+    },
+  
+    // Fallback Route
+    {
+      path: "*",
+      element: <NotFound />,
+    },
+  ]);
+  
   return (
     <MainContext >
       <Navbar />

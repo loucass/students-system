@@ -1,4 +1,4 @@
-import { Menu, X, Sun, Moon, Languages } from "lucide-react"
+import { Sun, Moon, Languages } from "lucide-react"
 import { useContext } from "react"
 import { MainContextObj } from "./shared/MainContext"
 
@@ -7,14 +7,6 @@ export default function Navbar() {
   return (
     <nav className={`navbar navbar-expand-lg ${data.isDarkTheme ? "navbar-dark bg-dark" : "navbar-light bg-light"}`}>
       <div className="container-fluid">
-        <button
-          className="navbar-toggler"
-          type="button"
-          onClick={data.toggleSidebar}
-          aria-label={data.isArabic ? "تبديل القائمة" : "Toggle navigation"}
-        >
-          {data.isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
         <div className="ms-auto d-flex gap-3">
           <button
             className="btn btn-icon"

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useContext } from "react"
 import { Eye, EyeOff } from "lucide-react"
-import AllLinks from "./Links"
 import { MainContextObj } from "./shared/MainContext"
+import StudentSidebar from "./StudentSidebar"
 
 export default function Settings() {
   const data = useContext(MainContextObj)
@@ -65,18 +65,7 @@ export default function Settings() {
     <div className={`dashboard ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
 
       <div className="dashboard-container">
-        {/* Left Sidebar */}
-        <div ref={sidebarRef} className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
-          <div className="profile-section">
-            <img src="/placeholder.svg?height=80&width=80" alt="Profile" className="profile-image" />
-            <h3>{data.isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
-            <p>{data.isArabic ? "الصف الثاني" : "Second Grade"}</p>
-          </div>
-
-          <div className="sidebar-links">
-          <AllLinks isArabic={data.isArabic} />
-          </div>
-        </div>
+        <StudentSidebar />
 
         {/* Main Content */}
         <main className="main-content">

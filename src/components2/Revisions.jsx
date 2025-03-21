@@ -1,7 +1,7 @@
 import { useEffect, useRef, useContext } from "react"
 import { FileIcon as FilePdf, Download } from "lucide-react"
-import AllLinks from "./Links"
 import { MainContextObj } from "./shared/MainContext"
+import StudentSidebar from "./StudentSidebar"
 
 // Sample revisions data
 const revisionsData = {
@@ -119,18 +119,8 @@ export default function Revisions() {
     <div className={`dashboard ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
 
       <div className="dashboard-container">
-        {/* Left Sidebar */}
-        <div ref={sidebarRef} className={`sidebar ${data.isSidebarOpen ? "open" : ""}`}>
-          <div className="profile-section">
-            <img src="/placeholder.svg?height=80&width=80" alt="Profile" className="profile-image" />
-            <h3>{data.isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
-            <p>{data.isArabic ? "الصف الثاني" : "Second Grade"}</p>
-          </div>
+        <StudentSidebar />
 
-          <div className="sidebar-links">
-          <AllLinks isArabic={data.isArabic} />
-          </div>
-        </div>
 
         {/* Main Content */}
         <main className="main-content" style={{ overflowX: "auto" }}>

@@ -11,20 +11,12 @@ export default function MainContext({children}) {
     return localStorage.getItem("lang") === "ar"
     })
 
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-
-    const toggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen)
-        }
-
   return (
     <MainContextObj.Provider value={{
         "isDarkTheme": isDarkTheme,
         "setIsDarkTheme": setIsDarkTheme,
         "isArabic": isArabic,
         "setIsArabic": setIsArabic,
-        "toggleSidebar": toggleSidebar,
-        "isSidebarOpen": isSidebarOpen,
     }}>
       {children}
     </MainContextObj.Provider>

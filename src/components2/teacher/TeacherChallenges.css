@@ -1,0 +1,706 @@
+/* TeacherChallenges Specific Styles */
+.teacher-challenges-styling-loading,
+.teacher-challenges-styling-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+/* Header Styles */
+.teacher-challenges-styling-search-container {
+  position: relative;
+  width: 300px;
+}
+
+.teacher-challenges-styling-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  width: 18px;
+  height: 18px;
+}
+
+[dir="rtl"] .teacher-challenges-styling-search-icon {
+  left: auto;
+  right: 10px;
+}
+
+.teacher-challenges-styling-search-input {
+  width: 100%;
+  padding: 0.6rem 2.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.teacher-challenges-styling-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.2);
+}
+
+.teacher-challenges-styling-notification,
+.teacher-challenges-styling-assistant {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  color: var(--text-color);
+}
+
+.teacher-challenges-styling-notification:hover,
+.teacher-challenges-styling-assistant:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+}
+
+.teacher-challenges-styling-notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ff4081;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[dir="rtl"] .teacher-challenges-styling-notification-badge {
+  right: auto;
+  left: 0;
+}
+
+.teacher-challenges-styling-notification-text {
+  font-size: 0.9rem;
+}
+
+/* Dashboard Container */
+.teacher-challenges-styling-dashboard-container {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 56px - 60px); /* Adjust for navbar and footer */
+  position: relative;
+}
+
+/* Sidebar Styles */
+.teacher-challenges-styling-sidebar {
+  width: 250px;
+  background-color: var(--card-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 56px; /* Adjust for navbar height */
+  height: calc(100vh - 56px); /* Adjust for navbar height */
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+[dir="rtl"] .teacher-challenges-styling-sidebar {
+  border-right: none;
+  border-left: 1px solid var(--border-color);
+}
+
+.teacher-challenges-styling-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.teacher-challenges-styling-profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+.teacher-challenges-styling-profile-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  color: var(--heading-color);
+}
+
+.teacher-challenges-styling-class-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(124, 77, 255, 0.1);
+  color: var(--primary-color);
+  margin: 0 1rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.teacher-challenges-styling-class-selector:hover {
+  background-color: rgba(124, 77, 255, 0.2);
+}
+
+.teacher-challenges-styling-nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.teacher-challenges-styling-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-bottom: 0.5rem;
+}
+
+.teacher-challenges-styling-nav-item:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+  color: var(--primary-color);
+}
+
+.teacher-challenges-styling-nav-item.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.teacher-challenges-styling-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+  color: #ff4081;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-challenges-styling-logout:hover {
+  background-color: rgba(255, 64, 129, 0.1);
+}
+
+/* Main Content Styles */
+.teacher-challenges-styling-main {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  width: calc(100% - 250px); /* Ensure it takes the remaining width */
+}
+
+.teacher-challenges-styling-challenges-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.teacher-challenges-styling-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.teacher-challenges-styling-title {
+  font-size: 1.8rem;
+  color: var(--heading-color);
+  margin: 0;
+}
+
+.teacher-challenges-styling-add-challenge-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-challenges-styling-add-challenge-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Tabs */
+.teacher-challenges-styling-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.teacher-challenges-styling-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-color);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-challenges-styling-tab:hover {
+  color: var(--primary-color);
+}
+
+.teacher-challenges-styling-tab.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+/* Leaderboard Styles */
+.teacher-challenges-styling-leaderboard-container {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.dark-theme .teacher-challenges-styling-leaderboard-container {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-challenges-styling-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.teacher-challenges-styling-table-title {
+  font-size: 1.25rem;
+  color: var(--heading-color);
+  margin: 0;
+}
+
+.teacher-challenges-styling-sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.teacher-challenges-styling-sort-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.teacher-challenges-styling-sort-select {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
+
+.teacher-challenges-styling-sort-direction {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-challenges-styling-sort-direction:hover {
+  background-color: var(--hover-color);
+}
+
+.teacher-challenges-styling-table-wrapper {
+  overflow-x: auto;
+}
+
+.teacher-challenges-styling-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.teacher-challenges-styling-table th,
+.teacher-challenges-styling-table td {
+  padding: 1rem;
+  text-align: start;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.teacher-challenges-styling-table th {
+  font-weight: 600;
+  color: var(--text-muted);
+  background-color: var(--hover-color);
+}
+
+.teacher-challenges-styling-sortable {
+  cursor: pointer;
+  position: relative;
+}
+
+.teacher-challenges-styling-sortable:hover {
+  background-color: rgba(124, 77, 255, 0.05);
+}
+
+.teacher-challenges-styling-sort-indicator {
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+}
+
+[dir="rtl"] .teacher-challenges-styling-sort-indicator {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+.teacher-challenges-styling-table tr:hover td {
+  background-color: rgba(124, 77, 255, 0.05);
+}
+
+.teacher-challenges-styling-rank {
+  text-align: center;
+}
+
+.teacher-challenges-styling-rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-weight: 600;
+  color: white;
+  background-color: #7c4dff;
+}
+
+.teacher-challenges-styling-rank-badge.rank-1 {
+  background-color: #ffd700; /* Gold */
+  color: #333;
+}
+
+.teacher-challenges-styling-rank-badge.rank-2 {
+  background-color: #c0c0c0; /* Silver */
+  color: #333;
+}
+
+.teacher-challenges-styling-rank-badge.rank-3 {
+  background-color: #cd7f32; /* Bronze */
+  color: white;
+}
+
+.teacher-challenges-styling-score {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.teacher-challenges-styling-score-value {
+  font-weight: 500;
+}
+
+.teacher-challenges-styling-score-bar {
+  height: 8px;
+  background-color: var(--hover-color);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.teacher-challenges-styling-score-progress {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+}
+
+/* Challenge Cards */
+.teacher-challenges-styling-challenges-section {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.dark-theme .teacher-challenges-styling-challenges-section {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-challenges-styling-section-header {
+  margin-bottom: 1.5rem;
+}
+
+.teacher-challenges-styling-section-title {
+  font-size: 1.25rem;
+  color: var(--heading-color);
+  margin: 0;
+}
+
+.teacher-challenges-styling-challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.teacher-challenges-styling-challenge-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: var(--hover-color);
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.teacher-challenges-styling-challenge-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .teacher-challenges-styling-challenge-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.teacher-challenges-styling-challenge-icon {
+  font-size: 2rem;
+  min-width: 40px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.teacher-challenges-styling-challenge-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.teacher-challenges-styling-challenge-title {
+  font-size: 1.1rem;
+  margin: 0;
+  color: var(--heading-color);
+}
+
+.teacher-challenges-styling-challenge-description {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.teacher-challenges-styling-challenge-progress-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.teacher-challenges-styling-challenge-progress-bar {
+  flex: 1;
+  height: 8px;
+  background-color: var(--card-bg);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.teacher-challenges-styling-challenge-progress {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+}
+
+.teacher-challenges-styling-challenge-percentage {
+  font-size: 0.9rem;
+  font-weight: 500;
+  min-width: 40px;
+  text-align: right;
+}
+
+[dir="rtl"] .teacher-challenges-styling-challenge-percentage {
+  text-align: left;
+}
+
+.teacher-challenges-styling-challenge-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.teacher-challenges-styling-challenge-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Footer */
+.teacher-challenges-styling-footer {
+  background-color: var(--card-bg);
+  padding: 1rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.teacher-challenges-styling-footer p {
+  margin: 0.25rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .teacher-challenges-styling-sidebar {
+    width: 80px;
+    padding: 1rem 0;
+  }
+
+  .teacher-challenges-styling-profile-name,
+  .teacher-challenges-styling-class-selector span,
+  .teacher-challenges-styling-nav-item span,
+  .teacher-challenges-styling-logout span {
+    display: none;
+  }
+
+  .teacher-challenges-styling-class-selector {
+    justify-content: center;
+    padding: 0.75rem;
+    margin: 0 0.5rem 1.5rem;
+  }
+
+  .teacher-challenges-styling-nav-item,
+  .teacher-challenges-styling-logout {
+    justify-content: center;
+    padding: 0.75rem;
+  }
+
+  .teacher-challenges-styling-profile-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .teacher-challenges-styling-main {
+    width: calc(100% - 80px);
+  }
+
+  .teacher-challenges-styling-challenges-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .teacher-challenges-styling-search-container {
+    width: 100%;
+  }
+
+  .teacher-challenges-styling-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .teacher-challenges-styling-dashboard-container {
+    flex-direction: column;
+  }
+
+  .teacher-challenges-styling-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 1rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .teacher-challenges-styling-main {
+    width: 100%;
+  }
+
+  .teacher-challenges-styling-profile,
+  .teacher-challenges-styling-class-selector {
+    display: none;
+  }
+
+  .teacher-challenges-styling-nav {
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .teacher-challenges-styling-nav-item,
+  .teacher-challenges-styling-logout {
+    padding: 0.5rem;
+    margin: 0 0.25rem;
+  }
+
+  .teacher-challenges-styling-nav-item span,
+  .teacher-challenges-styling-logout span {
+    display: none;
+  }
+
+  .teacher-challenges-styling-table-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .teacher-challenges-styling-sort-controls {
+    width: 100%;
+  }
+
+  .teacher-challenges-styling-tabs {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 576px) {
+  .teacher-challenges-styling-main {
+    padding: 1rem;
+  }
+
+  .teacher-challenges-styling-leaderboard-container,
+  .teacher-challenges-styling-challenges-section {
+    padding: 1rem;
+  }
+
+  .teacher-challenges-styling-table th,
+  .teacher-challenges-styling-table td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .teacher-challenges-styling-challenge-card {
+    padding: 1rem;
+  }
+}

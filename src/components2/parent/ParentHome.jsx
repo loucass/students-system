@@ -1,8 +1,7 @@
-import { useState, useEffect, useContext, useRef } from "react"
+import { useState, useEffect, useContext } from "react"
 import { Download, FileText, Phone, Mail, HelpCircle } from "lucide-react"
 import "./parentstyle.css"
 import { MainContextObj } from "../shared/MainContext"
-import AllLinks from "../Links"
 
 // Mock API data
 const mockStudentData = {
@@ -120,9 +119,6 @@ const mockStudentData = {
 export default function StudentProfile() {
   const data = useContext(MainContextObj)
 
-  const sidebarRef = useRef(null)
-
-
   const [studentData, setStudentData] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -153,19 +149,6 @@ export default function StudentProfile() {
     fetchData()
   }, [])
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target) && data.isSidebarOpen) {
-        data.toggleSidebar()
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [data.isSidebarOpen])
-
   if (loading) {
     return <div className="loading-spinner">Loading...</div>
   }
@@ -178,18 +161,6 @@ export default function StudentProfile() {
     <div className="dashboard student-profile-page">
 
       <div className="dashboard-container">
-        {/* Left Sidebar */}
-        <div ref={sidebarRef} className={`sidebar d-lg-none ${data.isSidebarOpen ? "open" : ""}`}>
-          <div className="profile-section">
-            <img src="/placeholder.svg?height=80&width=80" alt="Profile" className="profile-image" />
-            <h3>{data.isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
-            <p>{data.isArabic ? "الصف الثاني" : "Second Grade"}</p>
-          </div>
-
-          <div className="sidebar-links">
-            <AllLinks isArabic={data.isArabic} />
-          </div>
-        </div>
         <div className="student-profile-content">
           {/* Header Section */}
           <div className="profile-header">

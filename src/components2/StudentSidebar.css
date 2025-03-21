@@ -1,0 +1,178 @@
+/* studentSidebar.css */
+
+/* Sidebar Styles */
+.student-sidebar-styling {
+  width: 250px;
+  background-color: var(--card-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 56px; /* Adjust for navbar height */
+  height: calc(100vh - 56px); /* Adjust for navbar height */
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+[dir="rtl"] .student-sidebar-styling {
+  border-right: none;
+  border-left: 1px solid var(--border-color);
+}
+
+.student-sidebar-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.student-sidebar-profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+.student-sidebar-profile-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  color: var(--heading-color);
+}
+
+.student-sidebar-class-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(124, 77, 255, 0.1);
+  color: var(--primary-color);
+  margin: 0 1rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.student-sidebar-class-selector:hover {
+  background-color: rgba(124, 77, 255, 0.2);
+}
+
+.student-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.student-sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-bottom: 0.5rem;
+}
+
+.student-sidebar-nav-item:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+  color: var(--primary-color);
+}
+
+.student-sidebar-nav-item.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.student-sidebar-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+  color: #ff4081;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.student-sidebar-logout:hover {
+  background-color: rgba(255, 64, 129, 0.1);
+}
+
+/* Responsive Design for Sidebar */
+
+/* Medium screens (992px and below) */
+@media (max-width: 992px) {
+  .student-sidebar-styling {
+    width: 80px;
+    padding: 1rem 0;
+  }
+
+  .student-sidebar-profile-name,
+  .student-sidebar-class-selector span,
+  .student-sidebar-nav-item span,
+  .student-sidebar-logout span {
+    display: none;
+  }
+
+  .student-sidebar-class-selector {
+    justify-content: center;
+    padding: 0.75rem;
+    margin: 0 0.5rem 1.5rem;
+  }
+
+  .student-sidebar-nav-item,
+  .student-sidebar-logout {
+    justify-content: center;
+    padding: 0.75rem;
+  }
+
+  .student-sidebar-profile-image {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Small screens (768px and below) */
+@media (max-width: 768px) {
+  .student-sidebar-styling {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 1rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .student-sidebar-profile,
+  .student-sidebar-class-selector {
+    display: none;
+  }
+
+  .student-sidebar-nav {
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .student-sidebar-nav-item,
+  .student-sidebar-logout {
+    padding: 0.5rem;
+    margin: 0 0.25rem;
+  }
+
+  .student-sidebar-nav-item span,
+  .student-sidebar-logout span {
+    display: none;
+  }
+}

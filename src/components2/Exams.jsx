@@ -1,8 +1,8 @@
 import { useEffect, useRef, useContext } from "react"
 import { Link } from "react-router-dom"
 import { Clock, FileText, ChevronLeft } from "lucide-react"
-import AllLinks from "./Links"
 import { MainContextObj } from "./shared/MainContext"
+import StudentSidebar from "./StudentSidebar"
 
 // Sample exam data
 const examData = {
@@ -78,8 +78,6 @@ const examData = {
 export default function Exams() {
   const data = useContext(MainContextObj)
 
-  const sidebarRef = useRef(null)
-
   useEffect(() => {
     localStorage.setItem("theme", data.isDarkTheme ? "dark" : "light")
     document.body.className = data.isDarkTheme ? "dark-theme" : "light-theme"
@@ -90,35 +88,11 @@ export default function Exams() {
     document.dir = data.isArabic ? "rtl" : "ltr"
   }, [data.isArabic])
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target) && data.isSidebarOpen) {
-        data.toggleSidebar()
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [data.isSidebarOpen])
-
   return (
     <div className={`dashboard ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
 
       <div className="dashboard-container">
-        {/* Left Sidebar */}
-        <div ref={sidebarRef} className={`sidebar ${data.isSidebarOpen ? "open" : ""}`}>
-          <div className="profile-section">
-            <img src="/placeholder.svg?height=80&width=80" alt="Profile" className="profile-image" />
-            <h3>{data.isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
-            <p>{data.isArabic ? "الصف الثاني" : "Second Grade"}</p>
-          </div>
-
-          <div className="sidebar-links">
-          <AllLinks isArabic={data.isArabic} />
-          </div>
-        </div>
+        <StudentSidebar />
 
         {/* Main Content */}
         <main className="main-content" style={{ overflowX: "auto" }}>

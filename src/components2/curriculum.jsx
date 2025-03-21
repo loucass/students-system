@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
-import AllLinks from "./Links"
 import { MainContextObj } from "./shared/MainContext"
+import StudentSidebar from "./StudentSidebar"
 
 // Sample curriculum data
 const curriculumData = {
@@ -64,7 +64,6 @@ export default function Curriculum() {
   const data = useContext(MainContextObj)
 
   const [expandedChapters, setExpandedChapters] = useState([1])
-  const sidebarRef = React.useRef(null)
 
   useEffect(() => {
     localStorage.setItem("theme", data.isDarkTheme ? "dark" : "light")
@@ -76,19 +75,6 @@ export default function Curriculum() {
     document.dir = data.isArabic ? "rtl" : "ltr"
   }, [data.isArabic])
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target) && data.isSidebarOpen) {
-        data.toggleSidebar()
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [data.isSidebarOpen])
-
   const toggleChapter = (chapterId) => {
     setExpandedChapters((prev) =>
       prev.includes(chapterId) ? prev.filter((id) => id !== chapterId) : [...prev, chapterId],
@@ -99,18 +85,7 @@ export default function Curriculum() {
     <div className={`dashboard ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
 
       <div className="dashboard-container">
-        {/* Left Sidebar */}
-        <div ref={sidebarRef} className={`sidebar ${data.isSidebarOpen ? "open" : ""}`}>
-          <div className="profile-section">
-            <img src="/placeholder.svg?height=80&width=80" alt="Profile" className="profile-image" />
-            <h3>{data.isArabic ? "يوسف احمد" : "Yousef Ahmed"}</h3>
-            <p>{data.isArabic ? "الصف الثاني" : "Second Grade"}</p>
-          </div>
-
-          <div className="sidebar-links">
-          <AllLinks isArabic={data.isArabic} />
-          </div>
-        </div>
+        <StudentSidebar />
 
         {/* Main Content */}
         <main className="main-content">
