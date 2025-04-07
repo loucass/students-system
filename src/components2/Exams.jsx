@@ -1,4 +1,4 @@
-import { useEffect, useRef, useContext } from "react"
+import { useEffect, useContext } from "react"
 import { Link } from "react-router-dom"
 import { Clock, FileText, ChevronLeft } from "lucide-react"
 import { MainContextObj } from "./shared/MainContext"
@@ -121,7 +121,7 @@ export default function Exams() {
                     </div>
                   </div>
                   <div className="exam-actions">
-                  <Link to={`/examPage${exam.examLink}`} className="btn-start text-decoration-none">{data.isArabic ? "بدء الامتحان" : "Start Exam"}</Link>
+                  <Link to={`/exams${exam.examLink}`} className="btn-start text-decoration-none">{data.isArabic ? "بدء الامتحان" : "Start Exam"}</Link>
                   <Link to={exam.reviewUrl ? exam.reviewUrl : "#"} className="review-link">
                       <ChevronLeft className="icon" />
                       {data.isArabic ? "مراجعة الدرس" : "Review Lesson"}

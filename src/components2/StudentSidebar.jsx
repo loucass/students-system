@@ -66,7 +66,7 @@ export default function StudentSidebar({ studentName = "yousef ahmed" }) {
           
           <Link 
             to="/Revisions" 
-            className={`${lastEndpoint === "revisions" ? "active " : ""} student-sidebar-nav-item`}
+            className={`${lastEndpoint === "Revisions" ? "active " : ""} student-sidebar-nav-item`}
           >
             <FileText size={20} />
             <span>{isArabic ? "المراجعات" : "Revisions"}</span>

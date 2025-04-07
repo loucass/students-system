@@ -1,419 +1,335 @@
 import { useState, useEffect, useRef, useContext } from "react"
-import { Link } from "react-router-dom"
-import {
-  Grid,
-  User,
-  MessageSquare,
-  FileText,
-  BookOpen,
-  Award,
-  Settings,
-  LogOut,
-  Search,
-  Bell,
-  ChevronDown,
-  MoreVertical,
-  Send,
-  Globe,
-} from "lucide-react"
+import { Search, Send, MoreVertical, Globe } from "lucide-react"
 import "./TeacherChat.css"
 import { MainContextObj } from "../shared/MainContext"
-import TeacherSidebar from "./TeacherSidebar"
 
-// Mock data for chat
-const mockChatData = {
-  teacher: {
-    id: "T12345",
-    name: "م/أحمد حسن",
-    role: "مدرس رياضيات",
-    avatar: "/placeholder.svg?height=80&width=80",
-  },
-  notifications: 1,
-  currentClass: {
-    name: "الصف الأول الثانوي",
-  },
-  currentChat: {
-    id: 1,
-    name: "مجتمع طلاب الصف الاول الثانوي",
-    type: "group",
-    avatar: "/placeholder.svg?height=40&width=40",
-    messages: [
-      {
-        id: 1,
-        sender: {
-          id: "S001",
-          name: "اسماء ابراهيم",
-          avatar: "/placeholder.svg?height=40&width=40",
-        },
-        content: "ايه الاخبار يا شباب كنت عايز اسأل على الامتحان الشامل مش خلاص ؟",
-        time: "1:15 مساء",
-        isTeacher: false,
-      },
-      {
-        id: 2,
-        sender: {
-          id: "T12345",
-          name: "م/أحمد حسن",
-          avatar: "/placeholder.svg?height=40&width=40",
-        },
-        content: "ايه الاخبار يا شباب كنت عايز اسأل على الامتحان الشامل مش خلاص ؟",
-        time: "1:35 مساء",
-        isTeacher: true,
-      },
-      {
-        id: 3,
-        sender: {
-          id: "S002",
-          name: "أحمد محمود",
-          avatar: "/placeholder.svg?height=40&width=40",
-        },
-        content: "ايه الاخبار يا شباب كنت عايز اسأل على الامتحان الشامل مش خلاص ؟",
-        time: "2:40 مساء",
-        isTeacher: false,
-      },
-      {
-        id: 4,
-        sender: {
-          id: "S003",
-          name: "علي سامح",
-          avatar: "/placeholder.svg?height=40&width=40",
-        },
-        content: "ايه الاخبار يا شباب كنت عايز اسأل على الامتحان الشامل مش خلاص ؟",
-        time: "2:44 مساء",
-        isTeacher: false,
-      },
-      {
-        id: 5,
-        sender: {
-          id: "S004",
-          name: "حسين خالد",
-          avatar: "/placeholder.svg?height=40&width=40",
-        },
-        content: "ايه الاخبار يا شباب كنت عايز اسأل على الامتحان الشامل مش خلاص ؟",
-        time: "2:45 مساء",
-        isTeacher: false,
-      },
-      {
-        id: 6,
-        sender: {
-          id: "T12345",
-          name: "م/أحمد حسن",
-          avatar: "/placeholder.svg?height=40&width=40",
-        },
-        content: "ايه الاخبار يا شباب كنت عايز اسأل على الامتحان الشامل مش خلاص ؟",
-        time: "3:15 مساء",
-        isTeacher: true,
-      },
-    ],
-  },
-  chats: [
+  // Conversations data
+  const CONVERSATIONS = [
     {
       id: 1,
-      name: "المساعد الخاص",
-      type: "assistant",
-      avatar: "/placeholder.svg?height=40&width=40",
-      lastMessage: "كيف يمكنني مساعدتك؟",
-      time: "10:00 مساء",
+      name: "طلاب الصف الأول الثانوي",
+      lastMessage: "بدء الحصة يا شباب",
+      time: "02:00 مساء",
+      isGroup: true,
       unread: 0,
+      avatar: null,
     },
     {
       id: 2,
-      name: "طلاب 1 ثانوي",
-      type: "group",
-      avatar: "/placeholder.svg?height=40&width=40",
+      name: "طلاب 3 ثانوي",
       lastMessage: "بدء الحصة يا شباب",
-      time: "12:00 مساء",
+      time: "02:00 مساء",
+      isGroup: true,
       unread: 0,
+      avatar: null,
     },
     {
       id: 3,
-      name: "طلاب 2 ثانوي",
-      type: "group",
-      avatar: "/placeholder.svg?height=40&width=40",
-      lastMessage: "بدء الحصة يا شباب",
-      time: "02:00 مساء",
-      unread: 0,
+      name: "يوسف أحمد",
+      lastMessage: "شكرا استاذ",
+      time: "10:00 مساء",
+      isGroup: false,
+      unread: 1,
+      avatar: null,
     },
     {
       id: 4,
-      name: "طلاب 3 ثانوي",
-      type: "group",
-      avatar: "/placeholder.svg?height=40&width=40",
-      lastMessage: "بدء الحصة يا شباب",
-      time: "02:00 مساء",
-      unread: 0,
+      name: "مريم عبدالله",
+      lastMessage: "شكرا استاذ",
+      time: "10:00 مساء",
+      isGroup: false,
+      unread: 1,
+      avatar: null,
     },
     {
       id: 5,
-      name: "يوسف أحمد",
-      type: "student",
-      avatar: "/placeholder.svg?height=40&width=40",
+      name: "أحمد إبراهيم",
       lastMessage: "شكرا استاذ",
       time: "10:00 مساء",
+      isGroup: false,
       unread: 1,
+      avatar: null,
     },
-    {
-      id: 6,
-      name: "يوسف أحمد",
-      type: "student",
-      avatar: "/placeholder.svg?height=40&width=40",
-      lastMessage: "شكرا استاذ",
-      time: "10:00 مساء",
-      unread: 1,
-    },
-    {
-      id: 7,
-      name: "يوسف أحمد",
-      type: "student",
-      avatar: "/placeholder.svg?height=40&width=40",
-      lastMessage: "شكرا استاذ",
-      time: "10:00 مساء",
-      unread: 1,
-    },
-  ],
-}
+  ]
 
-export default function TeacherChat() {
+  // Initial messages data
+  const INITIAL_MESSAGES = {
+    1: [
+      {
+        id: 1,
+        sender: "أسماء إبراهيم",
+        content: "ايه الاخبار يا شباب كنت عايز اسأل على الامتحان الشامل متى خلاص ؟",
+        time: "1:15 مساء",
+        isMe: false,
+        avatar: null,
+      },
+      {
+        id: 2,
+        sender: "م/أحمد حسن",
+        content: "ايه الاخبار يا شباب كنت عايز اسأل على الامتحان الشامل مش خلاص ؟",
+        time: "1:35 مساء",
+        isMe: true,
+        avatar: null,
+      },
+      {
+        id: 3,
+        sender: "أحمد محمود",
+        content: "ايه الاخبار يا شباب كنت عايز اسأل على الامتحان الشامل مش خلاص ؟",
+        time: "2:40 مساء",
+        isMe: false,
+        avatar: null,
+      },
+    ],
+    2: [
+      {
+        id: 1,
+        sender: "محمد علي",
+        content: "متى موعد الامتحان القادم يا استاذ؟",
+        time: "3:20 مساء",
+        isMe: false,
+        avatar: null,
+      },
+    ],
+    3: [
+      {
+        id: 1,
+        sender: "يوسف أحمد",
+        content: "شكرا استاذ على المساعدة",
+        time: "10:00 مساء",
+        isMe: false,
+        avatar: null,
+      },
+    ],
+    4: [
+      {
+        id: 1,
+        sender: "مريم عبدالله",
+        content: "هل يمكنني تسليم الواجب غدا؟",
+        time: "9:45 مساء",
+        isMe: false,
+        avatar: null,
+      },
+    ],
+    5: [
+      {
+        id: 1,
+        sender: "أحمد إبراهيم",
+        content: "استاذ، هل يمكنني الحصول على مراجعة إضافية؟",
+        time: "8:30 مساء",
+        isMe: false,
+        avatar: null,
+      },
+    ],
+  }
+
+export default function TeacherChat () {
   const data = useContext(MainContextObj)
+  // State for conversations list
+  const [conversations, setConversations] = useState(CONVERSATIONS)
+  const [messages, setMessages] = useState(INITIAL_MESSAGES)
 
+  // State for active conversation and messages
+  const [activeConversation, setActiveConversation] = useState(1)
 
-  const [chatData, setChatData] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [searchQuery, setSearchQuery] = useState("")
-  const [messageInput, setMessageInput] = useState("")
-  const [filteredChats, setFilteredChats] = useState([])
-  const [activeChat, setActiveChat] = useState(null)
+  // State for new message
+  const [newMessage, setNewMessage] = useState("")
+  const [searchTerm, setSearchTerm] = useState("")
 
+  // Ref for message container to auto-scroll
   const messagesEndRef = useRef(null)
 
+  // Auto-scroll to bottom when messages change
   useEffect(() => {
-    localStorage.setItem("theme", data.isDarkTheme ? "dark" : "light")
-    document.body.className = data.isDarkTheme ? "dark-theme" : "light-theme"
-  }, [data.isDarkTheme])
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }, [messages, activeConversation])
 
-  useEffect(() => {
-    localStorage.setItem("lang", data.isArabic ? "ar" : "en")
-    document.dir = data.isArabic ? "rtl" : "ltr"
-  }, [data.isArabic])
+  // Filter conversations based on search term
+  const filteredConversations = conversations.filter((conv) =>
+    conv.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  )
 
-  // Simulate API fetch
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Simulate API delay
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-        setChatData(mockChatData)
-        setActiveChat(mockChatData.currentChat)
-      } catch (error) {
-        console.error("Error fetching chat data:", error)
-      } finally {
-        setLoading(false)
-      }
+  // Handle sending a new message
+  const handleSendMessage = () => {
+    if (newMessage.trim() === "") return
+
+    // Create new message object
+    const newMsg = {
+      id: messages[activeConversation].length + 1,
+      sender: "م/أحمد حسن",
+      content: newMessage,
+      time:
+        new Date().toLocaleTimeString(data.isArabic ? "ar-EG" : "en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+        }) + (data.isArabic ? " مساء" : " PM"),
+      isMe: true,
+      avatar: null,
     }
 
-    fetchData()
-  }, [])
+    // Update messages state
+    setMessages((prevMessages) => ({
+      ...prevMessages,
+      [activeConversation]: [...prevMessages[activeConversation], newMsg],
+    }))
 
-  // Filter chats based on search query
-  useEffect(() => {
-    if (chatData) {
-      if (!searchQuery) {
-        setFilteredChats(chatData.chats)
-      } else {
-        const filtered = chatData.chats.filter((chat) => chat.name.toLowerCase().includes(searchQuery.toLowerCase()))
-        setFilteredChats(filtered)
-      }
-    }
-  }, [searchQuery, chatData])
+    // Update last message in conversations list
+    setConversations((prevConversations) =>
+      prevConversations.map((conv) =>
+        conv.id === activeConversation ? { ...conv, lastMessage: newMessage, time: newMsg.time } : conv,
+      ),
+    )
 
-  // Scroll to bottom of messages
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
-    }
-  }, [activeChat])
+    // Clear input field
+    setNewMessage("")
 
-  const handleSendMessage = (e) => {
-    e.preventDefault()
-
-    if (!messageInput.trim()) return
-
-    // In a real app, you would send this to an API
-    console.log("Sending message:", messageInput)
-
-    // Simulate adding the message to the current chat
-    if (activeChat) {
-      const newMessage = {
-        id: Date.now(),
-        sender: {
-          id: chatData.teacher.id,
-          name: chatData.teacher.name,
-          avatar: chatData.teacher.avatar,
-        },
-        content: messageInput,
-        time: new Date().toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" }),
-        isTeacher: true,
-      }
-
-      setActiveChat({
-        ...activeChat,
-        messages: [...activeChat.messages, newMessage],
-      })
-    }
-
-    setMessageInput("")
+    // Simulate sending to backend
+    sendMessageToBackend(activeConversation, newMessage)
   }
 
-  const handleChatSelect = (chat) => {
-    // In a real app, you would fetch the chat messages from an API
-    setActiveChat({
-      ...chat,
-      messages: activeChat ? activeChat.messages : [],
+  // Simulate sending message to backend
+  const sendMessageToBackend = (conversationId, messageContent) => {
+    // This would be an API call in a real application
+    console.log(`Sending message to conversation ${conversationId}: ${messageContent}`)
+
+    // Simulate API call with fetch
+    /*
+    fetch('https://example.com/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        conversationId,
+        content: messageContent,
+        senderId: 'teacher-id',
+        timestamp: new Date().toISOString()
+      }),
     })
+    .then(response => response.json())
+    .then(data => console.log('Success:', data))
+    .catch(error => console.error('Error:', error));
+    */
   }
 
-  if (loading) {
-    return <div className="teacher-chat-styling-loading">{data.isArabic ? "جاري التحميل..." : "loading..."}</div>
-  }
-
-  if (!chatData) {
-    return <div className="teacher-chat-styling-error">{data.isArabic ? "حدث خطأ في تحميل البيانات" : "error loading the data"}</div>
+  // Handle key press in message input
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSendMessage()
+    }
   }
 
   return (
-    <div className={`dashboard ${data.isDarkTheme ? "dark-theme" : "light-theme"}`}>
+    <div className={`teacher-chat-container ${data.isDarkTheme ? "dark-theme" : "light-theme"} ${data.isArabic ? "rtl" : "ltr"}`}>
 
-      <div className="teacher-chat-styling-dashboard-container">
-        {/* Sidebar */}
-        <TeacherSidebar currentPage="chat" currentClass={chatData.currentClass.name} teacherName={chatData.teacher.name} />
+      <div className="teacher-layout">
 
         {/* Main Content */}
-        <main className="teacher-chat-styling-main">
-          <div className="teacher-chat-styling-header">
-            <h1 className="teacher-chat-styling-title">{data.isArabic ? "المحادثات" : "Conversations"}</h1>
+        <div className="teacher-main-content">
+          <div className="teacher-header">
+            <h1>{data.isArabic ? "المحادثات" : "Conversations"}</h1>
           </div>
 
-          <div className="teacher-chat-styling-chat-container">
-            {/* Chat List */}
-            <div className="teacher-chat-styling-chat-list">
-              <div className="teacher-chat-styling-chat-list-search">
-                <Search className="teacher-chat-styling-chat-search-icon" />
+          <div className="chat-container">
+            <div className={`conversations-sidebar ${data.isDarkTheme ? "dark" : "light"}`}>
+              <div className="search-container">
+                <Search className="search-icon" />
                 <input
                   type="text"
-                  className="teacher-chat-styling-chat-search-input"
-                  placeholder={data.isArabic ? "بحث في الرسائل" : "Search in messages"}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder={data.isArabic ? "البحث في الرسائل" : "Search in messages"}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="search-input"
                 />
               </div>
-              <div className="teacher-chat-styling-chat-list-items">
-                {filteredChats.map((chat) => (
+
+              <div className="conversations-list">
+                {filteredConversations.map((conversation) => (
                   <div
-                    key={chat.id}
-                    className={`teacher-chat-styling-chat-item ${activeChat && activeChat.id === chat.id ? "active" : ""}`}
-                    onClick={() => handleChatSelect(chat)}
+                    key={conversation.id}
+                    className={`conversation-item ${activeConversation === conversation.id ? "active" : ""}`}
+                    onClick={() => setActiveConversation(conversation.id)}
                   >
-                    <div className="teacher-chat-styling-chat-avatar">
-                      {chat.type === "group" ? (
-                        <div className="teacher-chat-styling-group-avatar">
-                          <Globe size={16} />
+                    <div className="conversation-avatar">
+                      {conversation.isGroup ? (
+                        <div className="group-avatar">
+                          <Globe size={24} />
                         </div>
                       ) : (
-                        <img src={chat.avatar || "/placeholder.svg"} alt={chat.name} />
+                        <div className="user-avatar"></div>
                       )}
                     </div>
-                    <div className="teacher-chat-styling-chat-info">
-                      <div className="teacher-chat-styling-chat-name-time">
-                        <h3 className="teacher-chat-styling-chat-name">{chat.name}</h3>
-                        <span className="teacher-chat-styling-chat-time">{chat.time}</span>
+                    <div className="conversation-details">
+                      <div className="conversation-header">
+                        <span className="conversation-name">{conversation.name}</span>
+                        <span className="conversation-time">{conversation.time}</span>
                       </div>
-                      <div className="teacher-chat-styling-chat-message">
-                        <p className="teacher-chat-styling-chat-last-message">{chat.lastMessage}</p>
-                        {chat.unread > 0 && <span className="teacher-chat-styling-chat-unread">{chat.unread}</span>}
-                      </div>
+                      <div className="conversation-message">{conversation.lastMessage}</div>
                     </div>
+                    {conversation.unread > 0 && <div className="unread-badge">{conversation.unread}</div>}
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Chat Messages */}
-            <div className="teacher-chat-styling-chat-messages">
-              {activeChat ? (
+            <div className={`chat-main ${data.isDarkTheme ? "dark" : "light"}`}>
+              {activeConversation && (
                 <>
-                  <div className="teacher-chat-styling-chat-header">
-                    <div className="teacher-chat-styling-chat-header-info">
-                      {activeChat.type === "group" ? (
-                        <div className="teacher-chat-styling-group-avatar">
-                          <Globe size={20} />
-                        </div>
-                      ) : (
-                        <img
-                          src={activeChat.avatar || "/placeholder.svg"}
-                          alt={activeChat.name}
-                          className="teacher-chat-styling-chat-header-avatar"
-                        />
-                      )}
-                      <h2 className="teacher-chat-styling-chat-header-name">{activeChat.name}</h2>
+                  <div className="chat-header">
+                    <div className="chat-header-info">
+                      <div className="chat-avatar">
+                        {conversations.find((c) => c.id === activeConversation)?.isGroup ? (
+                          <div className="group-avatar">
+                            <Globe size={24} />
+                          </div>
+                        ) : (
+                          <div className="user-avatar"></div>
+                        )}
+                      </div>
+                      <div className="chat-title">{conversations.find((c) => c.id === activeConversation)?.name}</div>
                     </div>
-                    <button className="teacher-chat-styling-chat-header-more">
-                      <MoreVertical size={20} />
-                    </button>
+                    <div className="chat-actions">
+                      <button className="action-button">
+                        <MoreVertical size={20} />
+                      </button>
+                    </div>
                   </div>
 
-                  <div className="teacher-chat-styling-messages-container">
-                    {activeChat.messages &&
-                      activeChat.messages.map((message) => (
-                        <div
-                          key={message.id}
-                          className={`teacher-chat-styling-message ${message.isTeacher ? "teacher" : "student"}`}
-                        >
-                          <div className="teacher-chat-styling-message-avatar">
-                            <img src={message.sender.avatar || "/placeholder.svg"} alt={message.sender.name} />
-                          </div>
-                          <div className="teacher-chat-styling-message-content">
-                            <div className="teacher-chat-styling-message-sender">
-                              <span className="teacher-chat-styling-message-name">{message.sender.name}</span>
-                              <span className="teacher-chat-styling-message-time">{message.time}</span>
-                            </div>
-                            <p className="teacher-chat-styling-message-text">{message.content}</p>
+                  <div className="messages-container">
+                    {messages[activeConversation]?.map((message) => (
+                      <div key={message.id} className={`message ${message.isMe ? "message-sent" : "message-received"}`}>
+                        {!message.isMe && <div className="message-avatar"></div>}
+                        <div className="message-content">
+                          {!message.isMe && <div className="message-sender">{message.sender}</div>}
+                          <div className="message-bubble">
+                            <div className="message-text">{message.content}</div>
+                            <div className="message-time">{message.time}</div>
                           </div>
                         </div>
-                      ))}
+                        {message.isMe && <div className="message-avatar teacher-avatar"></div>}
+                      </div>
+                    ))}
                     <div ref={messagesEndRef} />
                   </div>
 
-                  <form className="teacher-chat-styling-message-form" onSubmit={handleSendMessage}>
+                  <div className="message-input-container">
                     <input
                       type="text"
-                      className="teacher-chat-styling-message-input"
-                      placeholder={data.isArabic ? "اكتب رسالتك" : "Type your message"}
-                      value={messageInput}
-                      onChange={(e) => setMessageInput(e.target.value)}
+                      placeholder={data.isArabic ? "اكتب رسالتك هنا" : "Type your message here"}
+                      value={newMessage}
+                      onChange={(e) => setNewMessage(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      className="message-input"
                     />
-                    <button type="submit" className="teacher-chat-styling-send-button">
+                    <button className="send-button" onClick={handleSendMessage} disabled={!newMessage.trim()}>
                       <Send size={20} />
                     </button>
-                  </form>
+                  </div>
                 </>
-              ) : (
-                <div className="teacher-chat-styling-no-chat-selected">
-                  <MessageSquare size={48} />
-                  <p>{data.isArabic ? "اختر محادثة للبدء" : "Select a conversation to start"}</p>
-                </div>
               )}
             </div>
           </div>
-        </main>
+        </div>
       </div>
-
-      {/* Footer */}
-      <footer className="teacher-chat-styling-footer">
-        <p>
-          {data.isArabic ? "جميع الحقوق محفوظة" : "All Rights Reserved"} &copy; {new Date().getFullYear()}
-        </p>
-        <p>Powered by Dream Gate</p>
-      </footer>
     </div>
   )
 }

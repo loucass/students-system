@@ -70,16 +70,6 @@ export default function Settings() {
         {/* Main Content */}
         <main className="main-content">
           <div className="settings-container">
-            <div className="settings-header">
-              <h1>{data.isArabic ? "الإعدادات" : "Settings"}</h1>
-              <div className="theme-toggle">
-                <span>{data.isArabic ? "الوضع الليلي" : "Dark Mode"}</span>
-                <label className="switch">
-                  <input type="checkbox" checked={data.isDarkTheme} onChange={() => data.setIsDarkTheme(!data.isDarkTheme)} />
-                  <span className="slider round"></span>
-                </label>
-              </div>
-            </div>
 
             <div className="user-profile">
               <img src="/placeholder.svg?height=80&width=80" alt="Profile" className="profile-image" />

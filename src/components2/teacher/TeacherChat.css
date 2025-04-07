@@ -1,462 +1,400 @@
-/* TeacherChat Specific Styles */
-.teacher-chat-styling-loading,
-.teacher-chat-styling-error {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-size: 1.5rem;
-  color: var(--primary-color);
-}
-
-/* Header Styles */
-.teacher-chat-styling-search-container {
-  position: relative;
-  width: 300px;
-}
-
-.teacher-chat-styling-search-icon {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #aaa;
-  width: 18px;
-  height: 18px;
-}
-
-[dir="rtl"] .teacher-chat-styling-search-icon {
-  left: auto;
-  right: 10px;
-}
-
-.teacher-chat-styling-search-input {
-  width: 100%;
-  padding: 0.6rem 2.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  font-size: 0.9rem;
-  background-color: var(--card-bg);
-  color: var(--text-color);
-  transition: all 0.3s ease;
-}
-
-.teacher-chat-styling-search-input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.2);
-}
-
-.teacher-chat-styling-notification,
-.teacher-chat-styling-assistant {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  position: relative;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-  color: var(--text-color);
-}
-
-.teacher-chat-styling-notification:hover,
-.teacher-chat-styling-assistant:hover {
-  background-color: rgba(124, 77, 255, 0.1);
-}
-
-.teacher-chat-styling-notification-badge {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #ff4081;
-  color: white;
-  border-radius: 50%;
-  width: 18px;
-  height: 18px;
-  font-size: 0.7rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-[dir="rtl"] .teacher-chat-styling-notification-badge {
-  right: auto;
-  left: 0;
-}
-
-.teacher-chat-styling-notification-text {
-  font-size: 0.9rem;
-}
-
-/* Dashboard Container */
-.teacher-chat-styling-dashboard-container {
-  display: flex;
-  width: 100%;
-  min-height: calc(100vh - 56px - 60px); /* Adjust for navbar and footer */
-  position: relative;
-}
-
-.dark-theme .teacher-chat-styling-main,
-.dark-theme .dashboard {
-  background-color: #1a1a1a;
-}
-
-/* Sidebar Styles */
-.teacher-chat-styling-sidebar {
-  width: 250px;
-  background-color: var(--card-bg);
-  border-right: 1px solid var(--border-color);
+Base styles .teacher-chat-container {
   display: flex;
   flex-direction: column;
-  padding: 1.5rem 0;
-  position: sticky;
-  top: 56px; /* Adjust for navbar height */
-  height: calc(100vh - 56px); /* Adjust for navbar height */
-  overflow-y: auto;
-  flex-shrink: 0;
+  height: 100vh;
+  font-family: "Cairo", sans-serif;
 }
 
-[dir="rtl"] .teacher-chat-styling-sidebar {
-  border-right: none;
-  border-left: 1px solid var(--border-color);
+/* RTL and LTR support */
+.rtl {
+  direction: rtl;
+  text-align: right;
 }
 
-.teacher-chat-styling-profile {
+.ltr {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Theme support */
+.dark-theme {
+  --bg-primary: #1e1e2d;
+  --bg-secondary: #1a1a27;
+  --bg-tertiary: #2d2d3f;
+  --text-primary: #ffffff;
+  --text-secondary: #6c7293;
+  --border-color: #2d2d3f;
+  --accent-color: #6c5ce7;
+  --accent-hover: #5a4bd1;
+  --disabled-color: #3d3d5c;
+}
+
+.light-theme {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #e9ecef;
+  --text-primary: #333333;
+  --text-secondary: #6c757d;
+  --border-color: #dee2e6;
+  --accent-color: #6c5ce7;
+  --accent-hover: #5a4bd1;
+  --disabled-color: #adb5bd;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.btn-icon:hover {
+  background-color: var(--bg-tertiary);
+}
+
+/* Layout */
+.teacher-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.teacher-profile {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.teacher-chat-styling-profile-image {
+.profile-image {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--primary-color);
-  margin-bottom: 0.75rem;
-}
-
-.teacher-chat-styling-profile-name {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin: 0;
-  text-align: center;
-  color: var(--heading-color);
-}
-
-.teacher-chat-styling-class-selector {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem 1.5rem;
-  background-color: rgba(124, 77, 255, 0.1);
-  color: var(--primary-color);
-  margin: 0 1rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
-}
-
-.teacher-chat-styling-class-selector:hover {
-  background-color: rgba(124, 77, 255, 0.2);
-}
-
-.teacher-chat-styling-nav {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: 0 1rem;
-}
-
-.teacher-chat-styling-nav-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  color: var(--text-color);
-  text-decoration: none;
-  transition: all 0.3s ease;
+  overflow: hidden;
   margin-bottom: 0.5rem;
 }
 
-.teacher-chat-styling-nav-item:hover {
-  background-color: rgba(124, 77, 255, 0.1);
-  color: var(--primary-color);
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.teacher-chat-styling-nav-item.active {
-  background-color: var(--primary-color);
+.teacher-profile h3 {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.teacher-profile p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  padding: 0.75rem 1.5rem;
+  margin: 0.25rem 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.nav-links li:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.nav-links li.active {
+  background-color: var(--accent-color);
+}
+
+.nav-links li.active a {
   color: white;
 }
 
-.teacher-chat-styling-logout {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  margin: 1rem;
-  border-radius: 8px;
-  color: #ff4081;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-primary);
+  display: block;
+  width: 100%;
 }
 
-.teacher-chat-styling-logout:hover {
-  background-color: rgba(255, 64, 129, 0.1);
-}
-
-/* Main Content Styles */
-.teacher-chat-styling-main {
+/* Main content */
+.teacher-main-content {
   flex: 1;
-  padding: 1.5rem;
-  overflow-y: auto;
-  width: calc(100% - 250px); /* Ensure it takes the remaining width */
-}
-
-.teacher-chat-styling-header {
-  margin-bottom: 1.5rem;
-}
-
-.teacher-chat-styling-title {
-  font-size: 1.8rem;
-  color: var(--heading-color);
-  margin: 0;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-/* Chat Container Styles */
-.teacher-chat-styling-chat-container {
-  display: flex;
-  height: calc(100vh - 200px);
-  background-color: var(--card-bg);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
-
-.dark-theme .teacher-chat-styling-chat-container {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* Chat List Styles */
-.teacher-chat-styling-chat-list {
-  width: 300px;
-  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-[dir="rtl"] .teacher-chat-styling-chat-list {
-  border-right: none;
-  border-left: 1px solid var(--border-color);
-}
-
-.teacher-chat-styling-chat-list-search {
-  padding: 1rem;
-  position: relative;
+.teacher-header {
+  padding: 1rem 2rem;
   border-bottom: 1px solid var(--border-color);
 }
 
-.teacher-chat-styling-chat-search-icon {
-  position: absolute;
-  left: 1.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #aaa;
-  width: 16px;
-  height: 16px;
+.teacher-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
-[dir="rtl"] .teacher-chat-styling-chat-search-icon {
+.dark-theme .teacher-header {
+  background-color: #1a1a27;
+}
+
+/* Chat container */
+.chat-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Conversations sidebar */
+.conversations-sidebar {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-color);
+}
+
+.conversations-sidebar.dark {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.conversations-sidebar.light {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.search-container {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.rtl .search-icon {
   left: auto;
   right: 1.5rem;
 }
 
-.teacher-chat-styling-chat-search-input {
+.search-input {
   width: 100%;
-  padding: 0.6rem 2.5rem;
-  border: 1px solid var(--border-color);
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
   border-radius: 20px;
+  border: none;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
   font-size: 0.9rem;
-  background-color: var(--hover-color);
-  color: var(--text-color);
-  transition: all 0.3s ease;
 }
 
-.teacher-chat-styling-chat-search-input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.2);
+.rtl .search-input {
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
 }
 
-.teacher-chat-styling-chat-list-items {
+.search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.conversations-list {
   flex: 1;
   overflow-y: auto;
 }
 
-.teacher-chat-styling-chat-item {
+.conversation-item {
   display: flex;
   padding: 1rem;
   border-bottom: 1px solid var(--border-color);
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s;
+  position: relative;
 }
 
-.teacher-chat-styling-chat-item:hover {
-  background-color: var(--hover-color);
+.conversation-item:hover {
+  background-color: var(--bg-tertiary);
 }
 
-.teacher-chat-styling-chat-item.active {
-  background-color: rgba(124, 77, 255, 0.1);
+.conversation-item.active {
+  background-color: var(--bg-tertiary);
 }
 
-.teacher-chat-styling-chat-avatar {
+.conversation-avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  margin-right: 1rem;
   overflow: hidden;
-  margin-right: 0.75rem;
   flex-shrink: 0;
 }
 
-[dir="rtl"] .teacher-chat-styling-chat-avatar {
+.rtl .conversation-avatar {
   margin-right: 0;
-  margin-left: 0.75rem;
+  margin-left: 1rem;
 }
 
-.teacher-chat-styling-chat-avatar img {
+.user-avatar {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-}
-
-.teacher-chat-styling-group-avatar {
-  width: 100%;
-  height: 100%;
+  background-color: var(--accent-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+}
+
+.group-avatar {
+  width: 100%;
+  height: 100%;
+  background-color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
 }
 
-.teacher-chat-styling-chat-info {
+.conversation-details {
   flex: 1;
   min-width: 0;
 }
 
-.teacher-chat-styling-chat-name-time {
+.conversation-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 0.25rem;
 }
 
-.teacher-chat-styling-chat-name {
-  font-size: 0.95rem;
-  font-weight: 500;
-  margin: 0;
+.conversation-name {
+  font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--heading-color);
+  color: var(--text-primary);
 }
 
-.teacher-chat-styling-chat-time {
+.conversation-time {
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   white-space: nowrap;
 }
 
-.teacher-chat-styling-chat-message {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.teacher-chat-styling-chat-last-message {
+.conversation-message {
   font-size: 0.85rem;
-  margin: 0;
+  color: var(--text-secondary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--text-muted);
-  max-width: 180px;
 }
 
-.teacher-chat-styling-chat-unread {
+.unread-badge {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background-color: var(--accent-color);
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
-  background-color: var(--primary-color);
-  color: white;
-  border-radius: 50%;
   font-size: 0.75rem;
-  font-weight: 500;
 }
 
-/* Chat Messages Styles */
-.teacher-chat-styling-chat-messages {
+.rtl .unread-badge {
+  left: auto;
+  right: 1rem;
+}
+
+/* Chat main */
+.chat-main {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.teacher-chat-styling-chat-header {
+.chat-main.dark {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.chat-main.light {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.chat-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
   border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
 }
 
-.teacher-chat-styling-chat-header-info {
+.chat-header-info {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
 }
 
-.teacher-chat-styling-chat-header-avatar {
+.chat-avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  object-fit: cover;
+  margin-right: 1rem;
+  overflow: hidden;
 }
 
-.teacher-chat-styling-chat-header-name {
-  font-size: 1.1rem;
-  font-weight: 500;
-  margin: 0;
-  color: var(--heading-color);
+.rtl .chat-avatar {
+  margin-right: 0;
+  margin-left: 1rem;
 }
 
-.teacher-chat-styling-chat-header-more {
+.chat-title {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.chat-actions {
+  display: flex;
+}
+
+.action-button {
   background: none;
   border: none;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s;
 }
 
-.teacher-chat-styling-chat-header-more:hover {
-  background-color: var(--hover-color);
-  color: var(--primary-color);
+.action-button:hover {
+  background-color: var(--bg-tertiary);
 }
 
-.teacher-chat-styling-messages-container {
+/* Messages */
+.messages-container {
   flex: 1;
   padding: 1rem;
   overflow-y: auto;
@@ -465,273 +403,202 @@
   gap: 1rem;
 }
 
-.teacher-chat-styling-message {
+.message {
   display: flex;
-  gap: 0.75rem;
+  margin-bottom: 1rem;
   max-width: 80%;
 }
 
-.teacher-chat-styling-message.student {
+.message-received {
   align-self: flex-start;
 }
 
-.teacher-chat-styling-message.teacher {
+.message-sent {
   align-self: flex-end;
   flex-direction: row-reverse;
 }
 
-[dir="rtl"] .teacher-chat-styling-message.student {
+.rtl .message-received {
   align-self: flex-start;
 }
 
-[dir="rtl"] .teacher-chat-styling-message.teacher {
+.rtl .message-sent {
   align-self: flex-end;
-  flex-direction: row;
 }
 
-.teacher-chat-styling-message-avatar {
+.message-avatar {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  overflow: hidden;
+  background-color: var(--text-secondary);
+  margin: 0 0.5rem;
   flex-shrink: 0;
 }
 
-.teacher-chat-styling-message-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.teacher-avatar {
+  background-color: var(--accent-color);
 }
 
-.teacher-chat-styling-message-content {
-  background-color: var(--hover-color);
-  padding: 0.75rem;
-  border-radius: 12px;
+.message-content {
+  display: flex;
+  flex-direction: column;
+  max-width: calc(100% - 50px);
+}
+
+.message-sender {
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+  color: var(--text-secondary);
+}
+
+.message-bubble {
+  padding: 0.75rem 1rem;
+  border-radius: 18px;
   position: relative;
 }
 
-.teacher-chat-styling-message.teacher .teacher-chat-styling-message-content {
-  background-color: rgba(124, 77, 255, 0.1);
+.message-received .message-bubble {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-top-left-radius: 4px;
 }
 
-.teacher-chat-styling-message-sender {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.message-sent .message-bubble {
+  background-color: var(--accent-color);
+  color: white;
+  border-top-right-radius: 4px;
+}
+
+.rtl .message-received .message-bubble {
+  border-top-left-radius: 18px;
+  border-top-right-radius: 4px;
+}
+
+.rtl .message-sent .message-bubble {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 18px;
+}
+
+.message-text {
+  font-size: 0.95rem;
   margin-bottom: 0.25rem;
+  word-wrap: break-word;
 }
 
-.teacher-chat-styling-message-name {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--heading-color);
+.message-time {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  text-align: left;
 }
 
-.teacher-chat-styling-message-time {
-  font-size: 0.75rem;
-  color: var(--text-muted);
+.rtl .message-time {
+  text-align: right;
 }
 
-.teacher-chat-styling-message-text {
-  margin: 0;
-  font-size: 0.9rem;
-  color: var(--text-color);
-  word-break: break-word;
-}
-
-.teacher-chat-styling-message-form {
+/* Message input */
+.message-input-container {
   display: flex;
   padding: 1rem;
   border-top: 1px solid var(--border-color);
-  gap: 0.75rem;
+  background-color: var(--bg-primary);
 }
 
-.teacher-chat-styling-message-input {
+.message-input {
   flex: 1;
   padding: 0.75rem 1rem;
-  border: 1px solid var(--border-color);
   border-radius: 20px;
+  border: none;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
   font-size: 0.95rem;
-  background-color: var(--hover-color);
-  color: var(--text-color);
-  transition: all 0.3s ease;
+  margin-right: 0.5rem;
 }
 
-.teacher-chat-styling-message-input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.2);
+.rtl .message-input {
+  margin-right: 0;
+  margin-left: 0.5rem;
 }
 
-.teacher-chat-styling-send-button {
+.message-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.send-button {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: var(--primary-color);
+  background-color: var(--accent-color);
   color: white;
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s;
 }
 
-.teacher-chat-styling-send-button:hover {
-  background-color: var(--primary-hover);
+.send-button:hover {
+  background-color: var(--accent-hover);
 }
 
-.teacher-chat-styling-no-chat-selected {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-muted);
-  gap: 1rem;
+.send-button:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed;
 }
 
-.teacher-chat-styling-no-chat-selected p {
-  font-size: 1.1rem;
-  margin: 0;
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-/* Footer */
-.teacher-chat-styling-footer {
-  background-color: var(--card-bg);
-  padding: 1rem 2rem;
-  text-align: center;
-  border-top: 1px solid var(--border-color);
-  font-size: 0.85rem;
-  color: var(--text-muted);
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
 }
 
-.teacher-chat-styling-footer p {
-  margin: 0.25rem 0;
+::-webkit-scrollbar-thumb {
+  background: var(--text-secondary);
+  border-radius: 3px;
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-  .teacher-chat-styling-chat-container {
-    height: calc(100vh - 180px);
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
 }
 
+/* Responsive styles */
 @media (max-width: 992px) {
-  .teacher-chat-styling-sidebar {
-    width: 80px;
-    padding: 1rem 0;
-  }
-
-  .teacher-chat-styling-profile-name,
-  .teacher-chat-styling-class-selector span,
-  .teacher-chat-styling-nav-item span,
-  .teacher-chat-styling-logout span {
-    display: none;
-  }
-
-  .teacher-chat-styling-class-selector {
-    justify-content: center;
-    padding: 0.75rem;
-    margin: 0 0.5rem 1.5rem;
-  }
-
-  .teacher-chat-styling-nav-item,
-  .teacher-chat-styling-logout {
-    justify-content: center;
-    padding: 0.75rem;
-  }
-
-  .teacher-chat-styling-profile-image {
-    width: 50px;
-    height: 50px;
-  }
-
-  .teacher-chat-styling-main {
-    width: calc(100% - 80px);
-  }
-
-  .teacher-chat-styling-chat-list {
-    width: 250px;
+  .teacher-sidebar {
+    width: 200px;
   }
 }
 
 @media (max-width: 768px) {
-  .teacher-chat-styling-search-container {
-    width: 100%;
-  }
-
-  .teacher-chat-styling-dashboard-container {
+  .teacher-layout {
     flex-direction: column;
   }
 
-  .teacher-chat-styling-sidebar {
+  .teacher-sidebar {
     width: 100%;
     height: auto;
-    position: static;
-    flex-direction: row;
-    overflow-x: auto;
-    padding: 1rem;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
   }
 
-  .teacher-chat-styling-main {
-    width: 100%;
-  }
-
-  .teacher-chat-styling-profile,
-  .teacher-chat-styling-class-selector {
-    display: none;
-  }
-
-  .teacher-chat-styling-nav {
-    flex-direction: row;
-    padding: 0;
-  }
-
-  .teacher-chat-styling-nav-item,
-  .teacher-chat-styling-logout {
-    padding: 0.5rem;
-    margin: 0 0.25rem;
-  }
-
-  .teacher-chat-styling-nav-item span,
-  .teacher-chat-styling-logout span {
-    display: none;
-  }
-
-  .teacher-chat-styling-chat-container {
+  .chat-container {
     flex-direction: column;
-    height: auto;
   }
 
-  .teacher-chat-styling-chat-list {
+  .conversations-sidebar {
     width: 100%;
+    height: 40%;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
-    max-height: 300px;
   }
 
-  .teacher-chat-styling-chat-messages {
-    height: 500px;
-  }
-}
-
-@media (max-width: 576px) {
-  .teacher-chat-styling-main {
-    padding: 1rem;
+  .chat-main {
+    height: 60%;
   }
 
-  .teacher-chat-styling-message {
+  .message {
     max-width: 90%;
-  }
-
-  .teacher-chat-styling-message-form {
-    padding: 0.75rem;
-  }
-
-  .teacher-chat-styling-chat-last-message {
-    max-width: 120px;
   }
 }

@@ -1008,7 +1008,11 @@ input:checked + .slider:before {
 }
 
 .leaderboard-table tr.current-user {
-  background-color: #623394;
+  background-color: #6842ff;
+}
+
+.dark-theme .leaderboard-table tr.current-user {
+  background-color: #4324bd;
 }
 
 .challenges-sections {
@@ -1707,7 +1711,7 @@ input:checked + .slider:before {
 
 /* Exam Styles */
 .exam-progress-bar {
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   left: 0;
   width: 100%;

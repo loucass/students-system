@@ -1,0 +1,107 @@
+/* Sidebar Styles */
+.teacher-sidebar {
+  width: 250px;
+  background-color: var(--card-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 56px; /* Adjust for navbar height */
+  height: calc(100vh - 56px); /* Adjust for navbar height */
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+[dir="rtl"] .teacher-sidebar {
+  border-right: none;
+  border-left: 1px solid var(--border-color);
+}
+
+.teacher-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.teacher-profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+.teacher-profile-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  color: var(--heading-color);
+}
+
+.teacher-class-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(124, 77, 255, 0.1);
+  color: var(--primary-color);
+  margin: 0 1rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.teacher-class-selector:hover {
+  background-color: rgba(124, 77, 255, 0.2);
+}
+
+.teacher-nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.teacher-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-bottom: 0.5rem;
+}
+
+.teacher-nav-item:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+  color: var(--primary-color);
+}
+
+.teacher-nav-item.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.teacher-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+  color: #ff4081;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teacher-logout:hover {
+  background-color: rgba(255, 64, 129, 0.1);
+}

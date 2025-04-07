@@ -104,6 +104,10 @@ export default function Home() {
           path: "revisions",
           element: <Revisions />,
         },
+        {
+          path: "chat",
+          element: <TeacherChat />,
+        },
       ],
     },
   
