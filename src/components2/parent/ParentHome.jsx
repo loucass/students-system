@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react"
 import { Download, FileText, Phone, Mail, HelpCircle } from "lucide-react"
-import "./ParentStyle.css"
+import "./ParentHome.css"
 import { MainContextObj } from "../shared/MainContext"
 
 // Mock API data
