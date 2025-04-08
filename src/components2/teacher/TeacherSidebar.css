@@ -105,3 +105,72 @@
 .teacher-logout:hover {
   background-color: rgba(255, 64, 129, 0.1);
 }
+
+/* Responsive Design for Sidebar */
+
+/* Medium screens (992px and below) */
+@media (max-width: 992px) {
+  .teacher-sidebar {
+    width: 80px;
+    padding: 1rem 0;
+  }
+
+  .teacher-profile-name,
+  .teacher-class-selector span,
+  .teacher-nav-item span,
+  .teacher-logout span {
+    display: none;
+  }
+
+  .teacher-class-selector {
+    justify-content: center;
+    padding: 0.75rem;
+    margin: 0 0.5rem 1.5rem;
+  }
+
+  .teacher-nav-item,
+  .teacher-logout {
+    justify-content: center;
+    padding: 0.75rem;
+  }
+
+  .teacher-profile-image {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Small screens (768px and below) */
+@media (max-width: 768px) {
+  .teacher-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 1rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .teacher-profile *,
+  .teacher-class-selector {
+    display: none;
+  }
+
+  .teacher-nav {
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .teacher-nav-item,
+  .teacher-logout {
+    padding: 0.5rem;
+    margin: 0 0.25rem;
+  }
+
+  .teacher-nav-item span,
+  .teacher-logout span {
+    display: none;
+  }
+}
