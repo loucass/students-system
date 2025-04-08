@@ -12,7 +12,7 @@ import {
 } from "lucide-react"
 import { MainContextObj } from '../shared/MainContext'
 import { Link, useLocation } from 'react-router-dom'
-import "./teacherSidebar.css"
+import "./TeacherSidebar.css"
 
 export default function TeacherSidebar({teacherName , currentClass}) {
   const data = useContext(MainContextObj)
